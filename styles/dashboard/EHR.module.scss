@@ -1,0 +1,457 @@
+@import '../base';
+
+.ehr_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+
+  #left_items {
+    flex: 1.3;
+    border-right: 1px solid $color_stroke;
+    padding-right: 40px;
+    height: 78vh;
+    overflow-y: scroll;
+    padding-right: 15px;
+
+    &::-webkit-scrollbar {
+      width: 5px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color_blue_light;
+      border-radius: 10px;
+    }
+
+    .cards_container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+
+      .card {
+        background: $color-blue-main;
+        border-radius: 8px;
+        padding: 16px;
+        width: 100%;
+
+        .title {
+          color: $color_white;
+          font-weight: 400;
+          font-size: 12px;
+          opacity: 0.6;
+        }
+
+        h2 {
+          color: $color_white;
+          font-weight: 600;
+          font-size: 32px;
+        }
+
+        .additional {
+          font-weight: 500;
+          font-size: 14px;
+          color: $color_white;
+
+          span {
+            color: $color_grey_light;
+            font-weight: 400;
+            font-size: 12px;
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+
+    .quick_actions {
+      margin-top: 24px;
+
+      h5 {
+        margin-bottom: 16px;
+        color: $color_blue_dark;
+        font-weight: 600;
+        font-size: $size_medium;
+      }
+
+      .quick_actions_btns {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+    }
+
+    .recent_patients {
+      margin-top: 34px;
+
+      .recent_p {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 34px;
+
+        h5 {
+          color: $color_blue_dark;
+          font-weight: 600;
+          font-size: $size_medium;
+        }
+
+        > div {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          cursor: pointer;
+
+          :hover {
+            color: $color_blue_dark;
+          }
+
+          p {
+            font-weight: 600;
+            font-size: $size_font;
+            letter-spacing: -0.045em;
+            color: $color_blue_main;
+          }
+        }
+      }
+
+      .recent_p_list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        white-space: nowrap;
+
+        .patient {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 35px;
+          background: $color_white;
+          padding: 8px;
+
+          .patient_name {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .name {
+              font-weight: 500;
+              font-size: $size_font;
+              letter-spacing: -0.045em;
+              color: $color_blue_dark;
+            }
+          }
+
+          .email {
+            font-weight: 400;
+            font-size: $size_font;
+            color: $color_grey_dark;
+          }
+        }
+      }
+    }
+  }
+
+  #right_items {
+    flex: 0.7;
+    height: 78vh;
+    overflow-y: scroll;
+    padding-right: 15px;
+
+    &::-webkit-scrollbar {
+      width: 5px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color_blue_light;
+      border-radius: 10px;
+    }
+
+    .medic {
+      background: $color_blue_light;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding-right: 68px;
+      gap: 23px;
+      cursor: pointer;
+
+      .medic_text {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      p {
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: -0.045em;
+        color: $color_blue_dark;
+      }
+    }
+
+    .staffs_container {
+      margin-top: 24px;
+      .staffs_flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 36px;
+
+        h5 {
+          color: $color_blue_dark;
+          font-weight: 600;
+          font-size: $size_medium;
+        }
+
+        div {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          cursor: pointer;
+
+          :hover {
+            color: $color_blue_dark;
+          }
+
+          p {
+            font-weight: 600;
+            font-size: $size_font;
+            letter-spacing: -0.045em;
+            color: $color_blue_main;
+          }
+        }
+      }
+
+      .staffs {
+        display: flex;
+        flex-direction: column;
+        gap: 17px;
+
+        .staff {
+          background: $color_white;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 8px;
+
+          .member {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .name {
+              font-weight: 600;
+              font-size: $size_font;
+              color: $color_blue_dark;
+            }
+
+            .title {
+              font-weight: 400;
+              font-size: 12px;
+              color: $color_text_subtle;
+            }
+          }
+
+          .role {
+            font-weight: 400;
+            font-size: 12px;
+            color: $color_text_subtle;
+          }
+        }
+      }
+    }
+
+    .chats_container {
+      margin-top: 34px;
+
+      .chats_actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+
+        > div {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          h5 {
+            color: $color_blue_dark;
+            font-weight: 600;
+            font-size: $size_medium;
+          }
+
+          .go_to_chats {
+            font-weight: 600;
+            font-size: $size_font;
+            color: $color_blue_main;
+            margin-right: 8px;
+            cursor: pointer;
+
+            :hover {
+              color: $color_blue_dark;
+            }
+          }
+        }
+      }
+
+      .chats {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        margin-top: 35px;
+
+        li {
+          .chat {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 8px;
+
+            .chat_info {
+              display: flex;
+              align-items: center;
+              gap: 16px;
+
+              > div {
+                .chat_name {
+                  font-weight: 500;
+                  font-size: 14px;
+                  color: $color_blue_dark;
+                }
+
+                .message {
+                  font-weight: 400;
+                  font-size: 12px;
+                  color: $color_blue_dark;
+                }
+              }
+            }
+
+            .chat_time {
+              font-weight: 400;
+              font-size: 12px;
+              color: $color_blue_dark;
+              opacity: 0.7;
+            }
+          }
+
+          hr {
+            background: #ebebeb;
+            opacity: 0.2;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ehr_container {
+    flex-direction: column;
+    gap: 40px;
+
+    #left_items {
+      flex: 1;
+      border-right: none !important;
+      width: 100% !important;
+      border-bottom: 1px solid $color_stroke;
+      padding-bottom: 40px;
+      padding-right: 0;
+      height: 100% !important;
+      overflow-y: hidden !important;
+
+      .cards_container {
+        flex-direction: column;
+        gap: 20px;
+
+        .card {
+          width: 100%;
+        }
+      }
+
+      .recent_patients {
+        margin-top: 34px;
+
+        .recent_p {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 34px;
+
+          h5 {
+            color: $color_blue_dark;
+            font-weight: 600;
+            font-size: $size_medium;
+          }
+
+          > div {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+
+            :hover {
+              color: $color_blue_dark;
+            }
+
+            p {
+              font-weight: 600;
+              font-size: $size_font;
+              letter-spacing: -0.045em;
+              color: $color_blue_main;
+            }
+          }
+        }
+
+        .recent_p_list {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+          white-space: nowrap !important;
+          overflow-x: scroll !important;
+          padding-bottom: 16px;
+
+          .patient {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 35px;
+
+            .patient_name {
+              display: flex;
+              align-items: center;
+              gap: 16px;
+
+              .name {
+                font-weight: 500;
+                font-size: $size_font;
+                letter-spacing: -0.045em;
+                color: $color_blue_dark;
+              }
+            }
+
+            .email {
+              font-weight: 400;
+              font-size: $size_font;
+              color: $color_grey_dark;
+            }
+          }
+        }
+      }
+    }
+
+    #right_items {
+      flex: 1;
+      height: 100% !important;
+      overflow-y: hidden !important;
+
+      .medic {
+        height: 100px;
+        padding-right: 24px;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import '../base';
+
+.navbar_container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 20px 40px;
+  background: $color_white;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+
+  .flex_end {
+        width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 32px;
+  }
+}

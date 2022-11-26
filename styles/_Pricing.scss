@@ -1,0 +1,347 @@
+.pricing_ {
+  margin-top: 72px;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+
+    section {
+      .choose_a_plan {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        padding: 0 22rem;
+        letter-spacing: -0.5px;
+
+        h1 {
+          font-weight: 700;
+          font-size: 40px;
+          color: $color_blue_dark;
+          text-align: center;
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 18px;
+          color: $color_blue_dark;
+          text-align: center;
+        }
+      }
+
+      .tabs_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+        padding: 0 24px;
+
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+        white-space: nowrap;
+
+        .tab {
+          font-weight: 400;
+          font-size: 16px;
+          cursor: pointer;
+          color: $color_blue_dark;
+        }
+
+        .activeTab {
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 16px;
+          color: $color_blue_main;
+        }
+      }
+
+      .plans_conntainer {
+        margin-top: 82px;
+
+        padding: 0 120px;
+
+        ul {
+          position: relative;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 5fr));
+
+          justify-content: center;
+
+          gap: 16px;
+
+          li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            border: 1px solid #ebebeb;
+            border-radius: 16px;
+            padding: 24px;
+
+            .current_plan {
+              font-weight: 500;
+              font-size: 14px;
+              color: #8c8ca2;
+              text-align: center;
+              padding: 12px 0;
+            }
+
+            .buy_now {
+              width: 100%;
+
+              > button {
+                width: 100%;
+              }
+            }
+
+            .title_price {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 40px;
+            }
+
+            h4 {
+              font-weight: 600;
+              font-size: 16px;
+              color: $color_blue_main;
+            }
+            .price__ {
+              font-weight: 700;
+              font-size: 24px;
+              letter-spacing: -0.3px;
+
+              span {
+                font-weight: 600;
+                font-size: 14px;
+              }
+            }
+
+            .on_top {
+              font-weight: 400;
+              font-size: 14px;
+              color: rgba(0, 0, 0, 0.5);
+            }
+
+            .benefits_container {
+              display: flex;
+              gap: 8px;
+              flex-direction: column;
+
+              .benefits_ {
+                display: flex;
+                gap: 13px;
+                justify-content: center;
+
+                p {
+                  flex: 1.5 1;
+                  font-weight: 400;
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+hr {
+  height: 1px;
+  width: 100%;
+  background: #ebebeb;
+}
+
+.content_desc {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.035em;
+  margin-top: 16px;
+}
+
+.indicator {
+  position: absolute;
+  margin-top: 8px;
+  width: 50px;
+  background-color: $color_blue_main !important;
+  color: $color_blue_main;
+  height: 8px;
+  transition: all 0.5s;
+  border-radius: 8px;
+  margin: 8px 28px;
+}
+
+@media screen and (max-width: 820px) {
+  .pricing_ {
+    margin-top: 72px;
+
+    section {
+      .choose_a_plan {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        padding: 0 24px !important;
+        letter-spacing: -0.5px;
+
+        h1 {
+          font-weight: 700;
+          font-size: 28px;
+          color: $color_blue_dark;
+          text-align: center;
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          color: $color_blue_dark;
+          text-align: center;
+        }
+      }
+
+      .tabs_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px !important;
+        padding: 0 24px;
+
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+        white-space: nowrap;
+
+        .tab {
+          font-weight: 400;
+          font-size: 16px;
+          cursor: pointer;
+          color: $color_blue_dark;
+        }
+
+        .activeTab {
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 16px;
+          color: $color_blue_main;
+        }
+      }
+
+      .plans_conntainer {
+        margin-top: 82px;
+
+        padding: 0 120px;
+
+        ul {
+          position: relative;
+          display: grid;
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(300px, 5fr)
+          ) !important;
+
+          justify-content: center;
+
+          gap: 16px;
+
+          li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            border: 1px solid #ebebeb;
+            border-radius: 16px;
+            padding: 24px;
+
+            .current_plan {
+              font-weight: 500;
+              font-size: 14px;
+              color: #8c8ca2;
+              text-align: center;
+              padding: 12px 0;
+            }
+
+            .buy_now {
+              width: 100%;
+
+              > button {
+                width: 100%;
+              }
+            }
+
+            .title_price {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 40px;
+            }
+
+            h4 {
+              font-weight: 600;
+              font-size: 16px;
+              color: $color_blue_main;
+            }
+            .price__ {
+              font-weight: 700;
+              font-size: 24px;
+              letter-spacing: -0.3px;
+
+              span {
+                font-weight: 600;
+                font-size: 14px;
+              }
+            }
+
+            .benefits_container {
+              display: flex;
+              gap: 8px;
+              flex-direction: column;
+
+              .benefits_ {
+                display: flex;
+                gap: 13px;
+                justify-content: center;
+
+                p {
+                  flex: 1.5 1;
+                  font-weight: 400;
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .indicator {
+    position: absolute;
+    margin-top: 8px;
+    width: 50px;
+    background-color: $color_blue_main !important;
+    color: $color_blue_main;
+    height: 8px;
+    transition: all 0.5s;
+    border-radius: 8px;
+    margin: 8px 28px !important;
+  }
+  .content_desc {
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

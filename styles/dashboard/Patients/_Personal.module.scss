@@ -1,0 +1,141 @@
+.personal_details_body_container {
+  position: relative;
+
+  // height: 75vh;
+
+  .details_body {
+    height: 62vh;
+    padding: 24px 0;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 5px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $color_blue_light;
+      border-radius: 10px;
+    }
+  }
+
+  .chat_actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    // background: #fff;
+    // border-top: 1px solid #ebebeb;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    // background: #000;
+
+    .send {
+      flex: 0.2;
+
+      // button {
+      border: none !important;
+      background: $color_blue_main;
+      padding: 12px 5px;
+      border-radius: 8px;
+      transition: all 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: $color_blue_dark;
+      }
+      // }
+    }
+  }
+
+  .postal_address {
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.045em;
+    color: $color_blue_dark;
+  }
+
+  ._address {
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: -0.045em;
+    color: $color_blue_dark;
+  }
+
+  .personal_details_container {
+    display: flex;
+    // align-items: center;
+    // justify-content: flex-end;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding: 0 40px;
+
+    .personal_details {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      .label,
+      .value {
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: -0.045em;
+        color: $color_blue_dark;
+      }
+
+      .value {
+        opacity: 0.6;
+      }
+    }
+
+    .message_from_Client {
+      .message_content {
+        background: $color_blue_dark;
+        color: $color_white;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 8px 8px 8px 12px;
+        border-radius: 16px 16px 16px 0px;
+      }
+
+      .message_time {
+        font-weight: 400;
+        font-size: 10px;
+        color: $color_blue_dark;
+        text-align: left;
+      }
+    }
+
+    .message_from_Admin {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      width: 100%;
+
+      .message_content {
+        background: $color_blue_main;
+        color: $color_white;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 8px 8px 8px 12px;
+        border-radius: 16px 16px 0px 16px;
+      }
+
+      .message_time {
+        font-weight: 400;
+        font-size: 10px;
+        color: $color_blue_dark;
+        text-align: right;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 interface inputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   styles: string;
@@ -27,7 +27,7 @@ const Input: React.FC<inputProps> = ({
 }) => {
   return (
     <>
-      <div className={`${error && error ? 'input_error' : styles}`}>
+      <div className={`${error && error ? "input_error" : styles}`}>
         <input {...props} />
 
         {img && (

@@ -1,31 +1,31 @@
-import Image from 'next/image';
-import { Button } from '../../../../components/dashboard';
+import Image from "next/image";
+import { Button } from "../../../../components/dashboard";
 
 const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
   const productDetails = [
     {
-      label: 'Product name',
-      value: 'Paracetamol'
+      label: "Product name",
+      value: "Paracetamol"
     },
     {
-      label: 'Product price:',
-      value: 'NGN 23,334,33'
+      label: "Product price:",
+      value: "NGN 23,334,33"
     },
     {
-      label: 'Product code:',
-      value: 'EQUATE234'
+      label: "Product code:",
+      value: "EQUATE234"
     },
     {
-      label: 'Product strength:',
-      value: '50mg'
+      label: "Product strength:",
+      value: "50mg"
     },
     {
-      label: 'Pack size:',
-      value: '6 X 6'
+      label: "Pack size:",
+      value: "6 X 6"
     },
     {
-      label: 'Quantity:',
-      value: '36'
+      label: "Quantity:",
+      value: "36"
     }
   ];
 
@@ -46,9 +46,9 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
         <ul className={styles.all_products_}>
           <li className={styles.product}>
             <Image
-              src={'/assets/dashboard/pharmacy/product.svg'}
+              src={"/assets/dashboard/pharmacy/product.svg"}
               alt='product'
-              width={'160px'}
+              width={"160px"}
               height='117px'
               layout='fixed'
             />
@@ -58,9 +58,9 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
 
           <li className={styles.product}>
             <Image
-              src={'/assets/dashboard/pharmacy/product.svg'}
+              src={"/assets/dashboard/pharmacy/product.svg"}
               alt='product'
-              width={'160px'}
+              width={"160px"}
               height='117px'
               layout='fixed'
             />
@@ -69,9 +69,9 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
           </li>
           <li className={styles.product}>
             <Image
-              src={'/assets/dashboard/pharmacy/product.svg'}
+              src={"/assets/dashboard/pharmacy/product.svg"}
               alt='product'
-              width={'160px'}
+              width={"160px"}
               height='117px'
               layout='fixed'
             />
@@ -90,8 +90,8 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
             <p>Edit</p>
 
             <Image
-              src={'/assets/dashboard/edit.svg'}
-              width={'18px'}
+              src={"/assets/dashboard/edit.svg"}
+              width={"18px"}
               height='18px'
               layout='fixed'
             />
@@ -100,9 +100,9 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
 
         <div className={styles.product_image}>
           <Image
-            src={'/assets/dashboard/pharmacy/product.svg'}
+            src={"/assets/dashboard/pharmacy/product.svg"}
             alt='product'
-            width={'335px'}
+            width={"335px"}
             height='228px'
             layout='fixed'
           />
@@ -128,7 +128,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
             <p className={styles.value}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
               sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{' '}
+              elit interdum pellentesque. Nibh hac gravida placerat{" "}
             </p>
           </div>
           <div>
@@ -136,7 +136,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
             <p className={styles.value}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
               sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{' '}
+              elit interdum pellentesque. Nibh hac gravida placerat{" "}
             </p>
           </div>
           <div>
@@ -144,7 +144,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
             <p className={styles.value}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
               sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{' '}
+              elit interdum pellentesque. Nibh hac gravida placerat{" "}
             </p>
           </div>
           <div>
@@ -152,7 +152,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
             <p className={styles.value}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
               sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{' '}
+              elit interdum pellentesque. Nibh hac gravida placerat{" "}
             </p>
           </div>
         </div>

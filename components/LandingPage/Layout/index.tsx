@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Navbar, Sidebar, Footer } from '../index';
+import { useState } from "react";
+import { Navbar, Sidebar, Footer } from "../index";
 
 const Layout = ({ children }: any) => {
   const [openNavbar, setOpenNavbar] = useState(false);

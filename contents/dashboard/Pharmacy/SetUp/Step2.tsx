@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { Input, Button } from '../../../../components/dashboard';
+import { useState } from "react";
+import { Input, Button } from "../../../../components/dashboard";
 
 const Step2 = ({ styles, setCurrentStep }: any) => {
-  const [bank, setBank] = useState('');
+  const [bank, setBank] = useState("");
+
+  console.log("banks", bank);
 
   return (
     <form className={styles.padd}>
@@ -15,7 +17,7 @@ const Step2 = ({ styles, setCurrentStep }: any) => {
         <div>
           <label htmlFor='Bank'>Select bank</label>
           <Input
-            type={'text'}
+            type={"text"}
             styles='input_primary'
             list='Bank'
             placeholder='Select / type your bank'
@@ -24,7 +26,7 @@ const Step2 = ({ styles, setCurrentStep }: any) => {
           />
 
           <datalist id='Bank'>
-            {['Access bank', 'AlatbyWema'].map(
+            {["Access bank", "AlatbyWema"].map(
               (bank: string, index: number) => (
                 <option key={index} value={bank}>
                   {bank}
@@ -36,7 +38,7 @@ const Step2 = ({ styles, setCurrentStep }: any) => {
         <div>
           <label htmlFor='Account number'>Account number</label>
           <Input
-            type={'number'}
+            type={"number"}
             styles='input_primary'
             placeholder='Account number'
             id='Account number'
@@ -45,7 +47,7 @@ const Step2 = ({ styles, setCurrentStep }: any) => {
         <div>
           <label htmlFor='Account name'>Account name</label>
           <Input
-            type={'text'}
+            type={"text"}
             styles='input_primary'
             placeholder='GOD FAVOUR BUSINESS LTD'
             id='Account number'
@@ -55,7 +57,7 @@ const Step2 = ({ styles, setCurrentStep }: any) => {
 
       <div className={styles.continue}>
         <Button
-          onClick={() => setCurrentStep('Step3')}
+          onClick={() => setCurrentStep("Step3")}
           className='btn_primary w-full'
         >
           Continue

@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/globals.scss';
-import type { AppProps } from 'next/app';
-import mergeStore from '../redux';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { MoonLoader } from 'react-spinners';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/globals.scss";
+import type { AppProps } from "next/app";
+import mergeStore from "../redux";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { MoonLoader } from "react-spinners";
 
 const { store, persistor } = mergeStore();
 

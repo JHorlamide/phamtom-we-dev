@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const ShippingServices = ({ couriers, styles, Image,  }: any) => {
+const ShippingServices = ({ couriers, styles, Image }: any) => {
   return (
     <div>
       <ul className={styles.couriers}>
@@ -10,8 +10,8 @@ const ShippingServices = ({ couriers, styles, Image,  }: any) => {
               <Image
                 src={member.avatar}
                 alt='avatar'
-                width={'64px'}
-                height={'40px'}
+                width={"64px"}
+                height={"40px"}
                 layout='fixed'
               />
 

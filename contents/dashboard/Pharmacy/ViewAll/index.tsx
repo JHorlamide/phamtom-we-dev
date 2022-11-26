@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import ViewProducts from './ViewProducts';
-import ViewOrders from './ViewOrders';
+import { useState } from "react";
+import ViewProducts from "./ViewProducts";
+import ViewOrders from "./ViewOrders";
 
 const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
-  const [activeTab, setActiveTab] = useState('PRODUCTS');
+  const [activeTab, setActiveTab] = useState("PRODUCTS");
 
   const tabs = [
     {
-      name: 'PRODUCTS',
+      name: "PRODUCTS",
       totalItems: 10
     },
     {
-      name: 'ORDERS',
+      name: "ORDERS",
       totalItems: 10
     }
   ];
@@ -30,7 +30,7 @@ const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
               onClick={() => setActiveTab(item.name)}
             >
               <p>
-                {' '}
+                {" "}
                 {item.name} ({item.totalItems})
               </p>
             </div>
@@ -38,13 +38,13 @@ const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
         </div>
       </div>
 
-      {activeTab === 'PRODUCTS' && (
+      {activeTab === "PRODUCTS" && (
         <ViewProducts
           setShowAddNewProductModal={setShowAddNewProductModal}
           styles={styles}
         />
       )}
-      {activeTab === 'ORDERS' && (
+      {activeTab === "ORDERS" && (
         <ViewOrders
           setShowAddNewProductModal={setShowAddNewProductModal}
           styles={styles}

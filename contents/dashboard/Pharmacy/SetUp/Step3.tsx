@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import Image from 'next/image';
-import { Button } from '../../../../components/dashboard';
+import { useRef } from "react";
+import Image from "next/image";
+import { Button } from "../../../../components/dashboard";
 
 const Step3 = ({ styles, setCurrentStep }: any) => {
   const Ref: any = useRef();
@@ -18,13 +18,13 @@ const Step3 = ({ styles, setCurrentStep }: any) => {
 
       <div className={styles.form_input_container}>
         <div className={styles.upload_doc}>
-          <input type='file' ref={Ref} style={{ display: 'none' }} />
+          <input type='file' ref={Ref} style={{ display: "none" }} />
 
           <div onClick={onButtonClick}>
             <Image
-              src={'/assets/dashboard/doc.svg'}
-              width={'16px'}
-              height={'20px'}
+              src={"/assets/dashboard/doc.svg"}
+              width={"16px"}
+              height={"20px"}
             />
             <p>Upload a document</p>
           </div>
@@ -33,7 +33,7 @@ const Step3 = ({ styles, setCurrentStep }: any) => {
 
       <div className={styles.continue}>
         <Button
-          onClick={() => setCurrentStep('Step4')}
+          onClick={() => setCurrentStep("Step4")}
           className='btn_primary w-full'
         >
           Submit

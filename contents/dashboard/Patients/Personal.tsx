@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 
 const Personal = ({ styles }: any) => {
   const { selectedPatient } = useSelector(
@@ -8,40 +8,40 @@ const Personal = ({ styles }: any) => {
 
   const personal = [
     {
-      label: 'First name',
+      label: "First name",
       value: selectedPatient?.patient_demographic?.first_name
     },
 
     {
-      label: 'Last name',
+      label: "Last name",
       value: selectedPatient?.patient_demographic?.last_name
     },
     {
-      label: 'Gender',
-      value: '-'
+      label: "Gender",
+      value: "-"
     },
     {
-      label: 'Phone number',
+      label: "Phone number",
       value: selectedPatient?.patient_demographic?.phone_number
     },
     {
-      label: 'Age',
+      label: "Age",
       value: selectedPatient?.patient_demographic?.age
     },
     {
-      label: 'Weight',
-      value: selectedPatient?.patient_demographic?.weight_unit + 'kg'
+      label: "Weight",
+      value: selectedPatient?.patient_demographic?.weight_unit + "kg"
     },
     {
-      label: 'Height',
-      value: selectedPatient?.patient_demographic?.height_unit + 'm'
+      label: "Height",
+      value: selectedPatient?.patient_demographic?.height_unit + "m"
     },
     {
-      label: 'Blood group',
+      label: "Blood group",
       value: selectedPatient?.patient_demographic?.blood_group
     },
     {
-      label: 'Occupation',
+      label: "Occupation",
       value: selectedPatient?.patient_demographic?.occupation
     }
   ];
@@ -53,7 +53,7 @@ const Personal = ({ styles }: any) => {
         <div className={styles.personal_details_container}>
           {Object.keys(selectedPatient).length > 0 &&
             personal.map((item: any, index: any) => (
-              <div key={index} style={{ display: 'contents' }}>
+              <div key={index} style={{ display: "contents" }}>
                 <div className={styles.personal_details}>
                   <p className={styles.label}>{item.label}</p>
                   <p className={styles.value}>{item.value}</p>
@@ -63,7 +63,7 @@ const Personal = ({ styles }: any) => {
             ))}
         </div>
 
-        <div style={{ margin: '24px 40px' }}>
+        <div style={{ margin: "24px 40px" }}>
           <p className={styles.postal_address}>POSTAL ADDRESS</p>
           <p className={styles._address}>
             {selectedPatient?.patient_demographic?.home_address}

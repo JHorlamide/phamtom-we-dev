@@ -1,12 +1,12 @@
-import { useRef } from 'react';
-import styles from '../../../styles/dashboard/Sidebar.module.scss';
-import { setAdmin } from '../../../redux/actions/admin';
-import { useDispatch } from 'react-redux';
-import { removeToken } from '../../../services/localService';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { authRoutes, userRoutes } from '../../../Routes';
+import { useRef } from "react";
+import styles from "../../../styles/dashboard/Sidebar.module.scss";
+import { setAdmin } from "../../../redux/actions/admin";
+import { useDispatch } from "react-redux";
+import { removeToken } from "../../../services/localService";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { authRoutes, userRoutes } from "../../../Routes";
 
 const Sidebar = () => {
   const { pathname, push } = useRouter();
@@ -16,7 +16,7 @@ const Sidebar = () => {
   const handleLogout = () => {
     removeToken();
     dispatch(setAdmin({}));
-    push('/auth/login');
+    push("/auth/login");
   };
 
   return (
@@ -29,8 +29,8 @@ const Sidebar = () => {
         <Image
           src='/assets/navbar/logo.svg'
           alt='logo'
-          width={'152.67px'}
-          height={'40px'}
+          width={"152.67px"}
+          height={"40px"}
         />
       </div>
 
@@ -120,8 +120,8 @@ const Sidebar = () => {
       <div onClick={handleLogout} className={styles.logout}>
         <Image
           src='/assets/dashboard/sidebar/logout.svg'
-          width={'20px'}
-          height={'18px'}
+          width={"20px"}
+          height={"18px"}
           layout='fixed'
         />
 

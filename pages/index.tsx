@@ -1,13 +1,13 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
 import {
   Button,
   Banner,
   Layout,
   useScreenSize
-} from '../components/LandingPage';
-import { Section1, Section2 } from '../contents/homepage';
+} from "../components/LandingPage";
+import { Section1, Section2 } from "../contents/homepage";
 
 const Home: NextPage = () => {
   const screenSize = useScreenSize();
@@ -28,9 +28,9 @@ const Home: NextPage = () => {
           <div className='hero_content'>
             <h1>
               <span>
-                {' '}
-                Electronic Health Record. <br />{' '}
-              </span>{' '}
+                {" "}
+                Electronic Health Record. <br />{" "}
+              </span>{" "}
               Online Pharmacy. <br />
               <span>Telechat.</span>
             </h1>
@@ -42,15 +42,15 @@ const Home: NextPage = () => {
               <div>
                 <Image
                   src='/assets/home/googlePlay.svg'
-                  width={'157.5px'}
-                  height={'48px'}
+                  width={"157.5px"}
+                  height={"48px"}
                 />
               </div>
               <div>
                 <Image
                   src='/assets/home/appStore.svg'
-                  width={'157.5px'}
-                  height={'48px'}
+                  width={"157.5px"}
+                  height={"48px"}
                 />
               </div>
             </div>
@@ -59,9 +59,9 @@ const Home: NextPage = () => {
             <div className='hero_img'>
               <Image
                 src='/assets/hero.svg'
-                height={'672px'}
-                width={'911.94px'}
-                layout={screenSize.width >= 1025 ? 'responsive' : 'intrinsic'}
+                height={"672px"}
+                width={"911.94px"}
+                layout={screenSize.width >= 1025 ? "responsive" : "intrinsic"}
               />
             </div>
           </div>

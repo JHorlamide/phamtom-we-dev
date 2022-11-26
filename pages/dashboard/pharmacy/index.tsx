@@ -1,9 +1,9 @@
 /* eslint-disable indent */
-import { useState } from 'react';
-import { NextPage } from 'next/types';
-import { Badge, Button, DashboardLayout } from '../../../components/dashboard';
-import Image from 'next/image';
-import styles from '../../../styles/dashboard/Pharmacy.module.scss';
+import { useState } from "react";
+import { NextPage } from "next/types";
+import { Badge, Button, DashboardLayout } from "../../../components/dashboard";
+import Image from "next/image";
+import styles from "../../../styles/dashboard/Pharmacy.module.scss";
 import {
   SetUpPharmcy,
   MyOrder,
@@ -13,7 +13,7 @@ import {
   AddNewCourier,
   AddNewProducts,
   ViewAll
-} from '../../../contents/dashboard/Pharmacy';
+} from "../../../contents/dashboard/Pharmacy";
 
 const Pharmacy: NextPage = () => {
   const [showAddNewProductModal, setShowAddNewProductModal]: any =
@@ -31,136 +31,136 @@ const Pharmacy: NextPage = () => {
 
   const cards = [
     {
-      title: 'Total patients',
-      value: '62'
+      title: "Total patients",
+      value: "62"
     },
     {
-      title: 'Total orders',
-      value: '14'
+      title: "Total orders",
+      value: "14"
     },
     {
-      title: 'Active orders',
-      value: '14'
+      title: "Active orders",
+      value: "14"
     },
     {
-      title: 'Out of stock',
-      value: '14'
+      title: "Out of stock",
+      value: "14"
     }
   ];
 
   const Products = [
     {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg'
+      name: "Paracetamol",
+      price: "620,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg"
     },
     {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg'
+      name: "Paracetamol",
+      price: "620,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg"
     },
     {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg'
+      name: "Paracetamol",
+      price: "620,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg"
     },
     {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg'
+      name: "Paracetamol",
+      price: "140,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg"
     },
     {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg'
+      name: "Paracetamol",
+      price: "140,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg"
     },
     {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg'
+      name: "Paracetamol",
+      price: "140,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg"
     }
   ];
 
   const MyOrders = [
     {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '1',
-      status: 'pending'
+      name: "Paracetamol",
+      price: "620,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg",
+      qty: "1",
+      status: "pending"
     },
     {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '454',
-      status: 'pending'
+      name: "Paracetamol",
+      price: "620,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg",
+      qty: "454",
+      status: "pending"
     },
     {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '33',
-      status: 'pending'
+      name: "Paracetamol",
+      price: "620,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg",
+      qty: "33",
+      status: "pending"
     },
     {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '21',
-      status: 'pending'
+      name: "Paracetamol",
+      price: "140,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg",
+      qty: "21",
+      status: "pending"
     },
     {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '13',
-      status: 'pending'
+      name: "Paracetamol",
+      price: "140,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg",
+      qty: "13",
+      status: "pending"
     },
     {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '11',
-      status: 'pending'
+      name: "Paracetamol",
+      price: "140,000.00",
+      image: "/assets/dashboard/pharmacy/product.svg",
+      qty: "11",
+      status: "pending"
     }
   ];
 
   const couriers = [
     {
-      name: 'Jumia Logistics',
-      title: 'Director',
-      avatar: '/assets/dashboard/jumia.svg',
-      role: 'Admin'
+      name: "Jumia Logistics",
+      title: "Director",
+      avatar: "/assets/dashboard/jumia.svg",
+      role: "Admin"
     },
     {
-      name: 'GIG Logistics',
-      title: 'Asisting Manager',
-      avatar: '/assets/dashboard/jumia.svg',
-      role: 'Admin'
+      name: "GIG Logistics",
+      title: "Asisting Manager",
+      avatar: "/assets/dashboard/jumia.svg",
+      role: "Admin"
     }
   ];
 
   const chats = [
     {
-      name: 'John Doe',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar_2.svg',
-      time: '12:00',
+      name: "John Doe",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar_2.svg",
+      time: "12:00",
       totalUnread: 2
     },
     {
-      name: 'John Doe',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar_2.svg',
-      time: '12:00',
+      name: "John Doe",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar_2.svg",
+      time: "12:00",
       totalUnread: 2
     },
     {
-      name: 'John Doe',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar.svg',
-      time: '12:00',
+      name: "John Doe",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar.svg",
+      time: "12:00",
       totalUnread: 2
     }
   ];
@@ -179,13 +179,13 @@ const Pharmacy: NextPage = () => {
                       className={styles.card}
                       style={{
                         background:
-                          card.title === 'Active orders'
-                            ? ' #03C57F'
-                            : card.title === 'Out of stock'
+                          card.title === "Active orders"
+                            ? " #03C57F"
+                            : card.title === "Out of stock"
                             // eslint-disable-next-line operator-linebreak
                             ? // eslint-disable-next-line indent
-                              '#F29C4C'
-                            : '#0055D2'
+                              "#F29C4C"
+                            : "#0055D2"
                       }}
                     >
                       <p className={styles.title}>{card.title}</p>
@@ -208,8 +208,8 @@ const Pharmacy: NextPage = () => {
                       <Image
                         src='/assets/dashboard/ehr/arrow.svg'
                         alt='arrow'
-                        width={'12.05px'}
-                        height={'15px'}
+                        width={"12.05px"}
+                        height={"15px"}
                       />
                     </div>
                   </div>
@@ -248,8 +248,8 @@ const Pharmacy: NextPage = () => {
                       <Image
                         src='/assets/dashboard/ehr/arrow.svg'
                         alt='arrow'
-                        width={'12.05px'}
-                        height={'15px'}
+                        width={"12.05px"}
+                        height={"15px"}
                       />
                     </div>
                   </div>
@@ -263,8 +263,8 @@ const Pharmacy: NextPage = () => {
                   <Image
                     src='/assets/dashboard/ehr/medic.svg'
                     alt='medic'
-                    width={'120px'}
-                    height={'194px'}
+                    width={"120px"}
+                    height={"194px"}
                     layout='fixed'
                   />
 
@@ -277,8 +277,8 @@ const Pharmacy: NextPage = () => {
                       <Image
                         src='/assets/dashboard/ehr/arrow.svg'
                         alt='medic'
-                        width={'12.05px'}
-                        height={'15px'}
+                        width={"12.05px"}
+                        height={"15px"}
                       />
                     </div>
                   </div>
@@ -294,8 +294,8 @@ const Pharmacy: NextPage = () => {
                       <Image
                         src='/assets/dashboard/ehr/arrow.svg'
                         alt='arrow'
-                        width={'12.05px'}
-                        height={'15px'}
+                        width={"12.05px"}
+                        height={"15px"}
                       />
                     </div>
                   </div>
@@ -309,7 +309,7 @@ const Pharmacy: NextPage = () => {
                   <Button
                     onClick={() => setShowAddCourier(true)}
                     className='secondary_2 w-full'
-                    style={{ marginTop: '8px' }}
+                    style={{ marginTop: "8px" }}
                   >
                     Add new shipping service
                   </Button>
@@ -321,15 +321,15 @@ const Pharmacy: NextPage = () => {
                     <div>
                       <h5>Chats</h5>
 
-                      <Badge color={'badge_primary'} content={5} />
+                      <Badge color={"badge_primary"} content={5} />
                     </div>
                     <div onClick={() => {}}>
                       <p className={styles.go_to_chats}>Go to chats</p>
                       <Image
                         src='/assets/dashboard/ehr/arrow.svg'
                         alt='arrow'
-                        width={'12.05px'}
-                        height={'15px'}
+                        width={"12.05px"}
+                        height={"15px"}
                       />
                     </div>
                   </div>

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 import {
   Button,
   Checkbox,
   Input,
   DashboardLayout
-} from '../../../components/dashboard';
-import styles from '../../..//styles/dashboard/Payments.module.scss';
-import { Modal } from 'react-bootstrap';
+} from "../../../components/dashboard";
+import styles from "../../..//styles/dashboard/Payments.module.scss";
+import { Modal } from "react-bootstrap";
 
 const Payments = () => {
   const [show, setShow] = useState(false);
@@ -30,13 +30,13 @@ const Payments = () => {
   const [enterPin, setEnterPin] = useState(false);
 
   const handleOpenPayment = () => {
-    const slider = document.getElementById('PAYMENTS_SLIDE') as HTMLElement;
-    slider.classList.add('slide_right');
+    const slider = document.getElementById("PAYMENTS_SLIDE") as HTMLElement;
+    slider.classList.add("slide_right");
   };
 
   const handleClosePayment = () => {
-    const slider = document.getElementById('PAYMENTS_SLIDE') as HTMLElement;
-    slider.classList.remove('slide_right');
+    const slider = document.getElementById("PAYMENTS_SLIDE") as HTMLElement;
+    slider.classList.remove("slide_right");
   };
 
   const handleViewCardDetails = () => {
@@ -45,25 +45,25 @@ const Payments = () => {
 
   const allPlans = [
     {
-      duration: 'Monthly',
-      price: '$1.5 (NGN 10,000.00)'
+      duration: "Monthly",
+      price: "$1.5 (NGN 10,000.00)"
     },
     {
-      duration: 'Monthly',
-      price: '$3.5 (NGN 10,000.00)'
+      duration: "Monthly",
+      price: "$3.5 (NGN 10,000.00)"
     },
     {
-      duration: 'Annually',
-      price: '$12 (NGN 10,000.00)'
+      duration: "Annually",
+      price: "$12 (NGN 10,000.00)"
     }
   ];
 
   const benefits = [
-    'Create unlimited patient records',
-    'Download patient record',
-    'Access to chat with your patient',
-    'Add more staff members',
-    'Up to 50 registerd patients'
+    "Create unlimited patient records",
+    "Download patient record",
+    "Access to chat with your patient",
+    "Add more staff members",
+    "Up to 50 registerd patients"
   ];
 
   return (
@@ -74,9 +74,9 @@ const Payments = () => {
             <h5>Payments</h5>
             <div>
               <Image
-                src={'/assets/dashboard/ehr/arrow.svg'}
-                width={'12.05px'}
-                height={'15px'}
+                src={"/assets/dashboard/ehr/arrow.svg"}
+                width={"12.05px"}
+                height={"15px"}
               />
             </div>
           </div>
@@ -110,9 +110,9 @@ const Payments = () => {
               {benefits.map((item, index) => (
                 <div key={index} className={styles.benefits}>
                   <Image
-                    src={'/assets/dashboard/correct.svg'}
-                    width={'17.60px'}
-                    height={'14.41px'}
+                    src={"/assets/dashboard/correct.svg"}
+                    width={"17.60px"}
+                    height={"14.41px"}
                   />
                   <p>{item}</p>
                 </div>
@@ -128,9 +128,9 @@ const Payments = () => {
               <div className={styles.items_container}>
                 <div className={styles.top_items}>
                   <Image
-                    src={'/assets/dashboard/close_btn.svg'}
-                    width={'14px'}
-                    height={'14px'}
+                    src={"/assets/dashboard/close_btn.svg"}
+                    width={"14px"}
+                    height={"14px"}
                     layout='fixed'
                     onClick={handleClosePayment}
                     className='cursor-pointer'
@@ -141,9 +141,9 @@ const Payments = () => {
                 <div onClick={handleViewCardDetails}>
                   <div onClick={handleViewCardDetails}>
                     <Image
-                      src={'/assets/dashboard/card.svg'}
-                      height={'164px'}
-                      width={'330px'}
+                      src={"/assets/dashboard/card.svg"}
+                      height={"164px"}
+                      width={"330px"}
                       layout='responsive'
                       className='cursor-pointer'
                     />
@@ -160,9 +160,9 @@ const Payments = () => {
               <div className={styles.items_container}>
                 <div className={styles.top_items}>
                   <Image
-                    src={'/assets/dashboard/arrow_left.svg'}
-                    width={'18px'}
-                    height={'12px'}
+                    src={"/assets/dashboard/arrow_left.svg"}
+                    width={"18px"}
+                    height={"12px"}
                     layout='fixed'
                     onClick={handleViewCardDetails}
                     className='cursor-pointer'
@@ -174,9 +174,9 @@ const Payments = () => {
                 {/* cards */}
                 <div>
                   <Image
-                    src={'/assets/dashboard/card.svg'}
-                    height={'164px'}
-                    width={'330px'}
+                    src={"/assets/dashboard/card.svg"}
+                    height={"164px"}
+                    width={"330px"}
                     layout='responsive'
                   />
                 </div>
@@ -216,12 +216,12 @@ const Payments = () => {
 
                 <div className={styles.add_new_Card}>
                   <Button className={styles.delete_bank}>
-                    {' '}
-                    <p>Delete bank</p>{' '}
+                    {" "}
+                    <p>Delete bank</p>{" "}
                     <Image
-                      src={'/assets/dashboard/delete.svg'}
+                      src={"/assets/dashboard/delete.svg"}
                       width='14px'
-                      height={'18px'}
+                      height={"18px"}
                     />
                   </Button>
                 </div>
@@ -236,9 +236,9 @@ const Payments = () => {
           <p>Add new debit card</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={handleClose}
           />
         </div>
@@ -252,8 +252,8 @@ const Payments = () => {
                 <Input
                   id='card_number'
                   styles='input_primary'
-                  placeholder={'0000 0000 0000 0000'}
-                  type={'text'}
+                  placeholder={"0000 0000 0000 0000"}
+                  type={"text"}
                   name='currentPassword'
                 />
               </div>
@@ -262,8 +262,8 @@ const Payments = () => {
                 <Input
                   id='expiry_date'
                   styles='input_primary'
-                  placeholder={'MM/YY'}
-                  type={'text'}
+                  placeholder={"MM/YY"}
+                  type={"text"}
                   name='currentPassword'
                 />
               </div>
@@ -272,20 +272,20 @@ const Payments = () => {
                 <Input
                   id='cvv'
                   styles='input_primary'
-                  placeholder={'123'}
-                  type={'text'}
+                  placeholder={"123"}
+                  type={"text"}
                   name='currentPassword'
                 />
               </div>
 
-              <div style={{ marginTop: '20px' }}>
+              <div style={{ marginTop: "20px" }}>
                 <p className='details_'>
                   Your card details are secured and processed by our PCI-DSS
                   complaint payment partners.
                 </p>
               </div>
 
-              <div style={{ marginTop: '20px' }}>
+              <div style={{ marginTop: "20px" }}>
                 <Button
                   onClick={() => setEnterPin(true)}
                   className='btn_primary w-full'
@@ -305,8 +305,8 @@ const Payments = () => {
                 <Input
                   id='card_number'
                   styles='input_primary'
-                  placeholder={'0'}
-                  type={'number'}
+                  placeholder={"0"}
+                  type={"number"}
                   max='9'
                   min='0'
                   maxLength={1}
@@ -315,8 +315,8 @@ const Payments = () => {
                 <Input
                   id='card_number'
                   styles='input_primary'
-                  placeholder={'0'}
-                  type={'number'}
+                  placeholder={"0"}
+                  type={"number"}
                   max='9'
                   min='0'
                   maxLength={1}
@@ -325,8 +325,8 @@ const Payments = () => {
                 <Input
                   id='card_number'
                   styles='input_primary'
-                  placeholder={'0'}
-                  type={'number'}
+                  placeholder={"0"}
+                  type={"number"}
                   max='9'
                   min='0'
                   maxLength={1}
@@ -335,8 +335,8 @@ const Payments = () => {
                 <Input
                   id='card_number'
                   styles='input_primary'
-                  placeholder={'0'}
-                  type={'number'}
+                  placeholder={"0"}
+                  type={"number"}
                   max='9'
                   min='0'
                   maxLength={1}
@@ -344,7 +344,7 @@ const Payments = () => {
                 />
               </div>
 
-              <div style={{ marginTop: '20px' }}>
+              <div style={{ marginTop: "20px" }}>
                 <Button onClick={handleClose} className='btn_primary w-full'>
                   Continue
                 </Button>

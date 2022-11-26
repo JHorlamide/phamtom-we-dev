@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Button, Input } from '../../../../components/dashboard';
-import { setPatientMedicalHistory } from '../../../../redux/actions/patients';
-import { useSelector, useDispatch } from 'react-redux';
-import { medicationService } from '../../../../services/restService';
-import { Modal } from 'react-bootstrap';
-import produce from 'immer';
+import { useState, useEffect } from "react";
+import { Button, Input } from "../../../../components/dashboard";
+// import { setPatientMedicalHistory } from "../../../../redux/actions/patients";
+import { useSelector } from "react-redux";
+import { medicationService } from "../../../../services/restService";
+import { Modal } from "react-bootstrap";
+import produce from "immer";
 
 const MedicationHistory = ({
   medicalHistory,
@@ -17,32 +17,32 @@ const MedicationHistory = ({
     (state: any) => state.patientsReducer
   );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [addHistory, setAddHistory] = useState(false);
   const [inputFields, setInputFields] = useState([
     {
-      medication_name: '',
-      dosing_information: '',
-      medication_strength: '',
-      frequency: '',
-      route_of_administration: '',
-      duration_of_use: '',
-      refill_information: ''
+      medication_name: "",
+      dosing_information: "",
+      medication_strength: "",
+      frequency: "",
+      route_of_administration: "",
+      duration_of_use: "",
+      refill_information: ""
     }
   ]);
   const [tempInputFields, setTempInputFields]: any = useState([]);
 
   const newField = [
     {
-      medication_name: '',
-      dosing_information: '',
-      medication_strength: '',
-      frequency: '',
-      route_of_administration: '',
-      duration_of_use: '',
-      refill_information: ''
+      medication_name: "",
+      dosing_information: "",
+      medication_strength: "",
+      frequency: "",
+      route_of_administration: "",
+      duration_of_use: "",
+      refill_information: ""
     }
   ];
 
@@ -60,15 +60,17 @@ const MedicationHistory = ({
         admin.access_token
       );
 
+      console.log("data", data);
+
       setInputFields([
         {
-          refill_information: '',
-          medication_name: '',
-          dosing_information: '',
-          medication_strength: '',
-          frequency: '',
-          route_of_administration: '',
-          duration_of_use: ''
+          refill_information: "",
+          medication_name: "",
+          dosing_information: "",
+          medication_strength: "",
+          frequency: "",
+          route_of_administration: "",
+          duration_of_use: ""
         }
       ]);
     } catch (error) {
@@ -107,8 +109,8 @@ const MedicationHistory = ({
         <div className={styles.header}>
           <Image
             src='/assets/dashboard/arrow_left.svg'
-            width={'18px'}
-            height={'12px'}
+            width={"18px"}
+            height={"12px"}
             className='cursor-pointer'
             onClick={() => setSelectedRecord(null)}
           />
@@ -124,10 +126,10 @@ const MedicationHistory = ({
                   const content: any = e.currentTarget.nextElementSibling;
                   if (content.style.maxHeight) {
                     content.style.maxHeight = null;
-                    e.currentTarget.style.marginBottom = '0px';
+                    e.currentTarget.style.marginBottom = "0px";
                   } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    e.currentTarget.style.marginBottom = '16px';
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    e.currentTarget.style.marginBottom = "16px";
                   }
 
                   console.log(content);
@@ -136,8 +138,8 @@ const MedicationHistory = ({
                 <p>{history?.date}</p>
                 <Image
                   src='/assets/dashboard/chevronRight.svg'
-                  width={'4.94px'}
-                  height={'8px'}
+                  width={"4.94px"}
+                  height={"8px"}
                 />
               </div>
 
@@ -145,7 +147,7 @@ const MedicationHistory = ({
                 <div className={styles.physician}>
                   <p className={styles.name}>Physician name</p>
                   <p className={styles.physician_name}>
-                    {' '}
+                    {" "}
                     {history?.details?.physician}
                   </p>
                 </div>
@@ -158,7 +160,7 @@ const MedicationHistory = ({
                         {detail?.statement}
                       </p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
                   ))}
                 </div>
@@ -169,9 +171,9 @@ const MedicationHistory = ({
       </div>
       <Button onClick={() => setAddHistory(true)} className={styles.add_record}>
         <Image
-          src={'/assets/dashboard/plus.svg'}
-          width={'14px'}
-          height={'14px'}
+          src={"/assets/dashboard/plus.svg"}
+          width={"14px"}
+          height={"14px"}
         />
         <p>Add history</p>
       </Button>
@@ -186,9 +188,9 @@ const MedicationHistory = ({
           <p>Add Medication History</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={handleClose}
           />
         </div>
@@ -314,7 +316,7 @@ const MedicationHistory = ({
                     />
 
                     <select className={styles.select} name='' id=''>
-                      {['day', 'week', 'month', 'year'].map(
+                      {["day", "week", "month", "year"].map(
                         (item: any, index: any) => (
                           <option key={index} value={item}>
                             {item}
@@ -358,14 +360,14 @@ const MedicationHistory = ({
                 }}
                 className='secondary_2'
                 disabled={
-                  Object.values(inputFields[0]).some((x) => x === '') ||
+                  Object.values(inputFields[0]).some((x) => x === "") ||
                   isLoading
                 }
               >
                 <Image
-                  src={'/assets/dashboard/plus_blue.svg'}
-                  width={'14px'}
-                  height={'14px'}
+                  src={"/assets/dashboard/plus_blue.svg"}
+                  width={"14px"}
+                  height={"14px"}
                 />
                 <p>Add another medication</p>
               </Button>
@@ -374,12 +376,12 @@ const MedicationHistory = ({
             <Button
               onClick={handleSave}
               disabled={
-                (Object.values(inputFields[0]).some((x) => x === '') ||
+                (Object.values(inputFields[0]).some((x) => x === "") ||
                   isLoading) &&
                 tempInputFields.length < 1
               }
-              className={'btn_primary'}
-              style={{ marginTop: '16px' }}
+              className={"btn_primary"}
+              style={{ marginTop: "16px" }}
             >
               Save
             </Button>

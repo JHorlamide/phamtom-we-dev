@@ -1,25 +1,25 @@
-import { useState } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
-import { NextPage } from 'next';
+import { useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import { NextPage } from "next";
 import {
   Tabs,
   Banner,
   useScreenSize,
   Button,
   Layout
-} from '../../components/LandingPage';
+} from "../../components/LandingPage";
 import {
   BilledMonthly,
   BilledQuarterly,
   BilledYearly
-} from '../../contents/pricing';
+} from "../../contents/pricing";
 
 const Pricing: NextPage = () => {
   const screenSize = useScreenSize();
-  const [activetab, setActivetab]: any = useState('Billed Monthly');
+  const [activetab, setActivetab]: any = useState("Billed Monthly");
 
-  const tabs = ['Billed Monthly', 'Billed Quarterly', 'Billed Yearly'];
+  const tabs = ["Billed Monthly", "Billed Quarterly", "Billed Yearly"];
 
   return (
     <Layout>
@@ -46,7 +46,7 @@ const Pricing: NextPage = () => {
           </section>
 
           {/* tabs */}
-          <section style={{ marginBottom: '180px' }}>
+          <section style={{ marginBottom: "180px" }}>
             <Tabs
               tabs={tabs}
               activeTab={activetab}
@@ -54,17 +54,17 @@ const Pricing: NextPage = () => {
             />
 
             <div className='plans_conntainer'>
-              {activetab === 'Billed Monthly' && (
+              {activetab === "Billed Monthly" && (
                 <>
                   <BilledMonthly Image={Image} Button={Button} />
                 </>
               )}
-              {activetab === 'Billed Quarterly' && (
+              {activetab === "Billed Quarterly" && (
                 <>
                   <BilledQuarterly Image={Image} Button={Button} />
                 </>
               )}
-              {activetab === 'Billed Yearly' && (
+              {activetab === "Billed Yearly" && (
                 <>
                   <BilledYearly Image={Image} Button={Button} />
                 </>
@@ -73,7 +73,7 @@ const Pricing: NextPage = () => {
           </section>
 
           <Banner
-            height={screenSize.width >= 821 ? '300px' : '200px'}
+            height={screenSize.width >= 821 ? "300px" : "200px"}
             linkName='Contact support'
             linkTo='phamtom-support'
             content={

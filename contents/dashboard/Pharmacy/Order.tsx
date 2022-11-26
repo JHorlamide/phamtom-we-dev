@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const MyOrders = ({ Orders, styles, Image }: any) => {
   return (
@@ -9,7 +9,7 @@ const MyOrders = ({ Orders, styles, Image }: any) => {
             <Image
               src={item.image}
               alt='product'
-              width={'160px'}
+              width={"160px"}
               height='117px'
               layout='fixed'
             />
@@ -20,7 +20,7 @@ const MyOrders = ({ Orders, styles, Image }: any) => {
             <div className={styles.status}>
               <p
                 className={
-                  item.status === 'pending' ? styles.pending : styles.success
+                  item.status === "pending" ? styles.pending : styles.success
                 }
               >
                 {item.status}

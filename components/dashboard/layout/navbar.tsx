@@ -1,14 +1,14 @@
-import styles from '../../../styles/dashboard/Navbar.module.scss';
-import Image from 'next/image';
-import useScreenSize from '../../useScreenSize';
+import styles from "../../../styles/dashboard/Navbar.module.scss";
+import Image from "next/image";
+import useScreenSize from "../../useScreenSize";
 const Navbar = () => {
   const screenSize = useScreenSize();
 
   const handleOpenSidebar = () => {
     const sidebar: any = document.getElementById(
-      'SIDEBAR_CONTAINER'
+      "SIDEBAR_CONTAINER"
     ) as HTMLElement;
-    sidebar.classList.add('open_sidebar');
+    sidebar.classList.add("open_sidebar");
   };
 
   return (
@@ -32,8 +32,8 @@ const Navbar = () => {
           <Image
             src='/assets/dashboard/bell.svg'
             alt='logo'
-            width={'19.94px'}
-            height={'19.94px'}
+            width={"19.94px"}
+            height={"19.94px"}
           />
         </div>
 
@@ -41,8 +41,8 @@ const Navbar = () => {
           <Image
             src='/assets/dashboard/avatar.svg'
             alt='user'
-            width={'40px'}
-            height={'40px'}
+            width={"40px"}
+            height={"40px"}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
-import Image from 'next/image';
-import { Modal } from 'react-bootstrap';
-import { Button, Input, UploadImage } from '../../../components/dashboard';
+import { useState, useRef } from "react";
+import Image from "next/image";
+import { Modal } from "react-bootstrap";
+import { Button, Input, UploadImage } from "../../../components/dashboard";
 
 interface IAddNewPatientProps {
   showAddNewPatientModal: boolean;
@@ -14,7 +14,7 @@ const AddNewProducts = ({
   styles
 }: IAddNewPatientProps) => {
   const inputFile: any = useRef(null);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
 
   const onButtonClick = () => {
     inputFile.current.click();
@@ -32,9 +32,9 @@ const AddNewProducts = ({
           <p>Add new product</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={onHide}
           />
         </div>
@@ -42,7 +42,7 @@ const AddNewProducts = ({
         <div className={styles.form_container}>
           <div className={styles.img_container}>
             <UploadImage
-              objectFit={'contain'}
+              objectFit={"contain"}
               imageUrl={imageUrl}
               handleUploadFile={onButtonClick}
               height='200px'
@@ -67,7 +67,7 @@ const AddNewProducts = ({
             <div>
               <label htmlFor='firstname'>Product name</label>
               <Input
-                type={'text'}
+                type={"text"}
                 styles='input_primary'
                 placeholder='Paracetamol'
                 id='Productname'
@@ -77,7 +77,7 @@ const AddNewProducts = ({
             <div>
               <label htmlFor='Lastname'>Product price</label>
               <Input
-                type={'number'}
+                type={"number"}
                 min={0}
                 styles='input_primary'
                 placeholder='20,000.00'
@@ -88,7 +88,7 @@ const AddNewProducts = ({
             <div>
               <label htmlFor='email_address'>Product strength</label>
               <Input
-                type={'email'}
+                type={"email"}
                 styles='input_primary'
                 placeholder='50mg'
                 id='strength'
@@ -98,7 +98,7 @@ const AddNewProducts = ({
             <div>
               <label htmlFor='Home'>Quantity</label>
               <Input
-                type={'number'}
+                type={"number"}
                 min={0}
                 styles='input_primary'
                 placeholder='36'
@@ -109,7 +109,7 @@ const AddNewProducts = ({
             <div>
               <label htmlFor='Occupation'>Occupation</label>
               <Input
-                type={'text'}
+                type={"text"}
                 styles='input_primary'
                 placeholder='Doctor'
                 id='Occupation'
@@ -117,7 +117,7 @@ const AddNewProducts = ({
             </div>
 
             <div className={styles.checkbox_container}>
-              <input type={'checkbox'} name='Prescription' id='Prescription' />
+              <input type={"checkbox"} name='Prescription' id='Prescription' />
               <label htmlFor='Prescription'>Prescription required</label>
             </div>
 
@@ -157,8 +157,8 @@ const AddNewProducts = ({
 
             <Button
               disabled
-              className={'btn_primary'}
-              style={{ marginTop: '16px' }}
+              className={"btn_primary"}
+              style={{ marginTop: "16px" }}
             >
               Save Product
             </Button>

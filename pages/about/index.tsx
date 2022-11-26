@@ -1,47 +1,47 @@
-import Head from 'next/head';
-import type { NextPage } from 'next';
-import Image from 'next/image';
-import { Banner, useScreenSize, Layout } from '../../components/LandingPage';
+import Head from "next/head";
+import type { NextPage } from "next";
+import Image from "next/image";
+import { Banner, useScreenSize, Layout } from "../../components/LandingPage";
 
 const About: NextPage = () => {
   const screenSize = useScreenSize();
 
   const solutions = [
     {
-      title: 'Electronic Health Records',
+      title: "Electronic Health Records",
       description:
         // eslint-disable-next-line quotes
         "PHAMTOM's electronic health records powers the documentation and access to patients' health records from any location for optimum healthcare delivery.",
-      image: '/assets/about/webnmobile.svg',
-      width: '487px',
-      height: '288px'
+      image: "/assets/about/webnmobile.svg",
+      width: "487px",
+      height: "288px"
     },
     {
-      title: 'Online Pharmacy Marketplace',
+      title: "Online Pharmacy Marketplace",
       description:
         // eslint-disable-next-line quotes
         'PHAMTOM online pharmacy marketplace helps patients to locate their preferred medications that might not be available in local drug stores around them, at competitive price and high quality from any location.',
-      image: '/assets/about/webnmobile.svg',
-      width: '487px',
-      height: '288px'
+      image: "/assets/about/webnmobile.svg",
+      width: "487px",
+      height: "288px"
     },
     {
-      title: 'Easy to Use for Patients',
+      title: "Easy to Use for Patients",
       description:
         // eslint-disable-next-line quotes
         'Patients love PHAMTOM as a one-stop-app for their health needs.',
-      image: '/assets/about/webnmobile.svg',
-      width: '487px',
-      height: '288px'
+      image: "/assets/about/webnmobile.svg",
+      width: "487px",
+      height: "288px"
     },
     {
-      title: 'Easy Integration',
+      title: "Easy Integration",
       description:
         // eslint-disable-next-line quotes
         "It helps pharmacies to easily integrate their offline operations with their online operation without the need to write a single line of code or hire a web developer to setup and manage an online store. Hence, they're able to save cost from hiring web developers, domain and hosting services, logistics, and many more.",
-      image: '/assets/about/webnmobile.svg',
-      width: '487px',
-      height: '288px'
+      image: "/assets/about/webnmobile.svg",
+      width: "487px",
+      height: "288px"
     }
   ];
 
@@ -57,9 +57,9 @@ const About: NextPage = () => {
         </Head>
 
         <header>
-          <div style={{ marginBottom: '75px' }}>
+          <div style={{ marginBottom: "75px" }}>
             <Banner
-              height={screenSize.width >= 821 ? '280px' : '200px'}
+              height={screenSize.width >= 821 ? "280px" : "200px"}
               content='About Us'
             />
           </div>
@@ -108,7 +108,7 @@ const About: NextPage = () => {
                       which make up less than 10% of the country&apos;s
                       population. Hence, leaving over 50% of the population to
                       source their medications from local drug stores and
-                      peddlers at exorbitant prices.{' '}
+                      peddlers at exorbitant prices.{" "}
                     </p>
                     <p>
                       Pharmacies and clinics still lack access to EHR that
@@ -122,7 +122,7 @@ const About: NextPage = () => {
                       Pharmacies need an online pharmacy marketplace in order to
                       help patients in rural and underserved areas who struggle
                       with counterfeit and low quality medications at high
-                      price.{' '}
+                      price.{" "}
                     </p>
                   </div>
                 </div>
@@ -161,9 +161,9 @@ const About: NextPage = () => {
             </section>
           </div>
 
-          <div style={{ marginTop: '240px', marginBottom: '-20px' }}>
+          <div style={{ marginTop: "240px", marginBottom: "-20px" }}>
             <Banner
-              height={screenSize.width >= 821 ? '300px' : '200px'}
+              height={screenSize.width >= 821 ? "300px" : "200px"}
               linkName='Get started'
               linkTo='get-started'
               content='Signup to join our rapidly growing community of digital healthcare providers today.'

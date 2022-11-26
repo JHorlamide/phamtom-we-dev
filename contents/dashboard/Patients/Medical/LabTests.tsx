@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { Button, Input } from '../../../../components/dashboard';
-import { useSelector, useDispatch } from 'react-redux';
-import { setPatientLabTests } from '../../../../redux/actions/patients';
-import { labService } from '../../../../services/restService';
-import { Modal } from 'react-bootstrap';
-import produce from 'immer';
+import { useState, useEffect, useRef } from "react";
+import { Button, Input } from "../../../../components/dashboard";
+import { useSelector, useDispatch } from "react-redux";
+import { setPatientLabTests } from "../../../../redux/actions/patients";
+import { labService } from "../../../../services/restService";
+import { Modal } from "react-bootstrap";
+import produce from "immer";
 
 const LabTests = ({
   medicalHistory,
@@ -30,10 +30,10 @@ const LabTests = ({
   const [addHistory, setAddHistory] = useState(false);
   const [inputFields, setInputFields] = useState([
     {
-      test_name: '',
-      test_date: '',
-      test_result: '',
-      upload_doc: 'dsfdsf'
+      test_name: "",
+      test_date: "",
+      test_result: "",
+      upload_doc: "dsfdsf"
     }
   ]);
 
@@ -41,10 +41,10 @@ const LabTests = ({
 
   const newField = [
     {
-      test_name: '',
-      test_date: '',
-      test_result: '',
-      upload_doc: 'fdgfdg'
+      test_name: "",
+      test_date: "",
+      test_result: "",
+      upload_doc: "fdgfdg"
     }
   ];
 
@@ -63,12 +63,14 @@ const LabTests = ({
         admin.access_token
       );
 
+      console.log("data", data);
+
       setInputFields([
         {
-          test_name: '',
-          test_date: '',
-          test_result: '',
-          upload_doc: ''
+          test_name: "",
+          test_date: "",
+          test_result: "",
+          upload_doc: ""
         }
       ]);
     } catch (error) {
@@ -90,12 +92,12 @@ const LabTests = ({
         admin.access_token
       );
 
-      if (typeof data !== 'string') {
+      if (typeof data !== "string") {
         dispatch(setPatientLabTests(data));
         setEmptyState(null);
       } else {
         dispatch(setPatientLabTests([]));
-        setEmptyState('No test found');
+        setEmptyState("No test found");
       }
     } catch (error) {
       console.log(error);
@@ -111,8 +113,8 @@ const LabTests = ({
         <div className={styles.header}>
           <Image
             src='/assets/dashboard/arrow_left.svg'
-            width={'18px'}
-            height={'12px'}
+            width={"18px"}
+            height={"12px"}
             className='cursor-pointer'
             onClick={() => setSelectedRecord(null)}
           />
@@ -128,18 +130,18 @@ const LabTests = ({
                   const content: any = e.currentTarget.nextElementSibling;
                   if (content.style.maxHeight) {
                     content.style.maxHeight = null;
-                    e.currentTarget.style.marginBottom = '0px';
+                    e.currentTarget.style.marginBottom = "0px";
                   } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    e.currentTarget.style.marginBottom = '16px';
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    e.currentTarget.style.marginBottom = "16px";
                   }
                 }}
               >
                 <p>{history?.date}</p>
                 <Image
                   src='/assets/dashboard/chevronRight.svg'
-                  width={'4.94px'}
-                  height={'8px'}
+                  width={"4.94px"}
+                  height={"8px"}
                 />
               </div>
 
@@ -147,7 +149,7 @@ const LabTests = ({
                 <div className={styles.physician}>
                   <p className={styles.name}>Physician name</p>
                   <p className={styles.physician_name}>
-                    {' '}
+                    {" "}
                     {history?.details?.physician}
                   </p>
                 </div>
@@ -160,7 +162,7 @@ const LabTests = ({
                         {detail?.statement}
                       </p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
                   ))}
                 </div>
@@ -172,9 +174,9 @@ const LabTests = ({
       </div>
       <Button onClick={() => setAddHistory(true)} className={styles.add_record}>
         <Image
-          src={'/assets/dashboard/plus.svg'}
-          width={'14px'}
-          height={'14px'}
+          src={"/assets/dashboard/plus.svg"}
+          width={"14px"}
+          height={"14px"}
         />
         <p>Add history</p>
       </Button>
@@ -189,9 +191,9 @@ const LabTests = ({
           <p>Add Laboratory Test</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={handleClose}
           />
         </div>
@@ -261,17 +263,17 @@ const LabTests = ({
                 </div>
 
                 <div
-                  style={{ marginTop: '8px' }}
+                  style={{ marginTop: "8px" }}
                   className={styles.text_area_container}
                 >
                   <div className={styles.upload_doc}>
-                    <input type='file' ref={Ref} style={{ display: 'none' }} />
+                    <input type='file' ref={Ref} style={{ display: "none" }} />
 
                     <div onClick={onButtonClick}>
                       <Image
-                        src={'/assets/dashboard/doc.svg'}
-                        width={'16px'}
-                        height={'20px'}
+                        src={"/assets/dashboard/doc.svg"}
+                        width={"16px"}
+                        height={"20px"}
                       />
                       <p>Upload a document</p>
                     </div>
@@ -293,14 +295,14 @@ const LabTests = ({
                 }}
                 className='secondary_2'
                 disabled={
-                  Object.values(inputFields[0]).some((x) => x === '') ||
+                  Object.values(inputFields[0]).some((x) => x === "") ||
                   isLoading
                 }
               >
                 <Image
-                  src={'/assets/dashboard/plus_blue.svg'}
-                  width={'14px'}
-                  height={'14px'}
+                  src={"/assets/dashboard/plus_blue.svg"}
+                  width={"14px"}
+                  height={"14px"}
                 />
                 <p>Add another medication</p>
               </Button>
@@ -309,12 +311,12 @@ const LabTests = ({
             <Button
               onClick={handleSave}
               disabled={
-                (Object.values(inputFields[0]).some((x) => x === '') ||
+                (Object.values(inputFields[0]).some((x) => x === "") ||
                   isLoading) &&
                 tempInputFields.length < 1
               }
-              className={'btn_primary'}
-              style={{ marginTop: '16px' }}
+              className={"btn_primary"}
+              style={{ marginTop: "16px" }}
             >
               Save
             </Button>

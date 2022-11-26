@@ -1,13 +1,13 @@
-import React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 const Sidebar = ({ setOpenSidebar }: any) => {
   const { pathname } = useRouter();
 
   const navLinks = [
-    { name: 'Pricing', to: '/pricing' },
-    { name: 'About', to: '/about' },
-    { name: 'Login', to: '/login' }
+    { name: "Pricing", to: "/pricing" },
+    { name: "About", to: "/about" },
+    { name: "Login", to: "/login" }
   ];
 
   return (
@@ -17,8 +17,8 @@ const Sidebar = ({ setOpenSidebar }: any) => {
           <Link key={index} href={link.to}>
             <a
               onClick={() => setOpenSidebar(false)}
-              className={`${link.name === 'Login' && 'login'} ${
-                pathname.includes(link.to) ? 'activeRoute' : ''
+              className={`${link.name === "Login" && "login"} ${
+                pathname.includes(link.to) ? "activeRoute" : ""
               }`}
             >
               <li>{link.name}</li>

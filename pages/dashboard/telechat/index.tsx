@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { NextPage } from 'next';
+import { useState, useEffect } from "react";
+import { NextPage } from "next";
 import {
   Badge,
   DashboardLayout,
   Input,
   Button,
   useScreenSize
-} from '../../../components/dashboard';
-import Image from 'next/image';
-import styles from '../../../styles/dashboard/Telechat.module.scss';
+} from "../../../components/dashboard";
+import Image from "next/image";
+import styles from "../../../styles/dashboard/Telechat.module.scss";
 
 const Telechat: NextPage = () => {
   const screenSize = useScreenSize();
@@ -17,164 +17,164 @@ const Telechat: NextPage = () => {
   const chats = [
     {
       id: 1,
-      name: 'John Doe',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar.svg',
-      time: '12:00',
+      name: "John Doe",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar.svg",
+      time: "12:00",
       totalUnread: 21,
       messages: [
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         }
       ]
     },
     {
       id: 1,
-      name: 'Kiln Klone',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar_2.svg',
-      time: '12:00',
+      name: "Kiln Klone",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar_2.svg",
+      time: "12:00",
       totalUnread: 10,
       messages: [
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         }
       ]
     },
     {
       id: 1,
-      name: 'Litre Mren',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar.svg',
-      time: '12:00',
+      name: "Litre Mren",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar.svg",
+      time: "12:00",
       totalUnread: 2,
       messages: [
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         }
       ]
     },
     {
       id: 1,
-      name: 'Doreen Anson',
-      message: 'Hello, how are you?',
-      avatar: '/assets/dashboard/avatar_2.svg',
-      time: '12:00',
+      name: "Doreen Anson",
+      message: "Hello, how are you?",
+      avatar: "/assets/dashboard/avatar_2.svg",
+      time: "12:00",
       totalUnread: 0,
       messages: [
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'Client',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "Client",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         },
         {
-          from: 'admin',
-          message: 'Hello, how are you?',
-          time: 'October 15, 2019 10:00'
+          from: "admin",
+          message: "Hello, how are you?",
+          time: "October 15, 2019 10:00"
         }
       ]
     }
   ];
 
   const handleOpenChat = () => {
-    const slider = document.getElementById('CHATS_SLIDER') as HTMLElement;
-    slider.classList.add('slide_right');
+    const slider = document.getElementById("CHATS_SLIDER") as HTMLElement;
+    slider.classList.add("slide_right");
   };
 
   const handleCloseChat = () => {
-    const slider = document.getElementById('CHATS_SLIDER') as HTMLElement;
-    slider.classList.remove('slide_right');
+    const slider = document.getElementById("CHATS_SLIDER") as HTMLElement;
+    slider.classList.remove("slide_right");
   };
 
   useEffect(() => {
@@ -197,7 +197,7 @@ const Telechat: NextPage = () => {
                 img='/assets/dashboard/search.svg'
                 width='24px'
                 height='24px'
-                type={'text'}
+                type={"text"}
               />
 
               <div>
@@ -215,8 +215,8 @@ const Telechat: NextPage = () => {
                           <Image
                             src={chat.avatar}
                             alt='avatar'
-                            width={'40'}
-                            height={'40'}
+                            width={"40"}
+                            height={"40"}
                             layout='fixed'
                           />
 
@@ -229,7 +229,7 @@ const Telechat: NextPage = () => {
                         <div className='flex flex-col items-end'>
                           <p className={styles.chat_time}>{chat.time}</p>
                           <Badge
-                            color={'badge_primary'}
+                            color={"badge_primary"}
                             content={chat.totalUnread}
                           />
                         </div>
@@ -245,11 +245,11 @@ const Telechat: NextPage = () => {
         </div>
         <div className={styles.chats_room}>
           <div
-            id={'CHATS_SLIDER'}
+            id={"CHATS_SLIDER"}
             className={`${styles.chat_room_container} ${
               screenSize.width > 700 &&
               Object.keys(selectedChat).length > 1 &&
-              'slide_right'
+              "slide_right"
             }`}
           >
             <div className={styles.chat_room_header}>
@@ -257,8 +257,8 @@ const Telechat: NextPage = () => {
                 <Image
                   src='/assets/dashboard/arrow_left.svg'
                   alt='avatar'
-                  width={'18px'}
-                  height={'12px'}
+                  width={"18px"}
+                  height={"12px"}
                   onClick={handleCloseChat}
                 />
 
@@ -267,11 +267,11 @@ const Telechat: NextPage = () => {
                   src={
                     Object.keys(selectedChat).length > 0
                       ? selectedChat.avatar
-                      : '/assets/dashboard/avatar.svg'
+                      : "/assets/dashboard/avatar.svg"
                   }
                   alt='avatar'
-                  width={'40'}
-                  height={'40'}
+                  width={"40"}
+                  height={"40"}
                 />
 
                 {/* user name */}
@@ -280,8 +280,8 @@ const Telechat: NextPage = () => {
               <Image
                 src='/assets/dashboard/more.svg'
                 alt='avatar'
-                width={'4px'}
-                height={'16px'}
+                width={"4px"}
+                height={"16px"}
               />
             </div>
 
@@ -295,12 +295,12 @@ const Telechat: NextPage = () => {
                       <div
                         key={index}
                         className={
-                          message.from === 'Client'
+                          message.from === "Client"
                             ? styles.message_from_Client
                             : styles.message_from_Admin
                         }
                       >
-                        {message.from === 'Client'
+                        {message.from === "Client"
                           ? (
                           <div>
                             <p className={styles.message_content}>
@@ -331,7 +331,7 @@ const Telechat: NextPage = () => {
                 <div className={styles.message_input}>
                   <Input
                     styles='input_primary'
-                    type={'text'}
+                    type={"text"}
                     placeholder='Chat here'
                     img='/assets/dashboard/attach.svg'
                     width='20px'
@@ -341,9 +341,9 @@ const Telechat: NextPage = () => {
 
                 <Button className={styles.send}>
                   <Image
-                    src={'/assets/dashboard/send.svg'}
-                    width={'21px'}
-                    height={'18px'}
+                    src={"/assets/dashboard/send.svg"}
+                    width={"21px"}
+                    height={"18px"}
                     layout='fixed'
                   />
                 </Button>

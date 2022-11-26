@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import { Button } from '../../../../components/dashboard';
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { Button } from "../../../../components/dashboard";
 
 const Step4 = ({ styles, setCurrentStep }: any) => {
   const { push } = useRouter();
@@ -9,7 +9,7 @@ const Step4 = ({ styles, setCurrentStep }: any) => {
     <form className={styles.completed_container}>
       <div className={styles.completed}>
         <Image
-          src={'/assets/dashboard/success.svg'}
+          src={"/assets/dashboard/success.svg"}
           width='50.72px'
           height='53.33px'
           layout='fixed'
@@ -27,7 +27,7 @@ const Step4 = ({ styles, setCurrentStep }: any) => {
       <div className={styles.goHome}>
         <Button onClick={(e:any) => {
           e.preventDefault();
-          push('/dashboard/EHR');
+          push("/dashboard/EHR");
         }} className='btn_primary'>
           Go home
         </Button>

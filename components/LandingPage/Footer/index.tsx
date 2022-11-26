@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 const Footer = () => {
   return (
     <div className='footer_container'>
       <div className='left_items'>
         <div className='logo'>
-          <Image src='/assets/navbar/logo.svg' width={'152.67'} height={'40'} />
+          <Image src='/assets/navbar/logo.svg' width={"152.67"} height={"40"} />
         </div>
 
         <div className='copyright'>
@@ -42,7 +42,7 @@ const Footer = () => {
 
           {/* email */}
           <div className='email'>
-            <Image src={'/assets/footer/email.svg'} height={16} width={20} />
+            <Image src={"/assets/footer/email.svg"} height={16} width={20} />
             <div>
               <p>phamtom@phamtomhealth.com</p>
               <p>phamtom.inc@gmail.com</p>
@@ -51,19 +51,19 @@ const Footer = () => {
 
           {/* socials */}
           <div className='socials'>
-            <Link href={'/'}>
+            <Link href={"/"}>
               <a className='instagram'>
                 <Image
-                  src={'/assets/footer/instagram.svg'}
+                  src={"/assets/footer/instagram.svg"}
                   height={18}
                   width={18}
                 />
               </a>
             </Link>
-            <Link href={'/'}>
+            <Link href={"/"}>
               <a>
                 <Image
-                  src={'/assets/footer/linkdn.svg'}
+                  src={"/assets/footer/linkdn.svg"}
                   height={18}
                   width={18}
                 />

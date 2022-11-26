@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import { Button, Input } from '../../../../components/dashboard';
-import { Modal } from 'react-bootstrap';
+import { useState } from "react";
+import Image from "next/image";
+import { Button, Input } from "../../../../components/dashboard";
+import { Modal } from "react-bootstrap";
 
 const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
-  const [orderStatus, setOrderStatus] = useState('Pending');
-  const [trackingNumber, setTrackingNumber] = useState('');
-  const [tempNumber, setTempNumber] = useState('');
-  const [courier, setCourier] = useState('');
+  const [orderStatus, setOrderStatus] = useState("Pending");
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [tempNumber, setTempNumber] = useState("");
+  const [courier, setCourier] = useState("");
   const [chooseCourier, setChooseCourier] = useState(false);
   const [editTrackingNumber, setEditTrackingNumber] = useState(false);
   const [complete, setComplete] = useState(false);
@@ -18,12 +18,12 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
 
   const productDetails = [
     {
-      label: 'Name:',
-      value: 'Matthew Ola'
+      label: "Name:",
+      value: "Matthew Ola"
     },
     {
-      label: 'Phone:',
-      value: '+234 816 220 7086'
+      label: "Phone:",
+      value: "+234 816 220 7086"
     }
   ];
 
@@ -36,11 +36,11 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
             <li className={styles.selected_order}>
               <div className={styles.order_img}>
                 <Image
-                  src={'/assets/dashboard/pharmacy/product.svg'}
-                  alt='product'
-                  width={'100px'}
-                  height='80px'
-                  layout='fixed'
+                  src={"/assets/dashboard/pharmacy/product.svg"}
+                  alt="product"
+                  width={"100px"}
+                  height="80px"
+                  layout="fixed"
                 />
 
                 <div>
@@ -58,11 +58,11 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
             <li className={styles.order}>
               <div className={styles.order_img}>
                 <Image
-                  src={'/assets/dashboard/pharmacy/product.svg'}
-                  alt='product'
-                  width={'100px'}
-                  height='80px'
-                  layout='fixed'
+                  src={"/assets/dashboard/pharmacy/product.svg"}
+                  alt="product"
+                  width={"100px"}
+                  height="80px"
+                  layout="fixed"
                 />
 
                 <div>
@@ -83,21 +83,21 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
         <div className={styles.right_items}>
           {!complete && (
             <>
-              {' '}
+              {" "}
               <div className={styles.marked_status}>
-                {orderStatus === 'Pending' && (
+                {orderStatus === "Pending" && (
                   <p className={styles.pending}>
                     This order has been marked as pending
                   </p>
                 )}
 
-                {orderStatus === 'Packaged' && (
+                {orderStatus === "Packaged" && (
                   <p className={styles.packaged}>
                     This order has been marked as packaged
                   </p>
                 )}
 
-                {orderStatus === 'Shipped' && (
+                {orderStatus === "Shipped" && (
                   <p className={styles.shipped}>
                     This order has been marked as on it way
                   </p>
@@ -105,7 +105,7 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
               </div>
               {/* details */}
               <div className={styles.details_container}>
-                <h5>Buyer's info:</h5>
+                <h5>Buyer&aposs info:</h5>
                 <hr />
                 {productDetails.map((detail: any, index: any) => (
                   <div key={index} className={styles.detail}>
@@ -115,7 +115,7 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
                 ))}
                 <hr />
 
-                <div className=''>
+                <div className="">
                   <h6>Delivery address:</h6>
                   <p className={styles.label}>
                     No 15, Adejuyigbe Adebo Street, Abudu Edo State.
@@ -138,7 +138,8 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
                     <hr />
 
                     <div className={styles.tracking_number}>
-                      {trackingNumber && !editTrackingNumber ? (
+                      {trackingNumber && !editTrackingNumber
+                        ? (
                         <>
                           <h6>Tracking number</h6>
 
@@ -150,26 +151,27 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
                               onClick={() => setEditTrackingNumber(true)}
                             >
                               <Image
-                                src={'/assets/dashboard/edit.svg'}
-                                width='15px'
-                                height={'15px'}
-                                layout={'fixed'}
+                                src={"/assets/dashboard/edit.svg"}
+                                width="15px"
+                                height={"15px"}
+                                layout={"fixed"}
                               />
 
                               <p>Edit</p>
                             </div>
                           </div>
                         </>
-                      ) : (
+                          )
+                        : (
                         <>
                           <h6>Tracking number</h6>
 
                           <div className={styles.input_tracking}>
                             <div className={styles.input}>
                               <Input
-                                styles='input_primary'
-                                placeholder='Input tracking number'
-                                type={'text'}
+                                styles="input_primary"
+                                placeholder="Input tracking number"
+                                type={"text"}
                                 value={tempNumber}
                                 onChange={(e) => setTempNumber(e.target.value)}
                               />
@@ -179,20 +181,20 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
                                 setTrackingNumber(tempNumber);
                                 setEditTrackingNumber(false);
                               }}
-                              className='btn_primary'
+                              className="btn_primary"
                             >
                               Submit
                             </Button>
                           </div>
                         </>
-                      )}
+                          )}
                     </div>
                   </>
                 )}
               </div>
               {/* approve order */}
               <div className={styles.approve}>
-                {orderStatus === 'Pending' && (
+                {orderStatus === "Pending" && (
                   <>
                     <p>
                       * Make sure you have confirmed the before approving an
@@ -200,8 +202,8 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
                     </p>
                     <div>
                       <Button
-                        onClick={() => setOrderStatus('Packaged')}
-                        className='btn_primary'
+                        onClick={() => setOrderStatus("Packaged")}
+                        className="btn_primary"
                       >
                         Approve order
                       </Button>
@@ -209,25 +211,25 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
                   </>
                 )}
 
-                {orderStatus === 'Packaged' && !courier && (
+                {orderStatus === "Packaged" && !courier && (
                   <div>
                     <Button
                       onClick={() => setChooseCourier(true)}
-                      className='btn_primary'
+                      className="btn_primary"
                     >
                       Choose a courier service
                     </Button>
                   </div>
                 )}
 
-                {trackingNumber && orderStatus !== 'Completed' && (
+                {trackingNumber && orderStatus !== "Completed" && (
                   <div>
                     <Button
                       onClick={() => {
-                        setOrderStatus('Completed');
+                        setOrderStatus("Completed");
                         setComplete(true);
                       }}
-                      className='btn_primary'
+                      className="btn_primary"
                     >
                       Mark order as complete
                     </Button>
@@ -240,10 +242,10 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
           {complete && (
             <div className={styles.completed}>
               <Image
-                src={'/assets/dashboard/success.svg'}
-                width='50.72px'
-                height='53.33px'
-                layout='fixed'
+                src={"/assets/dashboard/success.svg"}
+                width="50.72px"
+                height="53.33px"
+                layout="fixed"
               />
 
               <div>
@@ -265,10 +267,10 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
           <p>Choose shipping services</p>
 
           <Image
-            src={'/assets/dashboard/close_btn.svg'}
-            width={'14px'}
-            height={'14px'}
-            layout='fixed'
+            src={"/assets/dashboard/close_btn.svg"}
+            width={"14px"}
+            height={"14px"}
+            layout="fixed"
             onClick={handleCloseModal}
           />
         </div>
@@ -278,30 +280,30 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
         <div className={styles.services}>
           <div className={styles.courier}>
             <input
-              type='radio'
-              name='courier'
-              id='jumia'
-              onChange={() => setCourier('Jumia')}
+              type="radio"
+              name="courier"
+              id="jumia"
+              onChange={() => setCourier("Jumia")}
             />
-            <label htmlFor='jumia'>Jumia</label>
+            <label htmlFor="jumia">Jumia</label>
           </div>
           <div className={styles.courier}>
             <input
-              type='radio'
-              name='courier'
-              id='GIG Logistics'
-              onChange={() => setCourier('GIG Logistics')}
+              type="radio"
+              name="courier"
+              id="GIG Logistics"
+              onChange={() => setCourier("GIG Logistics")}
             />
-            <label htmlFor='GIG Logistics'>GIG Logistics</label>
+            <label htmlFor="GIG Logistics">GIG Logistics</label>
           </div>
           <div className={styles.courier}>
             <input
-              type='radio'
-              name='courier'
-              id='UPS'
-              onChange={() => setCourier('UPS')}
+              type="radio"
+              name="courier"
+              id="UPS"
+              onChange={() => setCourier("UPS")}
             />
-            <label htmlFor='UPS'>UPS</label>
+            <label htmlFor="UPS">UPS</label>
           </div>
         </div>
       </Modal>

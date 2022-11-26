@@ -1,34 +1,34 @@
-import { useState } from 'react';
-import Image from 'next/image';
-import { Button } from '../../../components/dashboard';
-import MedicalHistory from './Medical/MedicalHistory';
-import MedicationHistory from './Medical/MedicationHistory';
-import Vitals from './Medical/Vitals';
-import Soap from './Medical/Soap';
-import LabTests from './Medical/LabTests';
+import { useState } from "react";
+import Image from "next/image";
+import { Button } from "../../../components/dashboard";
+import MedicalHistory from "./Medical/MedicalHistory";
+import MedicationHistory from "./Medical/MedicationHistory";
+import Vitals from "./Medical/Vitals";
+import Soap from "./Medical/Soap";
+import LabTests from "./Medical/LabTests";
 
 const Medical = ({ styles }: any) => {
   const [selectedRecord, setSelectedRecord]: any = useState(null);
 
   const records = [
     {
-      label: 'Medical History',
+      label: "Medical History",
       history: []
     },
     {
-      label: 'SOAP',
+      label: "SOAP",
       history: []
     },
     {
-      label: 'Medication History',
+      label: "Medication History",
       history: []
     },
     {
-      label: 'Laboaratory Tests',
+      label: "Laboaratory Tests",
       history: []
     },
     {
-      label: 'Vitals Signs',
+      label: "Vitals Signs",
       history: []
     }
   ];
@@ -48,8 +48,8 @@ const Medical = ({ styles }: any) => {
                   <p> {record.label}</p>
                   <Image
                     src='/assets/dashboard/chevronRight.svg'
-                    width={'4.94px'}
-                    height={'8px'}
+                    width={"4.94px"}
+                    height={"8px"}
                   />
                 </div>
 
@@ -59,16 +59,16 @@ const Medical = ({ styles }: any) => {
 
             <Button className={styles.add_record}>
               <Image
-                src={'/assets/dashboard/plus.svg'}
-                width={'14px'}
-                height={'14px'}
+                src={"/assets/dashboard/plus.svg"}
+                width={"14px"}
+                height={"14px"}
               />
               <p>Add record</p>
             </Button>
           </div>
         )}
 
-        {selectedRecord && selectedRecord.label === 'Medical History' && (
+        {selectedRecord && selectedRecord.label === "Medical History" && (
           <MedicalHistory
             styles={styles}
             Image={Image}
@@ -77,7 +77,7 @@ const Medical = ({ styles }: any) => {
           />
         )}
 
-        {selectedRecord && selectedRecord.label === 'Medication History' && (
+        {selectedRecord && selectedRecord.label === "Medication History" && (
           <MedicationHistory
             styles={styles}
             Image={Image}
@@ -86,7 +86,7 @@ const Medical = ({ styles }: any) => {
           />
         )}
 
-        {selectedRecord && selectedRecord.label === 'SOAP' && (
+        {selectedRecord && selectedRecord.label === "SOAP" && (
           <Soap
             styles={styles}
             Image={Image}
@@ -95,7 +95,7 @@ const Medical = ({ styles }: any) => {
           />
         )}
 
-        {selectedRecord && selectedRecord.label === 'Laboaratory Tests' && (
+        {selectedRecord && selectedRecord.label === "Laboaratory Tests" && (
           <LabTests
             styles={styles}
             Image={Image}
@@ -104,7 +104,7 @@ const Medical = ({ styles }: any) => {
           />
         )}
 
-        {selectedRecord && selectedRecord.label === 'Vitals Signs' && (
+        {selectedRecord && selectedRecord.label === "Vitals Signs" && (
           <Vitals
             styles={styles}
             Image={Image}

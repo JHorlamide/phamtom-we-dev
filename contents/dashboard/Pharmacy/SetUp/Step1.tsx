@@ -1,7 +1,7 @@
-import React from 'react';
-import { Input, Button } from '../../../../components/dashboard';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import React from "react";
+import { Input, Button } from "../../../../components/dashboard";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const Step1 = ({ styles, setCurrentStep }: any) => {
   return (
@@ -14,7 +14,7 @@ const Step1 = ({ styles, setCurrentStep }: any) => {
         <div>
           <label htmlFor='Name of pharmacy'>Name of pharmacy</label>
           <Input
-            type={'text'}
+            type={"text"}
             styles='input_primary'
             placeholder='Enter your pharmacy name'
             id='Name of pharmacy'
@@ -25,7 +25,7 @@ const Step1 = ({ styles, setCurrentStep }: any) => {
             Name of suprintendent pharmacist
           </label>
           <Input
-            type={'text'}
+            type={"text"}
             styles='input_primary'
             placeholder='Enter supritendent full name'
             id='suprintendent'
@@ -34,7 +34,7 @@ const Step1 = ({ styles, setCurrentStep }: any) => {
         <div>
           <label htmlFor='email'>Pharmacy email address</label>
           <Input
-            type={'email'}
+            type={"email"}
             styles='input_primary'
             placeholder='Enter your email address'
             id='email'
@@ -43,7 +43,7 @@ const Step1 = ({ styles, setCurrentStep }: any) => {
         <div>
           <label htmlFor='address'>Pharmacy physical address</label>
           <Input
-            type={'text'}
+            type={"text"}
             styles='input_primary'
             placeholder='Enter pharmacy physical address'
             id='address'
@@ -55,7 +55,7 @@ const Step1 = ({ styles, setCurrentStep }: any) => {
             Phone number
           </label>
           <PhoneInput
-            country={'ng'}
+            country={"ng"}
             containerClass='phone_input_container'
             placeholder='Phone number'
             onChange={(phone: any) => {}}
@@ -65,7 +65,7 @@ const Step1 = ({ styles, setCurrentStep }: any) => {
 
       <div className={styles.continue}>
         <Button
-          onClick={() => setCurrentStep('Step2')}
+          onClick={() => setCurrentStep("Step2")}
           className='btn_primary w-full'
         >
           Continue

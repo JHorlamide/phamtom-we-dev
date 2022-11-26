@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { Modal } from 'react-bootstrap';
-import { Button, Input } from '../../../components/dashboard';
-import { patientsService } from '../../../services/restService';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import { useState, useRef } from "react";
+import Image from "next/image";
+import { Modal } from "react-bootstrap";
+import { Button, Input } from "../../../components/dashboard";
+import { patientsService } from "../../../services/restService";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 type IAddNewPatientProps = {
   showAddNewPatientModal: boolean;
@@ -23,17 +23,17 @@ const AddNewPatient = ({
   const inputFile: any = useRef(null);
 
   const [inputField, setInputField] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone_number: '',
-    home_address: '',
-    age: '',
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    home_address: "",
+    age: "",
     // genotype: '',
-    weight_unit: '',
-    height_unit: '',
-    blood_group: '',
-    occupation: ''
+    weight_unit: "",
+    height_unit: "",
+    blood_group: "",
+    occupation: ""
   });
 
   const onInputChange = (e: any) => {
@@ -52,22 +52,24 @@ const AddNewPatient = ({
         inputField,
         admin.access_token
       );
+
+      console.log("data", data);
       handleGetAllPatients();
     } catch (error) {
       console.log(error);
     } finally {
       setInputField({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone_number: '',
-        home_address: '',
-        age: '',
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        home_address: "",
+        age: "",
         // genotype: '',
-        weight_unit: '',
-        height_unit: '',
-        blood_group: '',
-        occupation: ''
+        weight_unit: "",
+        height_unit: "",
+        blood_group: "",
+        occupation: ""
       });
       onHide();
     }
@@ -85,9 +87,9 @@ const AddNewPatient = ({
           <p>Add new patient</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={onHide}
           />
         </div>
@@ -97,9 +99,9 @@ const AddNewPatient = ({
 
           <div className={styles.patient_profile}>
             <Image
-              src={'/assets/dashboard/avatar.svg'}
-              width={'64'}
-              height={'64'}
+              src={"/assets/dashboard/avatar.svg"}
+              width={"64"}
+              height={"64"}
             />
 
             <div>
@@ -107,7 +109,7 @@ const AddNewPatient = ({
                 type='file'
                 id='file'
                 ref={inputFile}
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
               />
               <button onClick={onButtonClick} className={styles.browse_image}>
                 <p className={styles.take_pic}>Take a picture</p>
@@ -120,7 +122,7 @@ const AddNewPatient = ({
             <div>
               <label htmlFor='firstname'>First name</label>
               <Input
-                type={'text'}
+                type={"text"}
                 styles='input_primary'
                 placeholder='Matthew'
                 id='firstname'
@@ -133,7 +135,7 @@ const AddNewPatient = ({
             <div>
               <label htmlFor='Lastname'>Last name</label>
               <Input
-                type={'text'}
+                type={"text"}
                 styles='input_primary'
                 placeholder='Olukoju'
                 id='Lastname'
@@ -146,7 +148,7 @@ const AddNewPatient = ({
             <div>
               <label htmlFor='email_address'>Email address</label>
               <Input
-                type={'email'}
+                type={"email"}
                 styles='input_primary'
                 placeholder='thematthewola@gmail.com'
                 id='email_address'
@@ -161,7 +163,7 @@ const AddNewPatient = ({
                 Phone number
               </label>
               <PhoneInput
-                country={'ng'}
+                country={"ng"}
                 containerClass='phone_input_container'
                 placeholder='Phone number'
                 onChange={(phone: any) => {
@@ -174,7 +176,7 @@ const AddNewPatient = ({
             <div>
               <label htmlFor='Home'>Home address</label>
               <Input
-                type={'text'}
+                type={"text"}
                 styles='input_primary'
                 placeholder='5b Yeye Olofin street, Aldmiralty way Lekki'
                 id='Home'
@@ -187,7 +189,7 @@ const AddNewPatient = ({
             <div>
               <label htmlFor='Occupation'>Occupation</label>
               <Input
-                type={'text'}
+                type={"text"}
                 styles='input_primary'
                 placeholder='Doctor'
                 id='Occupation'
@@ -201,7 +203,7 @@ const AddNewPatient = ({
               <div>
                 <label htmlFor='dob'>Age</label>
                 <Input
-                  type={'number'}
+                  type={"number"}
                   styles='input_primary'
                   placeholder='54'
                   id='dob'
@@ -213,7 +215,7 @@ const AddNewPatient = ({
               <div>
                 <label htmlFor='blood_group'>Blood group</label>
                 <Input
-                  type={'text'}
+                  type={"text"}
                   styles='input_primary'
                   placeholder='O-'
                   id='blood_group'
@@ -228,7 +230,7 @@ const AddNewPatient = ({
               <div>
                 <label htmlFor='Height'>Height(ft)</label>
                 <Input
-                  type={'number'}
+                  type={"number"}
                   styles='input_primary'
                   placeholder='7.2'
                   id='Height'
@@ -247,7 +249,7 @@ const AddNewPatient = ({
               <div>
                 <label htmlFor='Weight'>Weight(kg)</label>
                 <Input
-                  type={'number'}
+                  type={"number"}
                   styles='input_primary'
                   placeholder='129'
                   id='Weight'
@@ -265,9 +267,9 @@ const AddNewPatient = ({
             </div>
 
             <Button
-              disabled={Object.values(inputField).some((x) => x === '')}
-              className={'btn_primary'}
-              style={{ marginTop: '16px' }}
+              disabled={Object.values(inputField).some((x) => x === "")}
+              className={"btn_primary"}
+              style={{ marginTop: "16px" }}
               onClick={handleAddPatient}
             >
               Save

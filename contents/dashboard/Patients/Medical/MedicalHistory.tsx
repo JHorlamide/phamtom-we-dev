@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Button } from '../../../../components/dashboard';
-import { setPatientMedicalHistory } from '../../../../redux/actions/patients';
-import { useSelector, useDispatch } from 'react-redux';
-import { medicalHistoryService } from '../../../../services/restService';
-import { Modal } from 'react-bootstrap';
-import moment from 'moment';
-import { MoonLoader } from 'react-spinners';
+import { useState, useEffect } from "react";
+import { Button } from "../../../../components/dashboard";
+import { setPatientMedicalHistory } from "../../../../redux/actions/patients";
+import { useSelector, useDispatch } from "react-redux";
+import { medicalHistoryService } from "../../../../services/restService";
+import { Modal } from "react-bootstrap";
+import moment from "moment";
+import { MoonLoader } from "react-spinners";
 
 const MedicalHistory = ({
   medicalHistory,
@@ -25,11 +25,11 @@ const MedicalHistory = ({
   const [isFetching, setIsFetching] = useState(false);
   const [addHistory, setAddHistory] = useState(false);
   const [inputFields, setInputFields] = useState({
-    medical_history: '',
-    social_history: '',
-    surgical_history: '',
-    allergies: '',
-    adrs: ''
+    medical_history: "",
+    social_history: "",
+    surgical_history: "",
+    allergies: "",
+    adrs: ""
   });
 
   const handleClose = () => {
@@ -57,11 +57,11 @@ const MedicalHistory = ({
       getAllMedicalHistory();
 
       setInputFields({
-        medical_history: '',
-        social_history: '',
-        surgical_history: '',
-        allergies: '',
-        adrs: ''
+        medical_history: "",
+        social_history: "",
+        surgical_history: "",
+        allergies: "",
+        adrs: ""
       });
     } catch (error) {
       console.log(error);
@@ -89,13 +89,13 @@ const MedicalHistory = ({
         // eslint-disable-next-line camelcase
         patient_medical_histories &&
         // eslint-disable-next-line camelcase
-        typeof patient_medical_histories !== 'string'
+        typeof patient_medical_histories !== "string"
       ) {
         // eslint-disable-next-line camelcase
         dispatch(setPatientMedicalHistory(patient_medical_histories.reverse()));
       } else {
         dispatch(setPatientMedicalHistory([]));
-        setEmptyState('No history found');
+        setEmptyState("No history found");
       }
     } catch (error) {
       console.log(error);
@@ -111,6 +111,8 @@ const MedicalHistory = ({
         patientMedicalHistory[0].medical_history_id,
         admin.access_token
       );
+
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +120,7 @@ const MedicalHistory = ({
 
   useEffect(() => {
     getAllMedicalHistory();
-    // getSingleMedicalHistory();
+    getSingleMedicalHistory();
   }, [selectedPatient]);
 
   return (
@@ -126,10 +128,10 @@ const MedicalHistory = ({
       <div className={styles.medical_history_container}>
         <div className={styles.header}>
           <Image
-            src='/assets/dashboard/arrow_left.svg'
-            width={'18px'}
-            height={'12px'}
-            className='cursor-pointer'
+            src="/assets/dashboard/arrow_left.svg"
+            width={"18px"}
+            height={"12px"}
+            className="cursor-pointer"
             onClick={() => setSelectedRecord(null)}
           />
           <p>{medicalHistory?.label}</p>
@@ -145,18 +147,18 @@ const MedicalHistory = ({
                     const content: any = e.currentTarget.nextElementSibling;
                     if (content.style.maxHeight) {
                       content.style.maxHeight = null;
-                      e.currentTarget.style.marginBottom = '0px';
+                      e.currentTarget.style.marginBottom = "0px";
                     } else {
-                      content.style.maxHeight = content.scrollHeight + 'px';
-                      e.currentTarget.style.marginBottom = '16px';
+                      content.style.maxHeight = content.scrollHeight + "px";
+                      e.currentTarget.style.marginBottom = "16px";
                     }
                   }}
                 >
-                  <p>{moment(item?.createdAt).format('Do MMM., YYYY')}</p>
+                  <p>{moment(item?.createdAt).format("Do MMM., YYYY")}</p>
                   <Image
-                    src='/assets/dashboard/chevronRight.svg'
-                    width={'4.94px'}
-                    height={'8px'}
+                    src="/assets/dashboard/chevronRight.svg"
+                    width={"4.94px"}
+                    height={"8px"}
                   />
                 </div>
 
@@ -173,7 +175,7 @@ const MedicalHistory = ({
                         {item?.medical_history}
                       </p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
 
                     <div className={styles.detail}>
@@ -182,7 +184,7 @@ const MedicalHistory = ({
                         {item?.social_history}
                       </p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
 
                     <div className={styles.detail}>
@@ -191,14 +193,14 @@ const MedicalHistory = ({
                         {item?.surgical_history}
                       </p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
 
                     <div className={styles.detail}>
                       <p className={styles.detail_title}>ADRS</p>
                       <p className={styles.detail_statement}>{item?.adrs}</p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
 
                     <div className={styles.detail}>
@@ -214,8 +216,8 @@ const MedicalHistory = ({
 
           <>
             {isFetching && (
-              <div className='flex items-center justify-center'>
-                <MoonLoader color='#0055d2' size={30} />
+              <div className="flex items-center justify-center">
+                <MoonLoader color="#0055d2" size={30} />
               </div>
             )}
           </>
@@ -224,9 +226,9 @@ const MedicalHistory = ({
       </div>
       <Button onClick={() => setAddHistory(true)} className={styles.add_record}>
         <Image
-          src={'/assets/dashboard/plus.svg'}
-          width={'14px'}
-          height={'14px'}
+          src={"/assets/dashboard/plus.svg"}
+          width={"14px"}
+          height={"14px"}
         />
         <p>Add history</p>
       </Button>
@@ -241,9 +243,9 @@ const MedicalHistory = ({
           <p>Add Medical History</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={handleClose}
           />
         </div>
@@ -251,64 +253,64 @@ const MedicalHistory = ({
         <div className={styles.form_container}>
           <form>
             <div className={styles.text_area_container}>
-              <label htmlFor='Occupation'>Medical History</label>
+              <label htmlFor="Occupation">Medical History</label>
               <textarea
                 onChange={handleOnChange}
                 value={inputFields.medical_history}
-                name='medical_history'
-                id='Medical'
-                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                name="medical_history"
+                id="Medical"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adi"
               />
             </div>
 
             <div className={styles.text_area_container}>
-              <label htmlFor='Occupation'>Social history</label>
+              <label htmlFor="Occupation">Social history</label>
               <textarea
                 onChange={handleOnChange}
                 value={inputFields.social_history}
-                name='social_history'
-                id='Social'
-                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                name="social_history"
+                id="Social"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adi"
               />
             </div>
             <div className={styles.text_area_container}>
-              <label htmlFor='Surgical'>Surgical History</label>
+              <label htmlFor="Surgical">Surgical History</label>
               <textarea
                 onChange={handleOnChange}
                 value={inputFields.surgical_history}
-                name='surgical_history'
-                id='Surgical'
-                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                name="surgical_history"
+                id="Surgical"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adi"
               />
             </div>
             <div className={styles.text_area_container}>
-              <label htmlFor='Occupation'>Allergies</label>
+              <label htmlFor="Occupation">Allergies</label>
               <textarea
                 onChange={handleOnChange}
                 value={inputFields.allergies}
-                name='allergies'
-                id='Allergies'
-                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                name="allergies"
+                id="Allergies"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adi"
               />
             </div>
             <div className={styles.text_area_container}>
-              <label htmlFor='Occupation'>ADRs</label>
+              <label htmlFor="Occupation">ADRs</label>
               <textarea
                 onChange={handleOnChange}
                 value={inputFields.adrs}
-                name='adrs'
-                id='ADRs'
-                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                name="adrs"
+                id="ADRs"
+                placeholder="Lorem ipsum dolor sit amet, consectetur adi"
               />
             </div>
 
             <Button
               onClick={handleSave}
               disabled={
-                Object.values(inputFields).some((x) => x === '') || isAdding
+                Object.values(inputFields).some((x) => x === "") || isAdding
               }
-              className={'btn_primary'}
-              style={{ marginTop: '16px' }}
+              className={"btn_primary"}
+              style={{ marginTop: "16px" }}
             >
               Save
             </Button>

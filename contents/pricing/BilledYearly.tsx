@@ -1,71 +1,71 @@
-import React from 'react';
+import React from "react";
 
 const BilledYearly = ({ Button, Image }: any) => {
   const monthlyPlan = [
     {
-      name: 'Basic plan',
+      name: "Basic plan",
       price: <p className='price__'>Free</p>,
-      benefits: ['Up to 100 patients'],
-      onTop: '',
+      benefits: ["Up to 100 patients"],
+      onTop: "",
 
       button: <p className='current_plan'>Current plan</p>
     },
     {
-      name: 'Bronze plan',
+      name: "Bronze plan",
       price: (
         <p className='price__'>
           $12.5<span> /yr</span>
         </p>
       ),
-      benefits: ['Up to 200 patients', '2 staff accounts'],
-      onTop: '',
+      benefits: ["Up to 200 patients", "2 staff accounts"],
+      onTop: "",
 
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
-      name: 'Silver plan',
+      name: "Silver plan",
       price: (
         <p className='price__'>
           $25<span> /yr</span>
         </p>
       ),
-      benefits: ['Up to 500 patients', '10 staff accounts'],
-      onTop: '',
+      benefits: ["Up to 500 patients", "10 staff accounts"],
+      onTop: "",
 
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
-      name: 'Golden plan',
+      name: "Golden plan",
       price: (
         <p className='price__'>
           $50<span> /yr</span>
         </p>
       ),
       benefits: [
-        'Unlimited patients',
-        'Unlimited staff accounts',
-        'Advanced analytics',
-        'Physician order entry',
-        'Operations checklist',
-        'Billing',
-        'Outpatient management '
+        "Unlimited patients",
+        "Unlimited staff accounts",
+        "Advanced analytics",
+        "Physician order entry",
+        "Operations checklist",
+        "Billing",
+        "Outpatient management "
       ],
-      onTop: '',
+      onTop: "",
 
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
-      name: 'Custom',
+      name: "Custom",
       price: (
         <p className='price__'>
           $300<span> /yr</span>
         </p>
       ),
       benefits: [
-        'Inpatient/Outpatient management ',
-        'Scheduling',
-        'Digital hospital',
-        'Multiple branch management'
+        "Inpatient/Outpatient management ",
+        "Scheduling",
+        "Digital hospital",
+        "Multiple branch management"
       ],
       onTop: <p className='on_top'>Golden plan features +</p>,
 

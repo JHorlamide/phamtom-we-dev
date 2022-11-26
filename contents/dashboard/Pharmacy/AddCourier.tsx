@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
-import { Modal } from 'react-bootstrap';
-import { Button, Input, UploadImage } from '../../../components/dashboard';
+import { useState, useRef } from "react";
+import { Modal } from "react-bootstrap";
+import { Button, Input, UploadImage } from "../../../components/dashboard";
 
 const AddCourier = ({
   handleCloseAddCourier,
@@ -10,20 +10,19 @@ const AddCourier = ({
 }: any) => {
   const Ref: any = useRef();
 
-  const [imageUrl, setImageUr] = useState('');
+  const [imageUrl, setImageUr] = useState("");
 
   const handleUpload = () => {
     Ref.current.click();
   };
 
   const getImgUrl = () => {
-    const file: any = document.getElementById('file') as HTMLInputElement;
+    const file: any = document.getElementById("file") as HTMLInputElement;
     const fileReader: any = new FileReader();
     fileReader.onloadend = () => {
       setImageUr(fileReader.result);
     };
     fileReader.readAsDataURL(file.files[0]);
- 
   };
 
   return (
@@ -37,9 +36,9 @@ const AddCourier = ({
         <p>Add new shipping service</p>
 
         <Image
-          src={'/assets/dashboard/close_btn_white.svg'}
-          width={'14px'}
-          height={'14px'}
+          src={"/assets/dashboard/close_btn_white.svg"}
+          width={"14px"}
+          height={"14px"}
           onClick={handleCloseAddCourier}
         />
       </div>
@@ -63,7 +62,7 @@ const AddCourier = ({
           <div>
             <label htmlFor='firstname'>Logistics name</label>
             <Input
-              type={'text'}
+              type={"text"}
               styles='input_primary'
               placeholder='Jumia Logistics'
               id='Logistics'
@@ -73,7 +72,7 @@ const AddCourier = ({
           <div>
             <label htmlFor='Lastname'>Logistics number</label>
             <Input
-              type={'number'}
+              type={"number"}
               styles='input_primary'
               placeholder='0801 - 000 - 0000'
               id='number'
@@ -82,8 +81,8 @@ const AddCourier = ({
 
           <Button
             disabled
-            className={'btn_primary'}
-            style={{ marginTop: '16px' }}
+            className={"btn_primary"}
+            style={{ marginTop: "16px" }}
           >
             Save
           </Button>

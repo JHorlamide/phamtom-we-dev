@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Products = ({ Products, styles, Image }: any) => {
   return (
@@ -9,7 +9,7 @@ const Products = ({ Products, styles, Image }: any) => {
             <Image
               src={item.image}
               alt='product'
-              width={'160px'}
+              width={"160px"}
               height='117px'
               layout='fixed'
             />

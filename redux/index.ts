@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistReducer,
   persistStore,
@@ -8,14 +8,14 @@ import {
   PERSIST,
   PURGE,
   REGISTER
-} from 'redux-persist';
-import rootReducer from './reducers';
-import storage from 'redux-persist/lib/storage';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+} from "redux-persist";
+import rootReducer from "./reducers";
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
 // persist config
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
   stateReconciler: autoMergeLevel2
 };
@@ -35,7 +35,7 @@ export default function mergeStore() {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
         }
       }),
-    devTools: process.env.NODE_ENV !== 'production'
+    devTools: process.env.NODE_ENV !== "production"
   });
 
   const persistor = persistStore(store);

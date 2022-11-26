@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Button, Input } from '../../../../components/dashboard';
-import { useSelector, useDispatch } from 'react-redux';
-import { medicalHistoryService } from '../../../../services/restService';
-import { Modal } from 'react-bootstrap';
-import produce from 'immer';
+import { useState } from "react";
+import { Button, Input } from "../../../../components/dashboard";
+import { useSelector } from "react-redux";
+import { medicalHistoryService } from "../../../../services/restService";
+import { Modal } from "react-bootstrap";
+import produce from "immer";
 
 const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   const { admin } = useSelector((state: any) => state.adminReducer);
@@ -11,19 +11,19 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
     (state: any) => state.patientsReducer
   );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [addHistory, setAddHistory] = useState(false);
   const [inputFields, setInputFields] = useState([
     {
-      medication_name: '',
-      dosing_information: '',
-      medication_strength: '',
-      frequency: '',
-      route_of_administration: '',
-      duration_of_use: '',
-      refill_information: ''
+      medication_name: "",
+      dosing_information: "",
+      medication_strength: "",
+      frequency: "",
+      route_of_administration: "",
+      duration_of_use: "",
+      refill_information: ""
     }
   ]);
 
@@ -40,6 +40,7 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         selectedPatient.patient_demographic.patient_recordId,
         admin.access_token
       );
+      console.log(data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -53,10 +54,10 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       <div className={styles.medical_history_container}>
         <div className={styles.header}>
           <Image
-            src='/assets/dashboard/arrow_left.svg'
-            width={'18px'}
-            height={'12px'}
-            className='cursor-pointer'
+            src="/assets/dashboard/arrow_left.svg"
+            width={"18px"}
+            height={"12px"}
+            className="cursor-pointer"
             onClick={() => setSelectedRecord(null)}
           />
           <p>{medicalHistory?.label}</p>
@@ -71,18 +72,18 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                   const content: any = e.currentTarget.nextElementSibling;
                   if (content.style.maxHeight) {
                     content.style.maxHeight = null;
-                    e.currentTarget.style.marginBottom = '0px';
+                    e.currentTarget.style.marginBottom = "0px";
                   } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    e.currentTarget.style.marginBottom = '16px';
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    e.currentTarget.style.marginBottom = "16px";
                   }
                 }}
               >
                 <p>{history?.date}</p>
                 <Image
-                  src='/assets/dashboard/chevronRight.svg'
-                  width={'4.94px'}
-                  height={'8px'}
+                  src="/assets/dashboard/chevronRight.svg"
+                  width={"4.94px"}
+                  height={"8px"}
                 />
               </div>
 
@@ -90,7 +91,7 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                 <div className={styles.physician}>
                   <p className={styles.name}>Physician name</p>
                   <p className={styles.physician_name}>
-                    {' '}
+                    {" "}
                     {history?.details?.physician}
                   </p>
                 </div>
@@ -103,7 +104,7 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                         {detail?.statement}
                       </p>
 
-                      <hr style={{ marginTop: '16px' }} />
+                      <hr style={{ marginTop: "16px" }} />
                     </div>
                   ))}
                 </div>
@@ -114,9 +115,9 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       </div>
       <Button onClick={() => setAddHistory(true)} className={styles.add_record}>
         <Image
-          src={'/assets/dashboard/plus.svg'}
-          width={'14px'}
-          height={'14px'}
+          src={"/assets/dashboard/plus.svg"}
+          width={"14px"}
+          height={"14px"}
         />
         <p>Add history</p>
       </Button>
@@ -131,9 +132,9 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
           <p>Add Vitals</p>
 
           <Image
-            src={'/assets/dashboard/close_btn_white.svg'}
-            width={'14px'}
-            height={'14px'}
+            src={"/assets/dashboard/close_btn_white.svg"}
+            width={"14px"}
+            height={"14px"}
             onClick={handleClose}
           />
         </div>
@@ -143,9 +144,9 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
             {inputFields.map((inputField: any, index: any) => (
               <div key={index} className={styles.form_row}>
                 <div className={styles.text_area_container}>
-                  <label htmlFor='medication_name'>Date</label>
+                  <label htmlFor="medication_name">Date</label>
                   <Input
-                    styles='input_primary'
+                    styles="input_primary"
                     onChange={(e: any) => {
                       setInputFields((currentFields) =>
                         produce(currentFields, (draft) => {
@@ -154,15 +155,15 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                       );
                     }}
                     value={inputField.medication_name}
-                    name='medication_name'
-                    id='medication_name'
-                    placeholder='Enter medication name'
-                    type={'date'}
+                    name="medication_name"
+                    id="medication_name"
+                    placeholder="Enter medication name"
+                    type={"date"}
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor='Blood pressure'>Blood pressure</label>
+                  <label htmlFor="Blood pressure">Blood pressure</label>
                   <textarea
                     onChange={(e: any) => {
                       setInputFields((currentFields) =>
@@ -172,16 +173,16 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                       );
                     }}
                     value={inputField.dosing_information}
-                    name='dosing_information'
-                    id='Blood pressure'
-                    placeholder='Blood pressure'
+                    name="dosing_information"
+                    id="Blood pressure"
+                    placeholder="Blood pressure"
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor='medication_strength'>Pulse rate</label>
+                  <label htmlFor="medication_strength">Pulse rate</label>
                   <Input
-                    styles='input_primary'
+                    styles="input_primary"
                     onChange={(e: any) => {
                       setInputFields((currentFields) =>
                         produce(currentFields, (draft) => {
@@ -190,16 +191,16 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                       );
                     }}
                     value={inputField.medication_strength}
-                    name='medication_strength'
-                    id='medication_strength'
-                    placeholder='Enter pulse rate'
+                    name="medication_strength"
+                    id="medication_strength"
+                    placeholder="Enter pulse rate"
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor='frequency'>Respiration rate</label>
+                  <label htmlFor="frequency">Respiration rate</label>
                   <Input
-                    styles='input_primary'
+                    styles="input_primary"
                     onChange={(e: any) => {
                       setInputFields((currentFields) =>
                         produce(currentFields, (draft) => {
@@ -208,18 +209,18 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                       );
                     }}
                     value={inputField.frequency}
-                    name='frequency'
-                    id='frequency'
-                    placeholder='Respiration rate'
+                    name="frequency"
+                    id="frequency"
+                    placeholder="Respiration rate"
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor='temperature'>Body temperature</label>
+                  <label htmlFor="temperature">Body temperature</label>
 
                   <Input
-                    type='text'
-                    styles='input_primary'
+                    type="text"
+                    styles="input_primary"
                     onChange={(e: any) => {
                       setInputFields((currentFields) =>
                         produce(currentFields, (draft) => {
@@ -228,21 +229,21 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                       );
                     }}
                     value={inputField.duration_of_use}
-                    name='temperature'
-                    id='temperature'
-                    placeholder='Body temperature'
+                    name="temperature"
+                    id="temperature"
+                    placeholder="Body temperature"
                   />
                 </div>
               </div>
             ))}
 
             <Button
-              // onClick={handleSave}
+              onClick={handleSave}
               disabled={
-                Object.values(inputFields[0]).some((x) => x === '') || isLoading
+                Object.values(inputFields[0]).some((x) => x === "") || isLoading
               }
-              className={'btn_primary'}
-              style={{ marginTop: '16px' }}
+              className={"btn_primary"}
+              style={{ marginTop: "16px" }}
             >
               Save
             </Button>

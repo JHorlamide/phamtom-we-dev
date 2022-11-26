@@ -1,7 +1,7 @@
 import axios from "axios";
 import Router from "next/router";
 
-const API_ENDPOINT = "https://dev-api-phamtom.herokuapp.com/api/v2";
+const API_ENDPOINT = process.env.NEXT_PUBLIC_SERVICE_URL;
 
 const restAgent = axios.create({
   baseURL: API_ENDPOINT,

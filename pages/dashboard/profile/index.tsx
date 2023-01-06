@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { pharmacyService } from "../../../services/restService";
-import { Button, DashboardLayout, Input } from "../../../components/dashboard";
-import styles from "../../../styles/dashboard/Profile.module.scss";
-import { Modal } from "react-bootstrap";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+// import { pharmacyService } from '../../../services/restService';
+import { Button, DashboardLayout, Input } from '../../../components/dashboard';
+import styles from '../../../styles/dashboard/Profile.module.scss';
+import { Modal } from 'react-bootstrap';
+import { pharmacyService } from '../../../services/restService';
+import { setPharmacy } from '../../../redux/actions/pharmacy';
 const Profile = () => {
   const { admin } = useSelector((state: any) => state.adminReducer);
-
+  const { pharmacy } = useSelector((state: any) => state.pharmacyReducer);
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error] = useState(false);
   const [password, setPassword] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: ""
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   });
 
   const [success, setSuccess] = useState(false);
@@ -31,56 +34,87 @@ const Profile = () => {
     setSuccess(true);
   };
 
+
+  useEffect(() => {
+    getPharmacy();
+  }, []);
+  const getPharmacy = async () => {
+    try {
+      const {data : {data}} = await pharmacyService.getPharmacy(
+        admin._id,
+        admin.access_token
+      );
+      console.log(data)
+      dispatch(setPharmacy(data));
+    } catch (error) {
+      dispatch(setPharmacy([]));
+      console.log(error);
+
+    }
+  };
+
   const profile = [
     {
-      label: "NAME OF INSTITUTION",
+      label: 'NAME OF INSTITUTION',
       value: admin?.name_of_institution
     },
     {
-      label: "PHONE NUMBER",
+      label: 'PHONE NUMBER',
       value: admin?.phone_number
     },
     {
-      label: "HOSPITAL ADDRESS",
+      label: 'HOSPITAL ADDRESS',
       value: admin?.address
     },
     {
-      label: "LICENSES NUMBER",
+      label: 'LICENSES NUMBER',
       value: admin?.registration_number
     }
   ];
 
-  const pharmacy = [
+  const pharmacyDetails = [
     {
-      label: "NAME OF PHARMACY",
-      value: "Institution Name"
+      label: 'NAME OF PHARMACY',
+      value: pharmacy?.name_of_pharmacy
     },
     {
-      label: "EMAIL ADDRESS",
-      value: "Institution Name"
+      label: 'EMAIL ADDRESS',
+      value: pharmacy?.pharmacy_email
     },
     {
-      label: "PHARMACY ADDRESS",
-      value: "Institution Name"
+      label: 'PHARMACY ADDRESS',
+      value: pharmacy?.pharmacy_physical_address
     }
   ];
 
-  const getPharmacy = async () => {
-    try {
-      const data = await pharmacyService.getPharmacy(
-        admin.admin_id,
-        admin.access_token
-      );
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log(pharmacy)
 
-  // CORS issue
-  useEffect(() => {
-    getPharmacy();
-  }, []);
+  // const getPharmacy = async () => {
+  //   try {
+  //     const data = await pharmacyService.getPharmacy(
+  //       admin._id,
+  //       admin.access_token
+  //     );
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // // CORS issue
+  // useEffect(() => {
+  //   getPharmacy();
+  // }, []);
+
+  var getInitials = function (data : string) {
+    var names = data?.split(' '),
+        initials = names?.[0]?.substring(0, 1).toUpperCase();
+    
+    if (names?.length > 1) {
+        initials += names?.[names?.length - 1]?.substring(0, 1).toUpperCase();
+    }
+    return initials;
+};
 
   return (
     <DashboardLayout>
@@ -90,11 +124,19 @@ const Profile = () => {
         <div className={styles.profile_body_container}>
           <div className={styles.left_items}>
             <div className={styles.profile_image_container}>
-              <Image
-                src='/assets/dashboard/avatar.svg'
-                width={"64px"}
-                height={"64px"}
-              />
+              {
+                admin?.profile_image ?
+                <Image
+                  src={admin?.profile_image}
+                  width={'64px'}
+                  height={'64px'}
+                />
+                :
+                <div className={styles.profile_image_container_initials}>
+                  <h2>{getInitials(`${admin?.name_of_institution}`)}</h2>
+                </div>
+              }
+              
               <p className={styles.institution}>{admin.name_of_institution}</p>
               <p className={styles.email}>{admin?.email}</p>
             </div>
@@ -106,8 +148,8 @@ const Profile = () => {
                 <p>Change password</p>
                 <Image
                   src='/assets/dashboard/ehr/arrow.svg'
-                  width={"12.05px"}
-                  height={"15px"}
+                  width={'12.05px'}
+                  height={'15px'}
                 />
               </Button>
             </div>
@@ -126,11 +168,11 @@ const Profile = () => {
 
             <div className={styles.pharmacy_items}>
               <h4>Your Pharmacy </h4>
-              {pharmacy.map((item, index) => (
+              {pharmacyDetails.map((item, index) => (
                 <div key={index} className={styles.pharmacy_item}>
                   <p className={styles.label}>{item.label}</p>
                   <p className={styles.value}>{item.value}</p>
-                  {item.label !== "PHARMACY ADDRESS" && <hr />}
+                  {item.label !== 'PHARMACY ADDRESS' && <hr />}
                 </div>
               ))}
             </div>
@@ -139,7 +181,7 @@ const Profile = () => {
       </div>
 
       <Modal
-        id={"change_password_modal"}
+        id={'change_password_modal'}
         show={showModal}
         onHide={handleClose}
         centered
@@ -150,8 +192,8 @@ const Profile = () => {
           <div className='success_container'>
             <Image
               src='/assets/dashboard/success.svg'
-              width={"56px"}
-              height={"56px"}
+              width={'56px'}
+              height={'56px'}
             />
 
             <h4>Password change successful</h4>
@@ -163,12 +205,12 @@ const Profile = () => {
             )
           : (
           <div>
-            <div className={"top_items"}>
-              <h5 className={"change_password"}>Change password</h5>
+            <div className={'top_items'}>
+              <h5 className={'change_password'}>Change password</h5>
               <Image
                 src='/assets/dashboard/close_btn.svg'
-                width={"14px"}
-                height={"14px"}
+                width={'14px'}
+                height={'14px'}
                 onClick={handleClose}
               />
             </div>
@@ -178,8 +220,8 @@ const Profile = () => {
                 <Input
                   id='current_password'
                   styles='input_primary'
-                  placeholder={"Current password"}
-                  type={showPassword ? "text" : "password"}
+                  placeholder={'Current password'}
+                  type={showPassword ? 'text' : 'password'}
                   error={error}
                   onChange={handleChange}
                   handleImageChange={handleShowPassword}
@@ -197,8 +239,8 @@ const Profile = () => {
                 <Input
                   id='new_password'
                   styles='input_primary'
-                  placeholder={"Enter your new password"}
-                  type={showPassword ? "text" : "password"}
+                  placeholder={'Enter your new password'}
+                  type={showPassword ? 'text' : 'password'}
                   error={error}
                   onChange={handleChange}
                   value={password.newPassword}
@@ -217,8 +259,8 @@ const Profile = () => {
                   id='cnew_password'
                   name='confirmPassword'
                   styles='input_primary'
-                  placeholder={"Confirm new Password"}
-                  type={showPassword ? "text" : "password"}
+                  placeholder={'Confirm new Password'}
+                  type={showPassword ? 'text' : 'password'}
                   error={error}
                   onChange={handleChange}
                   handleImageChange={handleShowPassword}

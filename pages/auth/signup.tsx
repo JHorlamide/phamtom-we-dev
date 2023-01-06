@@ -8,6 +8,8 @@ import { registerAdmin } from "../../services/restService";
 import { saveCredentials } from "../../services/localService";
 import { useRouter } from "next/router";
 import { MoonLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import Image from "next/image";
 
 const Signup = () => {
   const { push } = useRouter();
@@ -70,24 +72,31 @@ const Signup = () => {
     setIsLoading(true);
 
     try {
-      const response = await registerAdmin(inputFields);
+      registerAdmin(inputFields)
+      .then((response) => response?.data)
+      .then(res => {
+        if(res?.status === true){
+          toast.success(res?.message)
+          saveCredentials(inputFields.email, inputFields.password);
+          setTimeout(() => {
+           push("/auth/login");
+          }, 1500);
+        }else{
+          toast.error(res?.message)
+        }
+      })
 
-      saveCredentials(inputFields.email, inputFields.password);
-
-      console.log(response);
-
-      setInputFields({
-        email: "",
-        name_of_institution: "",
-        address: "3rd street",
-        phone_number: "",
-        password: "",
-        registration_number: ""
-      });
-
-      push("/auth/login");
+      // setInputFields({
+      //   email: "",
+      //   name_of_institution: "",
+      //   address: "3rd street",
+      //   phone_number: "",
+      //   password: "",
+      //   registration_number: ""
+      // });      
     } catch (err) {
       console.log(err);
+      toast.error("error")
     } finally {
       setIsLoading(false);
     }
@@ -98,6 +107,22 @@ const Signup = () => {
       <div className={styles.left}></div>
 
       <div className={styles.right}>
+      <Link href={'/'}>
+        <a>
+          <div className={styles.return}>
+          
+                <Image
+                  src='/assets/dashboard/arrow_left.svg'
+                  alt='logo'
+                  width={'15px'}
+                  height={'19px'}
+                />
+              <p>Return to Homepage</p>
+            
+          
+          </div>
+        </a>
+      </Link>
         <form className={styles.form}>
           <h1>Sign up</h1>
 

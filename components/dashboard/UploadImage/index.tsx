@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styles from "../../../styles/dashboard/UploadImage.module.scss";
+import Image from 'next/image';
+import styles from '../../../styles/dashboard/UploadImage.module.scss';
 
 type UploadProps = {
   imageUrl: string;
@@ -22,24 +22,24 @@ const UploadImage = ({
         {imageUrl && (
           <Image
             src={imageUrl}
-            width={"100%"}
-            height={"132px"}
+            width={'100%'}
+            height={'132px'}
             layout='fill'
-            objectFit={objectFit || "cover"}
+            objectFit={objectFit || 'cover'}
           />
         )}
 
         <div className={styles.change_cover} onClick={handleUploadFile}>
           <Image
-            src={"/assets/dashboard/pharmacy/camera.svg"}
-            width={"24px"}
-            height={"24px"}
+            src={'/assets/dashboard/pharmacy/camera.svg'}
+            width={'24px'}
+            height={'24px'}
             layout='fixed'
           />
           {imageUrl ? <p>Change cover photo</p> : <p>Upload cover photo</p>}
         </div>
       </div>
-      <div style={{ display: "none" }}>{inputEl}</div>
+      <div style={{ display: 'none' }}>{inputEl}</div>
     </>
   );
 };

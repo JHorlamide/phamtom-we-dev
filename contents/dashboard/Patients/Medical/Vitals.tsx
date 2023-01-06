@@ -1,31 +1,40 @@
-import { useState } from "react";
-import { Button, Input } from "../../../../components/dashboard";
-import { useSelector } from "react-redux";
-import { medicalHistoryService } from "../../../../services/restService";
-import { Modal } from "react-bootstrap";
-import produce from "immer";
+import { useState, useEffect } from 'react';
+import { Button, Input } from '../../../../components/dashboard';
+import { useSelector, useDispatch } from 'react-redux';
+import { vitalService } from '../../../../services/restService';
+import { Modal } from 'react-bootstrap';
+import produce from 'immer';
+import { setPatientVitalSigns } from '../../../../redux/actions/patients';
+import { MoonLoader } from 'react-spinners';
+import moment from 'moment';
 
 const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   const { admin } = useSelector((state: any) => state.adminReducer);
-  const { selectedPatient } = useSelector(
+  const { selectedPatient, vitalSigns} = useSelector(
     (state: any) => state.patientsReducer
   );
 
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  const [activeIndex, setActiveIndex]: any = useState(0);
+  const [emptyState, setEmptyState]: any = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [addHistory, setAddHistory] = useState(false);
-  const [inputFields, setInputFields] = useState([
+  const [inputFields, setInputFields] = useState(
     {
-      medication_name: "",
-      dosing_information: "",
-      medication_strength: "",
-      frequency: "",
-      route_of_administration: "",
-      duration_of_use: "",
-      refill_information: ""
+      date: '',
+      blood_pressure: '',
+      pulse_rate: '',
+      respiration_rate: '',
+      body_temperature: '',
     }
-  ]);
+  );
+
+  const handleOnChange = (e: any) => {
+    setInputFields({
+      ...inputFields,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleClose = () => {
     setAddHistory(false);
@@ -35,12 +44,21 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
     setIsLoading(true);
 
     try {
-      const data = await medicalHistoryService.addMedicalHistory(
-        inputFields,
+      const data = await vitalService.addVitalSign(
         selectedPatient.patient_demographic.patient_recordId,
+        inputFields,
         admin.access_token
       );
-      console.log(data);
+
+      getAllVitalSigns()
+      setInputFields({
+          date: '',
+          blood_pressure: '',
+          pulse_rate: '',
+          respiration_rate: '',
+          body_temperature: '',
+        }
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -49,77 +67,148 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
     }
   };
 
+  const getAllVitalSigns = async () => {
+    try {
+      const {
+        data: {
+          data
+        }
+      } = await vitalService.getAllVitalSign(
+        selectedPatient.patient_demographic.patient_recordId,
+        admin.access_token
+      );
+      if (typeof data !== 'string' && data?.length > 0) {
+        dispatch(setPatientVitalSigns(data.reverse()));
+        setEmptyState(null);
+      } else {
+        dispatch(setPatientVitalSigns([]));
+        setEmptyState('No vital signs saved yet');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllVitalSigns();
+  }, []);
+
   return (
     <>
       <div className={styles.medical_history_container}>
         <div className={styles.header}>
           <Image
-            src="/assets/dashboard/arrow_left.svg"
-            width={"18px"}
-            height={"12px"}
-            className="cursor-pointer"
+            src='/assets/dashboard/arrow_left.svg'
+            width={'18px'}
+            height={'12px'}
+            className='cursor-pointer'
             onClick={() => setSelectedRecord(null)}
           />
           <p>{medicalHistory?.label}</p>
         </div>
 
         <div className={styles.medical_history_}>
-          {medicalHistory?.history.map((history: any, index: any) => (
-            <div key={index} className={styles.history_container}>
-              <div
-                className={styles.history_header}
-                onClick={(e) => {
-                  const content: any = e.currentTarget.nextElementSibling;
-                  if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    e.currentTarget.style.marginBottom = "0px";
-                  } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    e.currentTarget.style.marginBottom = "16px";
-                  }
-                }}
+          {vitalSigns?.length > 0 &&
+            vitalSigns.map((item: any, index: any) => (
+              <div 
+                key={index} 
+                className={ activeIndex === index ? styles.history_activeContainer : styles.history_container}
               >
-                <p>{history?.date}</p>
-                <Image
-                  src="/assets/dashboard/chevronRight.svg"
-                  width={"4.94px"}
-                  height={"8px"}
-                />
-              </div>
-
-              <div className={styles.collapsible}>
-                <div className={styles.physician}>
-                  <p className={styles.name}>Physician name</p>
-                  <p className={styles.physician_name}>
-                    {" "}
-                    {history?.details?.physician}
-                  </p>
+                <div
+                  className={styles.history_header}
+                  onClick={(e) => {
+                    setActiveIndex(index);
+                    const content: any = e.currentTarget.nextElementSibling;
+                    if (content.style.maxHeight) {
+                      content.style.maxHeight = null;
+                      e.currentTarget.style.marginBottom = '0px';
+                    } else {
+                      content.style.maxHeight = content.scrollHeight + 'px';
+                      e.currentTarget.style.marginBottom = '16px';
+                    }
+                  }}
+                >
+                  <p>{moment(item?.createdAt).format('Do MMMM YYYY')}</p>
+                  <Image
+                    src='/assets/dashboard/chevronRight.svg'
+                    width={'16px'}
+                    height={'12px'}
+                  />
                 </div>
 
-                <div className={styles.history}>
-                  {history.details.history.map((detail: any, index: any) => (
-                    <div key={index} className={styles.detail}>
-                      <p className={styles.detail_title}>{detail.label}</p>
+                <div className={styles.collapsible}>
+                  <div className={styles.physician}>
+                    <p className={styles.name}>Physician name</p>
+                    <p className={styles.physician_name}> {item?.created_by}</p>
+                  </div>
+
+                  <div className={styles.history}>
+                    <div className={styles.detail}>
+                      <p className={styles.detail_title}>DATE</p>
                       <p className={styles.detail_statement}>
-                        {detail?.statement}
+                        {moment(item?.date).format('Do MMMM YYYY')}
                       </p>
 
-                      <hr style={{ marginTop: "16px" }} />
+                      <hr style={{ marginTop: '16px' }} />
                     </div>
-                  ))}
+
+                    <div className={styles.detail}>
+                      <p className={styles.detail_title}>BLOOD PRESSURE</p>
+                      <p className={styles.detail_statement}>
+                        {item?.blood_pressure}
+                      </p>
+
+                      <hr style={{ marginTop: '16px' }} />
+                    </div>
+
+                    <div className={styles.detail}>
+                      <p className={styles.detail_title}>PULSE RATE</p>
+                      <p className={styles.detail_statement}>
+                        {item?.pulse_rate}
+                      </p>
+
+                      <hr style={{ marginTop: '16px' }} />
+                      </div>
+                      
+                    <div className={styles.detail}>
+                      <p className={styles.detail_title}>RESPIRATION RATE</p>
+                      <p className={styles.detail_statement}>
+                        {item?.respiration_rate}
+                      </p>
+
+                      <hr style={{ marginTop: '16px' }} />
+                    </div>
+
+                    <div className={styles.detail}>
+                      <p className={styles.detail_title}>BODY TEMPERATURE</p>
+                      <p className={styles.detail_statement}>
+                        {item?.body_temperature}
+                      </p>
+
+                      <hr style={{ marginTop: '16px' }} />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+
+          <>
+            {isLoading && (
+              <div className='flex items-center justify-center'>
+                <MoonLoader color='#0055d2' size={30} />
+              </div>
+            )}
+          </>
+          {emptyState && <p>{emptyState}</p>}
         </div>
       </div>
       <Button onClick={() => setAddHistory(true)} className={styles.add_record}>
         <Image
-          src={"/assets/dashboard/plus.svg"}
-          width={"14px"}
-          height={"14px"}
+          src={'/assets/dashboard/plus.svg'}
+          width={'14px'}
+          height={'14px'}
         />
-        <p>Add history</p>
+        <p>Add Vitals Signs</p>
       </Button>
 
       <Modal
@@ -129,121 +218,91 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         onHide={handleClose}
       >
         <div className={styles.label_container}>
-          <p>Add Vitals</p>
+          <p>Add Vitals Signs</p>
 
           <Image
-            src={"/assets/dashboard/close_btn_white.svg"}
-            width={"14px"}
-            height={"14px"}
+            src={'/assets/dashboard/close_btn_white.svg'}
+            width={'14px'}
+            height={'14px'}
             onClick={handleClose}
           />
         </div>
 
         <div className={styles.form_container}>
           <form>
-            {inputFields.map((inputField: any, index: any) => (
-              <div key={index} className={styles.form_row}>
+            
                 <div className={styles.text_area_container}>
-                  <label htmlFor="medication_name">Date</label>
+                  <label htmlFor='date'>Date</label>
                   <Input
-                    styles="input_primary"
-                    onChange={(e: any) => {
-                      setInputFields((currentFields) =>
-                        produce(currentFields, (draft) => {
-                          draft[index].medication_name = e.target.value;
-                        })
-                      );
-                    }}
-                    value={inputField.medication_name}
-                    name="medication_name"
-                    id="medication_name"
-                    placeholder="Enter medication name"
-                    type={"date"}
+                    styles='input_primary'
+                    onChange={handleOnChange}
+                    value={inputFields.date}
+                    name='date'
+                    id='date'
+                    placeholder='Enter date'
+                    type={'date'}
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor="Blood pressure">Blood pressure</label>
+                  <label htmlFor='Blood pressure'>Blood pressure</label>
                   <textarea
-                    onChange={(e: any) => {
-                      setInputFields((currentFields) =>
-                        produce(currentFields, (draft) => {
-                          draft[index].dosing_information = e.target.value;
-                        })
-                      );
-                    }}
-                    value={inputField.dosing_information}
-                    name="dosing_information"
-                    id="Blood pressure"
-                    placeholder="Blood pressure"
+                    onChange={handleOnChange}
+                    value={inputFields.blood_pressure}
+                    name='blood_pressure'
+                    id='Blood pressure'
+                    placeholder='Blood pressure'
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor="medication_strength">Pulse rate</label>
+                  <label htmlFor='pulse_rate'>Pulse rate</label>
                   <Input
-                    styles="input_primary"
-                    onChange={(e: any) => {
-                      setInputFields((currentFields) =>
-                        produce(currentFields, (draft) => {
-                          draft[index].medication_strength = e.target.value;
-                        })
-                      );
-                    }}
-                    value={inputField.medication_strength}
-                    name="medication_strength"
-                    id="medication_strength"
-                    placeholder="Enter pulse rate"
+                    styles='input_primary'
+                    onChange={handleOnChange}
+                    value={inputFields.pulse_rate}
+                    name='pulse_rate'
+                    id='pulse_rate'
+                    placeholder='Enter pulse rate'
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor="frequency">Respiration rate</label>
+                  <label htmlFor='respiration_rate'>Respiration rate</label>
                   <Input
-                    styles="input_primary"
-                    onChange={(e: any) => {
-                      setInputFields((currentFields) =>
-                        produce(currentFields, (draft) => {
-                          draft[index].frequency = e.target.value;
-                        })
-                      );
-                    }}
-                    value={inputField.frequency}
-                    name="frequency"
-                    id="frequency"
-                    placeholder="Respiration rate"
+                    styles='input_primary'
+                    onChange={handleOnChange}
+                    value={inputFields.respiration_rate}
+                    name='respiration_rate'
+                    id='respiration_rate'
+                    placeholder='Respiration rate'
                   />
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor="temperature">Body temperature</label>
+                  <label htmlFor='body_temperature'>Body temperature</label>
 
                   <Input
-                    type="text"
-                    styles="input_primary"
-                    onChange={(e: any) => {
-                      setInputFields((currentFields) =>
-                        produce(currentFields, (draft) => {
-                          draft[index].duration_of_use = e.target.value;
-                        })
-                      );
-                    }}
-                    value={inputField.duration_of_use}
-                    name="temperature"
-                    id="temperature"
-                    placeholder="Body temperature"
+                    type='text'
+                    styles='input_primary'
+                    onChange={handleOnChange}
+                    value={inputFields.body_temperature}
+                    name='body_temperature'
+                    id='body_temperature'
+                    placeholder='Body temperature'
                   />
                 </div>
-              </div>
-            ))}
+            
 
             <Button
               onClick={handleSave}
               disabled={
-                Object.values(inputFields[0]).some((x) => x === "") || isLoading
+                [inputFields?.blood_pressure || inputFields?.body_temperature ||
+                  inputFields?.date || inputFields?.pulse_rate || inputFields?.respiration_rate
+                ].some((x) => x === '') || isLoading
               }
-              className={"btn_primary"}
-              style={{ marginTop: "16px" }}
+              className={'btn_primary'}
+              style={{ marginTop: '16px' }}
             >
               Save
             </Button>

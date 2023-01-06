@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import { Button } from "../../../../components/dashboard";
-import { useSelector, useDispatch } from "react-redux";
-import { setPatientSoap } from "../../../../redux/actions/patients";
-import { soapService } from "../../../../services/restService";
-import { Modal } from "react-bootstrap";
-import moment from "moment";
-import { MoonLoader } from "react-spinners";
+import { useState, useEffect } from 'react';
+import { Button } from '../../../../components/dashboard';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPatientSoap } from '../../../../redux/actions/patients';
+import { soapService } from '../../../../services/restService';
+import { Modal } from 'react-bootstrap';
+import moment from 'moment';
+import { MoonLoader } from 'react-spinners';
 
 const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   const { admin } = useSelector((state: any) => state.adminReducer);
   const { selectedPatient, soap } = useSelector(
     (state: any) => state.patientsReducer
   );
-
+  const [activeIndex, setActiveIndex]: any = useState(0);
   const dispatch = useDispatch();
 
   const [emptyState, setEmptyState]: any = useState(null);
@@ -20,10 +20,10 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   const [isFetching, setIsFetching] = useState(false);
   const [addHistory, setAddHistory] = useState(false);
   const [inputFields, setInputFields] = useState({
-    subjective: "",
-    objective: "",
-    assessment: "",
-    plan: ""
+    subjective: '',
+    objective: '',
+    assessment: '',
+    plan: ''
   });
 
   const handleClose = () => {
@@ -49,10 +49,10 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       );
 
       setInputFields({
-        subjective: "",
-        objective: "",
-        assessment: "",
-        plan: ""
+        subjective: '',
+        objective: '',
+        assessment: '',
+        plan: ''
       });
       getAllSoap();
     } catch (error) {
@@ -66,7 +66,6 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   useEffect(() => {
     getAllSoap();
   }, [selectedPatient]);
-
   const getAllSoap = async () => {
     setIsFetching(true);
     setEmptyState(null);
@@ -74,7 +73,7 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       const {
         data: {
           // eslint-disable-next-line camelcase
-          data: { patient_assessments }
+          data
         }
       } = await soapService.getAllSOAP(
         selectedPatient.patient_demographic.patient_recordId,
@@ -82,12 +81,13 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       );
 
       // eslint-disable-next-line camelcase
-      if (patient_assessments && typeof patient_assessments !== "string") {
+      if (data && typeof data !== 'string' && data?.length > 0) {
         // eslint-disable-next-line camelcase
-        dispatch(setPatientSoap(patient_assessments.reverse()));
+        console.log(data)
+        dispatch(setPatientSoap(data.reverse()));
       } else {
         dispatch(setPatientSoap([]));
-        setEmptyState("No history found");
+        setEmptyState('No saved SOAP record yet');
       }
     } catch (error) {
       console.log(error);
@@ -102,8 +102,8 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         <div className={styles.header}>
           <Image
             src='/assets/dashboard/arrow_left.svg'
-            width={"18px"}
-            height={"12px"}
+            width={'18px'}
+            height={'12px'}
             className='cursor-pointer'
             onClick={() => setSelectedRecord(null)}
           />
@@ -113,25 +113,29 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         <div className={styles.medical_history_}>
           {soap.length > 0 &&
             soap.map((item: any, index: any) => (
-              <div key={index} className={styles.history_container}>
+              <div 
+                key={index} 
+                className={ activeIndex === index ? styles.history_activeContainer : styles.history_container}
+              >
                 <div
                   className={styles.history_header}
                   onClick={(e) => {
+                    setActiveIndex(index);
                     const content: any = e.currentTarget.nextElementSibling;
                     if (content.style.maxHeight) {
                       content.style.maxHeight = null;
-                      e.currentTarget.style.marginBottom = "0px";
+                      e.currentTarget.style.marginBottom = '0px';
                     } else {
-                      content.style.maxHeight = content.scrollHeight + "px";
-                      e.currentTarget.style.marginBottom = "16px";
+                      content.style.maxHeight = content.scrollHeight + 'px';
+                      e.currentTarget.style.marginBottom = '16px';
                     }
                   }}
                 >
-                  <p>{moment(item?.createdAt).format("Do MMM., YYYY")}</p>
+                  <p>{moment(item?.createdAt).format('Do MMM., YYYY')}</p>
                   <Image
                     src='/assets/dashboard/chevronRight.svg'
-                    width={"4.94px"}
-                    height={"8px"}
+                    width={'18px'}
+                    height={'12px'}
                   />
                 </div>
 
@@ -148,7 +152,7 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                         {item?.subjective}
                       </p>
 
-                      <hr style={{ marginTop: "16px" }} />
+                      <hr style={{ marginTop: '16px' }} />
                     </div>
 
                     <div className={styles.detail}>
@@ -157,7 +161,7 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                         {item?.objective}
                       </p>
 
-                      <hr style={{ marginTop: "16px" }} />
+                      <hr style={{ marginTop: '16px' }} />
                     </div>
                     <div className={styles.detail}>
                       <p className={styles.detail_title}>ASSESSMENT</p>
@@ -165,7 +169,7 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                         {item?.assessment}
                       </p>
 
-                      <hr style={{ marginTop: "16px" }} />
+                      <hr style={{ marginTop: '16px' }} />
                     </div>
                     <div className={styles.detail}>
                       <p className={styles.detail_title}>PLAN</p>
@@ -189,11 +193,11 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       </div>
       <Button onClick={() => setAddHistory(true)} className={styles.add_record}>
         <Image
-          src={"/assets/dashboard/plus.svg"}
-          width={"14px"}
-          height={"14px"}
+          src={'/assets/dashboard/plus.svg'}
+          width={'14px'}
+          height={'14px'}
         />
-        <p>Add history</p>
+        <p>Add SOAP</p>
       </Button>
 
       <Modal
@@ -206,9 +210,9 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
           <p>Add SOAP</p>
 
           <Image
-            src={"/assets/dashboard/close_btn_white.svg"}
-            width={"14px"}
-            height={"14px"}
+            src={'/assets/dashboard/close_btn_white.svg'}
+            width={'14px'}
+            height={'14px'}
             onClick={handleClose}
           />
         </div>
@@ -260,10 +264,11 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
             <Button
               onClick={handleSave}
               disabled={
-                Object.values(inputFields).some((x) => x === "") || isAdding
+                [inputFields?.assessment || inputFields?.objective || 
+                  inputFields?.plan || inputFields?.subjective].some((x) => x === '') || isAdding
               }
-              className={"btn_primary"}
-              style={{ marginTop: "16px" }}
+              className={'btn_primary'}
+              style={{ marginTop: '16px' }}
             >
               Save
             </Button>

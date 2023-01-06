@@ -123,9 +123,13 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 35px;
+          // gap: 35px;
           background: $color_white;
           padding: 8px;
+          cursor: pointer;
+          :hover {
+            background: $color_blue_light;
+          }
 
           .patient_name {
             display: flex;
@@ -138,6 +142,19 @@
               letter-spacing: -0.045em;
               color: $color_blue_dark;
             }
+            
+            .initials{
+              width:64px;
+              height:64px;
+              background: $color_blue_main;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              h2{
+                color: #fff;
+              }
+            }
           }
 
           .email {
@@ -145,6 +162,7 @@
             font-size: $size_font;
             color: $color_grey_dark;
           }
+         
         }
       }
     }

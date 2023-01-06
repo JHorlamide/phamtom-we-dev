@@ -26,6 +26,19 @@
       border-radius: 0px;
     }
 
+    .return{
+      display: flex;
+      margin: 20px;
+      cursor: pointer;
+      p{
+        font-weight: 600;
+        font-size: 14px;
+        color: #123a77;
+        letter-spacing: -0.75px;
+        margin-left: 8px;
+      }
+    }
+
     .form {
       padding: 80px 120px 80px 103px;
       display: flex;

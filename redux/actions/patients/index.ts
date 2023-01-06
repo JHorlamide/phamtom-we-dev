@@ -1,4 +1,4 @@
-import * as TYPES from "../../types";
+import * as TYPES from '../../types';
 
 export const setPatients = (data: any) => ({
   type: TYPES.SET_PATIENTS,
@@ -15,6 +15,11 @@ export const setPatientMedicalHistory = (data: any) => ({
   data
 });
 
+export const setPatientMedicationHistory = (data: any) => ({
+  type: TYPES.SET_PATIENT_MEDICATION_HISTORY,
+  data
+});
+
 export const setPatientSoap = (data: any) => ({
   type: TYPES.SET_PATIENT_SOAP,
   data
@@ -22,5 +27,10 @@ export const setPatientSoap = (data: any) => ({
 
 export const setPatientLabTests = (data: any) => ({
   type: TYPES.SET_PATIENT_LAB_TEST,
+  data
+});
+
+export const setPatientVitalSigns = (data: any) => ({
+  type: TYPES.SET_PATIENT_VITAL_SIGNS,
   data
 });

@@ -1,30 +1,91 @@
-import { useState, useRef } from "react";
-import { Modal } from "react-bootstrap";
-import { Button, Input, UploadImage } from "../../../components/dashboard";
+import { useState, useRef } from 'react';
+import { Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Button, Input, UploadImage } from '../../../components/dashboard';
+import { fileUploadService, shippingService } from '../../../services/restService';
 
 const AddCourier = ({
   handleCloseAddCourier,
   showAddCourier,
   styles,
-  Image
+  Image,
+  onHide,
+  handleGetAllLogistics
 }: any) => {
   const Ref: any = useRef();
+  const { admin } = useSelector((state: any) => state.adminReducer);
+  const [imageUpload, setImageUpload] : any = useState('');
+  const [inputField, setInputField] = useState({
+    logistics_name: '',
+    logistics_url: '',
+    logistics_image: '',
+  });
 
-  const [imageUrl, setImageUr] = useState("");
+  const onInputChange = (e: any) => {
+    setInputField({ ...inputField, [e.target.name]: e.target.value });
+  };
 
   const handleUpload = () => {
     Ref.current.click();
   };
 
-  const getImgUrl = () => {
-    const file: any = document.getElementById("file") as HTMLInputElement;
-    const fileReader: any = new FileReader();
-    fileReader.onloadend = () => {
-      setImageUr(fileReader.result);
-    };
-    fileReader.readAsDataURL(file.files[0]);
+  const handleFileUpload = async(e: any) => {
+    let value = new FormData();
+    let fileValue = e.target.files[0]
+    value.append('file', fileValue);
+    
+    try{
+      await fileUploadService.fileUpload(
+        value,
+        admin.access_token
+        )
+        .then((response) => response.data)
+        .then((res)=> {
+          if(res.status === 'Success'){
+            setInputField({
+              ...inputField,
+              logistics_image: res?.data?._id
+            })
+            setImageUpload(fileValue)
+          }
+        })
+    }catch (error) {
+      console.log(error);
+    } 
+  }
+
+  const handleAddLogistics = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      await shippingService.addLogistics(
+        inputField,
+        admin.access_token
+      )
+      .then((response) => response.data)
+      .then(res => {
+        console.log(res)
+        if(res.status === "Success"){
+          toast.success(res.message)
+          // setShowAllProducts(true)
+        }
+      })
+      handleGetAllLogistics();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setInputField({
+        logistics_name: '',
+        logistics_url: '',
+        logistics_image: '',
+      });
+      setImageUpload("")
+      onHide();
+    }
   };
 
+console.log(inputField)
   return (
     <Modal
       id={styles.addCourier_container}
@@ -36,21 +97,23 @@ const AddCourier = ({
         <p>Add new shipping service</p>
 
         <Image
-          src={"/assets/dashboard/close_btn_white.svg"}
-          width={"14px"}
-          height={"14px"}
+          src={'/assets/dashboard/close_btn_white.svg'}
+          width={'14px'}
+          height={'14px'}
           onClick={handleCloseAddCourier}
         />
       </div>
 
       <div className={styles.form_container}>
         <UploadImage
-          imageUrl={imageUrl}
+          // imageUrl={imageUrl}
+          imageUrl= { imageUpload !== "" ? URL.createObjectURL(imageUpload) : ""}
           handleUploadFile={handleUpload}
           inputEl={
             <input
               type='file'
-              onChange={getImgUrl}
+              // onChange={getImgUrl}
+              onChange={handleFileUpload}
               id='file'
               accept='image/*'
               ref={Ref}
@@ -60,29 +123,35 @@ const AddCourier = ({
 
         <form>
           <div>
-            <label htmlFor='firstname'>Logistics name</label>
+            <label htmlFor='logistics_name'>Logistics name</label>
             <Input
-              type={"text"}
+              type={'text'}
               styles='input_primary'
               placeholder='Jumia Logistics'
               id='Logistics'
+              name="logistics_name"
+              onChange={onInputChange}
             />
           </div>
 
           <div>
-            <label htmlFor='Lastname'>Logistics number</label>
+            <label htmlFor='logistics_url'>Logistics address</label>
             <Input
-              type={"number"}
+              type={'text'}
               styles='input_primary'
-              placeholder='0801 - 000 - 0000'
-              id='number'
+              placeholder='https://www.trackingurl.com/'
+              id='Logistics'
+              name="logistics_url"
+              onChange={onInputChange}
             />
           </div>
 
           <Button
-            disabled
-            className={"btn_primary"}
-            style={{ marginTop: "16px" }}
+             disabled={[inputField?.logistics_image || inputField?.logistics_name || 
+              inputField?.logistics_url].some((x) => x === '')}
+            className={'btn_primary'}
+            style={{ marginTop: '16px' }}
+            onClick={handleAddLogistics}
           >
             Save
           </Button>

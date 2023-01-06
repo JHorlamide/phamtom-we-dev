@@ -42,10 +42,19 @@
         color: $color_white !important;
         border-radius: 4px;
         height: 100%;
+        &:hover {
+          background: $color_blue_dark ;
+         }
 
         a {
           color: $color_white !important;
         }
+      }
+
+      .inactive_route {
+        &:hover {
+          background: $color_blue_light;
+         }
       }
 
       a {

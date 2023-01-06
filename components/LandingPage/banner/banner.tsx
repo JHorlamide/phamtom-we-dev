@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import Button from "../Button";
-import useScreenSize from "../../useScreenSize";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Button from '../Button';
+import useScreenSize from '../../useScreenSize';
 
 const Banner = ({ content, linkName, linkTo, height }: any) => {
   const screenSize = useScreenSize();
@@ -10,29 +10,29 @@ const Banner = ({ content, linkName, linkTo, height }: any) => {
   return (
     <section
       // eslint-disable-next-line no-unneeded-ternary
-      style={{ height: height ? height : "300px" }}
+      style={{ height: height ? height : '300px' }}
     >
-      <div style={{ height: "100%" }} className='section_3'>
+      <div style={{ height: '100%' }} className='section_3'>
         <div
           // eslint-disable-next-line no-unneeded-ternary
-          style={{ height: height ? height : "300px" }}
+          style={{ height: height ? height : '300px' }}
           className='bottom_banner_container'
         >
           <Image
             src='/assets/home/bottomBanner.svg'
-            width={"1440.85px"}
-            height={screenSize.width <= 820 ? "800px" : "400px"}
-            layout={"responsive"}
+            width={'1440.85px'}
+            height={screenSize.width <= 820 ? '800px' : '400px'}
+            layout={'responsive'}
           />
         </div>
         <div
           className='bottom_banner_content'
           style={{
-            height: "100%",
-            textAlign: linkTo ? "left" : "center"
+            height: '100%',
+            textAlign: linkTo ? 'left' : 'center'
           }}
         >
-          <h2 style={{ marginBottom: "0px" }}>{content}</h2>
+          <h2 style={{ marginBottom: '0px' }}>{content}</h2>
 
           {linkTo && (
             <div>

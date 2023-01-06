@@ -1,11 +1,13 @@
-import * as TYPES from "../../types";
+import * as TYPES from '../../types';
 
 const initialState = {
   patients: [],
   selectedPatient: {},
   patientMedicalHistory: [],
+  patientMedicationHistory: [],
   soap: [],
-  labTests: []
+  labTests: [],
+  vitalSigns: []
 };
 
 interface Payload {
@@ -36,6 +38,13 @@ const patientsReducer = (state = initialState, action: Payload) => {
         patientMedicalHistory: action.data
       };
 
+    // get single patient medication history
+    case TYPES.SET_PATIENT_MEDICATION_HISTORY:
+      return {
+        ...state,
+        patientMedicationHistory: action.data
+      };
+
     // get patient soap
     case TYPES.SET_PATIENT_SOAP:
       return {
@@ -43,11 +52,18 @@ const patientsReducer = (state = initialState, action: Payload) => {
         soap: action.data
       };
 
-    // get patient soap
+    // get patient lab test
     case TYPES.SET_PATIENT_LAB_TEST:
       return {
         ...state,
         labTests: action.data
+      };
+
+    // get patient vital signs
+    case TYPES.SET_PATIENT_VITAL_SIGNS:
+      return {
+        ...state,
+        vitalSigns: action.data
       };
 
     default:

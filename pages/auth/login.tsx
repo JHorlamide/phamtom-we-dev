@@ -9,10 +9,12 @@ import {
   saveToken,
   saveCredentials,
   removeCred,
-  redirectTo
+  // redirectTo
 } from "../../services/localService";
 import { setAdmin } from "../../redux/actions/admin";
 import { MoonLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import Image from "next/image";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -27,7 +29,7 @@ const Login = () => {
     password: ""
   });
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: any) => {
     setError(false);
@@ -48,19 +50,29 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const { data } = await loginAdmin(inputFields);
-      const path: any = redirectTo();
+      await loginAdmin(inputFields)
+      .then((response) => response?.data)
+      .then(res => {
+        if(res?.status === "Success"){
+          toast.success("Login Successful")
+          saveToken(res?.data?.access_token);
+          saveCredentials(inputFields.user_email_phone, inputFields.password);
+          dispatch(setAdmin({ ...res?.data?.admin, access_token: res?.data?.access_token }));
+          // setInputFields({ user_email_phone: "", password: "" });
+            push("/dashboard/EHR");
+        }else{
+          toast.error(res?.message)
+        }
+      })
+      // const path: any = redirectTo();
 
-      saveToken(data.access_token);
-      saveCredentials(inputFields.user_email_phone, inputFields.password);
-      dispatch(setAdmin({ ...data.admin, access_token: data.access_token }));
-      setInputFields({ user_email_phone: "", password: "" });
+      
 
-      if (path) {
-        push(path);
-      } else {
-        push("/dashboard/EHR");
-      }
+      // if (path) {
+      //   push(path);
+      // } else {
+      //   push("/dashboard/EHR");
+      // }
     } catch (err: any) {
       console.log(err);
       setError(true);
@@ -68,11 +80,14 @@ const Login = () => {
       const error = err?.response?.data?.error;
 
       if (errors && errors[0].toLowerCase().includes("invalid email")) {
-        setErrorMessage("Incorrect email or password");
+        // setErrorMessage("Incorrect email or password");
+        toast.error("Incorrect email or password")
       } else if (error && error.toLowerCase().includes("password")) {
-        setErrorMessage("Incorrect email or password");
+        // setErrorMessage("Incorrect email or password");
+        toast.error("Incorrect email or password")
       } else {
-        setErrorMessage("Connection timeout. Please try again later.");
+        // setErrorMessage("Connection timeout. Please try again later.");
+        toast.error("Connection timeout. Please try again later.")
       }
     } finally {
       setIsLoading(false);
@@ -88,13 +103,29 @@ const Login = () => {
       <div className={styles.left}></div>
 
       <div className={styles.right}>
+      <Link href={'/'}>
+        <a>
+          <div className={styles.return}>
+          
+                <Image
+                  src='/assets/dashboard/arrow_left.svg'
+                  alt='logo'
+                  width={'15px'}
+                  height={'19px'}
+                />
+              <p>Return to Homepage</p>
+            
+          
+          </div>
+        </a>
+      </Link>
         <form className={styles.form}>
           <h1>Login</h1>
 
           <div className={styles.input_container}>
-            {error && errorMessage && (
+            {/* {error && errorMessage && (
               <div className={styles.errorMessage}>{errorMessage}</div>
-            )}
+            )} */}
             <div>
               <label className={styles.label} htmlFor='email'>
                 Email

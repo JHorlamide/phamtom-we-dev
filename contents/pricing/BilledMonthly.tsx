@@ -1,61 +1,61 @@
-import React from "react";
+import React from 'react';
 
 const BilledMonthly = ({ Button, Image }: any) => {
   const monthlyPlan = [
     {
-      name: "Basic plan",
+      name: 'Basic plan',
       price: <p className='price__'>Free</p>,
-      onTop: "",
+      onTop: '',
 
-      benefits: ["Up to 100 patients"],
+      benefits: ['Up to 100 patients'],
       button: <p className='current_plan'>Current plan</p>
     },
     {
-      name: "Bronze plan",
-      onTop: "",
+      name: 'Bronze plan',
+      onTop: '',
 
       price: (
         <p className='price__'>
           $1.5<span> /mo</span>
         </p>
       ),
-      benefits: ["Up to 200 patients", "2 staff accounts"],
+      benefits: ['Up to 200 patients', '2 staff accounts'],
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
-      name: "Silver plan",
+      name: 'Silver plan',
       price: (
         <p className='price__'>
           $2.5<span> /mo</span>
         </p>
       ),
-      onTop: "",
+      onTop: '',
 
-      benefits: ["Up to 500 patients", "10 staff accounts"],
+      benefits: ['Up to 500 patients', '10 staff accounts'],
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
-      name: "Golden plan",
+      name: 'Golden plan',
       price: (
         <p className='price__'>
           $5<span> /mo</span>
         </p>
       ),
-      onTop: "",
+      onTop: '',
 
       benefits: [
-        "Unlimited patients",
-        "Unlimited staff accounts",
-        "Advanced analytics",
-        "Physician order entry",
-        "Operations checklist",
-        "Billing",
-        "Outpatient management "
+        'Unlimited patients',
+        'Unlimited staff accounts',
+        'Advanced analytics',
+        'Physician order entry',
+        'Operations checklist',
+        'Billing',
+        'Outpatient management '
       ],
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
-      name: "Custom",
+      name: 'Custom',
       onTop: <p className='on_top'>Golden plan features +</p>,
 
       price: (
@@ -64,10 +64,10 @@ const BilledMonthly = ({ Button, Image }: any) => {
         </p>
       ),
       benefits: [
-        "Inpatient/Outpatient management ",
-        "Scheduling",
-        "Digital hospital",
-        "Multiple branch management"
+        'Inpatient/Outpatient management ',
+        'Scheduling',
+        'Digital hospital',
+        'Multiple branch management'
       ],
 
       button: <Button className='btn_primary'>Buy Plan</Button>

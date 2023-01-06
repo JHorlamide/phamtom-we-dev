@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { attemptLoginAdmin } from "../../services/restService";
-import { getCredentials, redirectTo } from "../../services/localService";
-import { MoonLoader } from "react-spinners";
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { attemptLoginAdmin } from '../../services/restService';
+import { getCredentials, redirectTo } from '../../services/localService';
+import { MoonLoader } from 'react-spinners';
 const Index = () => {
   const { push } = useRouter();
 
@@ -11,7 +11,7 @@ const Index = () => {
     if (credentials) {
       attemptLogin(credentials.email, credentials.password);
     } else {
-      push("/auth/login");
+      push('/auth/login');
     }
   }, []);
 
@@ -24,12 +24,12 @@ const Index = () => {
       if (path) {
         push(path);
       } else {
-        push("/dashboard/EHR");
+        push('/dashboard/EHR');
       }
     } catch (error) {
       console.log(error);
 
-      push("/auth/login");
+      push('/auth/login');
     }
   };
 

@@ -1,10 +1,47 @@
-import { useState } from "react";
-import { Input, Button } from "../../../../components/dashboard";
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { Input, Button } from '../../../../components/dashboard';
+import TypeSelect from '../../../../components/dashboard/Typeselect';
+import { bankAccountChecker, getBanks } from '../../../../services/restService';
 
-const Step2 = ({ styles, setCurrentStep }: any) => {
-  const [bank, setBank] = useState("");
+const Step2 = ({ styles, setCurrentStep, onInputChange, inputField, setInputField }: any) => {
+  const [bank, setBank] = useState('');
+  const [ngBanks, setNgBanks] = useState([]);
 
-  console.log("banks", bank);
+  useEffect(()=>{        
+    getBanks()
+    .then(resp=>{
+        setNgBanks(resp.data);
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+const checkBank = (e: any) => {
+  e.preventDefault()
+  let bankCode: any = ngBanks.find((o: any) => o.name === bank);
+
+  if(!inputField?.account_number){
+    toast.error('Please enter account number')
+  }
+  if(!bank){
+    toast.error("Please select bank")
+  }
+  if(inputField?.account_number && bankCode?.code){
+    bankAccountChecker(inputField?.account_number, bankCode?.code)
+    .then((response: any)=> {
+      if(response.status === 200){
+        setInputField({
+          ...inputField,
+          account_name: response.data.account_name,
+          bank_code: bankCode?.code
+        })
+      }
+      console.log(response);
+    })
+  }
+  
+}
+
 
   return (
     <form className={styles.padd}>
@@ -16,53 +53,104 @@ const Step2 = ({ styles, setCurrentStep }: any) => {
       <div className={styles.form_input_container}>
         <div>
           <label htmlFor='Bank'>Select bank</label>
-          <Input
-            type={"text"}
+          {/* <Input
+            type={'text'}
             styles='input_primary'
             list='Bank'
             placeholder='Select / type your bank'
             id='Bank'
-            onChange={(e) => setBank(e.target.value)}
-          />
+            // onChange={(e) => setBank(e.target.value)}
+            name='bank_name'
+            onChange={onInputChange}
+            value={inputField?.bank_name}
+          /> */}
 
-          <datalist id='Bank'>
-            {["Access bank", "AlatbyWema"].map(
-              (bank: string, index: number) => (
-                <option key={index} value={bank}>
-                  {bank}
+           <TypeSelect 
+              placeholder={inputField?.bank_name === "" ? "Select Bank" : inputField?.bank_name }
+              options={ngBanks}
+              arrayType={"countryObject"}
+              filled={true}
+              selectChange={
+                (item: any)=> {
+                  setBank(item);
+                  setInputField({
+                    ...inputField,
+                    bank_name: item
+                  })
+                }
+              }
+            />
+
+          {/* <datalist id='Bank'>
+            {ngBanks?.map(
+              (bank: IBank, index: number) => (
+                <option key={index} value={bank?.name}>
+                  {bank?.name}
                 </option>
               )
             )}
-          </datalist>
+          </datalist> */}
         </div>
         <div>
           <label htmlFor='Account number'>Account number</label>
           <Input
-            type={"number"}
+            type={'number'}
             styles='input_primary'
             placeholder='Account number'
             id='Account number'
+            name='account_number'
+            onChange={onInputChange}
+            value={inputField?.account_number}
           />
         </div>
-        <div>
-          <label htmlFor='Account name'>Account name</label>
-          <Input
-            type={"text"}
-            styles='input_primary'
-            placeholder='GOD FAVOUR BUSINESS LTD'
-            id='Account number'
-          />
-        </div>
+        {
+          !inputField?.account_name ?
+          <div className={styles.continue}>
+            <Button
+              onClick={checkBank}
+              className='btn_primary w-full'
+            >
+              Confirm Bank
+            </Button>
+          </div>
+          :
+          <div>
+            <label htmlFor='Account name'>Account name</label>
+            <Input
+              type={'text'}
+              styles='input_primary'
+              placeholder='Account name'
+              id='Account name'
+              name='account_name'
+              onChange={onInputChange}
+              value={inputField?.account_name}
+            />
+          </div>
+        }
       </div>
 
-      <div className={styles.continue}>
-        <Button
-          onClick={() => setCurrentStep("Step3")}
-          className='btn_primary w-full'
-        >
-          Continue
-        </Button>
-      </div>
+      {
+        inputField?.account_name &&
+        <div className={styles.controls}>
+          <div className={styles.continue}>
+            <Button
+              onClick={() => setCurrentStep('Step1')}
+              className='secondary'
+            >
+              Go back
+            </Button>
+          </div>
+          <div className={styles.continue}>
+            <Button
+              onClick={() => setCurrentStep('Step3')}
+              className='btn_primary'
+            >
+              Continue
+            </Button>
+          </div>
+        </div>
+      }
+      
     </form>
   );
 };

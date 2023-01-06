@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Chats = ({ Image, styles, chats, Badge }: any) => {
   return (
@@ -11,8 +11,8 @@ const Chats = ({ Image, styles, chats, Badge }: any) => {
                 <Image
                   src={chat.avatar}
                   alt='avatar'
-                  width={"40"}
-                  height={"40"}
+                  width={'40'}
+                  height={'40'}
                   layout='fixed'
                 />
 
@@ -24,7 +24,7 @@ const Chats = ({ Image, styles, chats, Badge }: any) => {
 
               <div className='flex flex-col items-end'>
                 <p className={styles.chat_time}>{chat.time}</p>
-                <Badge color={"badge_primary"} content={chat.totalUnread} />
+                <Badge color={'badge_primary'} content={chat.totalUnread} />
               </div>
             </div>
 

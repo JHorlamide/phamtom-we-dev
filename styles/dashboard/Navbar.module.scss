@@ -20,5 +20,20 @@
     align-items: center;
     justify-content: flex-end;
     gap: 32px;
+
+    &_initials{
+      width:40px;
+      height:40px;
+      background: $color_blue_main;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      p{
+        color: #fff;
+        font-weight: 600;
+      }
+    }
   }
 }

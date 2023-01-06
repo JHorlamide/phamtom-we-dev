@@ -48,6 +48,9 @@
         align-items: center;
         gap: 24px;
 
+        &_image{
+          border-radius: 50%;
+        }
         .browse_image {
           background: none !important;
           border: none !important;

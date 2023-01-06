@@ -1,35 +1,35 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const Section1 = ({ Image, Button }: any) => {
   const electronicRecords = [
-    "Document Patients health records",
-    "Accessible from any location",
-    "Cloud-based storage",
-    "Secured and HIPAA compliant",
-    "Simple to use",
-    "Track patients' medication",
-    "Free for up to 100 patients'records",
-    "Evidence-based decision making tool",
-    "Reduce medical error"
+    'Document Patients health records',
+    'Accessible from any location',
+    'Cloud-based storage',
+    'Secured and HIPAA compliant',
+    'Simple to use',
+    'Track patients\' medication',
+    'Free for up to 100 patients\'records',
+    'Evidence-based decision making tool',
+    'Reduce medical error'
   ];
 
   const marketplace = [
-    "Locate pharmacies stocked with your preferred medications.",
-    "High quality medication for residents in rural and underserved urban areas.",
-    "Transparency and Fast delivery",
-    "Medication mix",
-    "Vetted Pharmacies and pharmacists.",
-    "Affordable price",
-    "Product visibility"
+    'Locate pharmacies stocked with your preferred medications.',
+    'High quality medication for residents in rural and underserved urban areas.',
+    'Transparency and Fast delivery',
+    'Medication mix',
+    'Vetted Pharmacies and pharmacists.',
+    'Affordable price',
+    'Product visibility'
   ];
 
   const telechat = [
-    "Virtual consultation with your healthcare provider",
-    "24/7 support",
-    "EHR, Chat and Medication integration",
-    "Access to specialists",
-    "Free",
-    "Medical access to rural and underserved urban residents."
+    'Virtual consultation with your healthcare provider',
+    '24/7 support',
+    'EHR, Chat and Medication integration',
+    'Access to specialists',
+    'Free',
+    'Medical access to rural and underserved urban residents.'
   ];
 
   return (
@@ -45,9 +45,9 @@ const Section1 = ({ Image, Button }: any) => {
           <div>
             <Image
               src='/assets/home/records.svg'
-              height={"562px"}
-              width={"547px"}
-              layout={"responsive"}
+              height={'562px'}
+              width={'547px'}
+              layout={'responsive'}
             />
           </div>
           <div className='prod_desc'>
@@ -78,9 +78,9 @@ const Section1 = ({ Image, Button }: any) => {
               <div>
                 <Link href='/auth/login'>
                   <a>
-                    {" "}
+                    {' '}
                     <Button className='secondary  flex items-center gap-2'>
-                      {" "}
+                      {' '}
                       <p className='mt-0'>Add patient record</p>
                       <Image
                         src='/assets/home/arrowRight.svg'
@@ -122,9 +122,9 @@ const Section1 = ({ Image, Button }: any) => {
               <div>
                 <Link href='/auth/login'>
                   <a>
-                    {" "}
+                    {' '}
                     <Button className='secondary  flex items-center gap-2'>
-                      {" "}
+                      {' '}
                       <p className='mt-0'>Setup your store</p>
                       <Image
                         src='/assets/home/arrowRight.svg'
@@ -140,9 +140,9 @@ const Section1 = ({ Image, Button }: any) => {
           <div>
             <Image
               src='/assets/home/market.svg'
-              height={"562px"}
-              width={"547px"}
-              layout={"responsive"}
+              height={'562px'}
+              width={'547px'}
+              layout={'responsive'}
             />
           </div>
         </div>
@@ -150,9 +150,9 @@ const Section1 = ({ Image, Button }: any) => {
           <div>
             <Image
               src='/assets/home/telechat.svg'
-              height={"562px"}
-              width={"547px"}
-              layout={"responsive"}
+              height={'562px'}
+              width={'547px'}
+              layout={'responsive'}
             />
           </div>
           <div className='prod_desc'>
@@ -179,20 +179,20 @@ const Section1 = ({ Image, Button }: any) => {
               </div>
 
               <div>
-                <Link href='/auth/login'>
-                  <a>
-                    {" "}
+                {/* <Link href='/auth/login'>
+                  <a> */}
+                    {' '}
                     <Button className='secondary  flex items-center gap-2'>
-                      {" "}
-                      <p className='mt-0'>Consult now</p>
-                      <Image
+                      {' '}
+                      <p className='mt-0'>Coming soon</p>
+                      {/* <Image
                         src='/assets/home/arrowRight.svg'
                         height={8}
                         width={16}
-                      />
+                      /> */}
                     </Button>
-                  </a>
-                </Link>
+                  {/* </a>
+                </Link> */}
               </div>
             </div>
           </div>

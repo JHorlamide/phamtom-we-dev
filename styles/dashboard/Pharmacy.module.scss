@@ -145,7 +145,26 @@
           }
         }
       }
-    }
+      .noProduct{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 34px;
+        text-align: center;
+        p{
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 140%;
+          text-align: center;
+          letter-spacing: -0.035em;
+          color: $color_blue_dark;
+          opacity: 0.8;
+          margin-top: 1.5em;
+        }
+      }
+      }
   }
 
   #right_items {

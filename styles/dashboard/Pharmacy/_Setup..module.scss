@@ -144,9 +144,13 @@
           }
         }
 
+        .controls{
+          display: flex;
+          justify-content: space-between;
+        }
+
         .continue {
           margin-top: 24px;
-          width: 100%;
         }
 
         .completed {
@@ -183,8 +187,8 @@
           }
         }
 
-        .goHome {
-        }
+        // .goHome {
+        // }
       }
     }
 

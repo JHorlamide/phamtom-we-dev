@@ -38,6 +38,19 @@
           font-size: 14px;
           color: $color_blue_main;
         }
+
+        &_initials{
+          width:64px;
+          height:64px;
+          background: $color_blue_main;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          h2{
+            color: #fff;
+          }
+        }
       }
 
       .change_password {

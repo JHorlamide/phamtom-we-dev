@@ -1,9 +1,12 @@
-import { useRef } from "react";
-import Image from "next/image";
-import { Button } from "../../../../components/dashboard";
+import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { Button } from '../../../../components/dashboard';
 
-const Step3 = ({ styles, setCurrentStep }: any) => {
+const Step3 = ({ styles, setCurrentStep, inputField, setInputField, handleAddPharmacy }: any) => {
   const Ref: any = useRef();
+  const [uploaded, setUploaded] = useState(null);
+  const [fileName, setFileName] = useState("");
+
 
   const onButtonClick = () => {
     Ref.current.click();
@@ -18,27 +21,53 @@ const Step3 = ({ styles, setCurrentStep }: any) => {
 
       <div className={styles.form_input_container}>
         <div className={styles.upload_doc}>
-          <input type='file' ref={Ref} style={{ display: "none" }} />
+          <input 
+            type='file' 
+            accept="application/pdf"
+            ref={Ref} 
+            style={{ display: 'none' }} 
+            name='valid_document'
+            // onChange={onInputChange}
+            onChange={(e: any)=>{
+              setUploaded(e.target.files[0]);
+              setFileName(e.target.files[0].name); 
+              setInputField({ ...inputField, valid_document: e.target.files[0] });
+              console.log((e.target.files))
+            } 
+          }
+            
+            // value={inputField?.valid_document}
+          />
 
           <div onClick={onButtonClick}>
             <Image
-              src={"/assets/dashboard/doc.svg"}
-              width={"16px"}
-              height={"20px"}
+              src={'/assets/dashboard/doc.svg'}
+              width={'16px'}
+              height={'20px'}
             />
-            <p>Upload a document</p>
+            <p>{fileName ? fileName : 'Upload a document'}</p>
           </div>
         </div>
       </div>
-
-      <div className={styles.continue}>
-        <Button
-          onClick={() => setCurrentStep("Step4")}
-          className='btn_primary w-full'
-        >
-          Submit
-        </Button>
+      <div className={styles.controls}>
+        <div className={styles.continue}>
+          <Button
+            onClick={() => setCurrentStep('Step2')}
+            className='secondary'
+          >
+            Go back
+          </Button>
+        </div>
+        <div className={styles.continue}>
+          <Button
+            onClick={handleAddPharmacy}
+            className='btn_primary w-full'
+          >
+            Submit
+          </Button>
+        </div>
       </div>
+
     </form>
   );
 };

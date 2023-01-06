@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const Section2 = ({ Image, Button }: any) => {
   return (
@@ -18,9 +18,9 @@ const Section2 = ({ Image, Button }: any) => {
           <div>
           <Link href='/auth/login'>
             <a>
-              {" "}
+              {' '}
               <Button className='btn_primary  flex items-center gap-2'>
-                {" "}
+                {' '}
                 <p className='mt-0 inherit text-sm'>Setup your store</p>
                 <Image src='/assets/home/arrowWhite.svg' height={16} width={16} />
               </Button>

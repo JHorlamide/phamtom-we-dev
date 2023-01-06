@@ -6,7 +6,7 @@ type Props = {
 
 const Badge = ({ content, props, color }: Props) => {
   return (
-    <p className={Number(content) > 0 ? color : "visibility-none"} {...props}>
+    <p className={Number(content) > 0 ? color : 'visibility-none'} {...props}>
       {content}
     </p>
   );

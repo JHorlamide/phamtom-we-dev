@@ -1,10 +1,12 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/globals.scss";
-import type { AppProps } from "next/app";
-import mergeStore from "../redux";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { MoonLoader } from "react-spinners";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/globals.scss';
+import 'react-toastify/dist/ReactToastify.css';
+import type { AppProps } from 'next/app';
+import mergeStore from '../redux';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { MoonLoader } from 'react-spinners';
+import { ToastContainer } from 'react-toastify';
 
 const { store, persistor } = mergeStore();
 
@@ -19,6 +21,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         }
         persistor={persistor}
       >
+        <ToastContainer position="top-right" theme="colored" style={{ textAlign: "left" }} />
         <Component {...pageProps} />
       </PersistGate>
     </Provider>

@@ -1,18 +1,19 @@
-import { useState } from "react";
-import ViewProducts from "./ViewProducts";
-import ViewOrders from "./ViewOrders";
+import { useState } from 'react';
+import ViewProducts from './ViewProducts';
+import ViewOrders from './ViewOrders';
+import { useSelector } from 'react-redux';
 
 const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
-  const [activeTab, setActiveTab] = useState("PRODUCTS");
-
+  const [activeTab, setActiveTab] = useState('PRODUCTS');
+  const { products, orders } = useSelector((state: any) => state.pharmacyReducer);
   const tabs = [
     {
-      name: "PRODUCTS",
-      totalItems: 10
+      name: 'PRODUCTS',
+      totalItems: products?.length
     },
     {
-      name: "ORDERS",
-      totalItems: 10
+      name: 'ORDERS',
+      totalItems: orders.length
     }
   ];
 
@@ -30,7 +31,7 @@ const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
               onClick={() => setActiveTab(item.name)}
             >
               <p>
-                {" "}
+                {' '}
                 {item.name} ({item.totalItems})
               </p>
             </div>
@@ -38,13 +39,13 @@ const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
         </div>
       </div>
 
-      {activeTab === "PRODUCTS" && (
+      {activeTab === 'PRODUCTS' && (
         <ViewProducts
           setShowAddNewProductModal={setShowAddNewProductModal}
           styles={styles}
         />
       )}
-      {activeTab === "ORDERS" && (
+      {activeTab === 'ORDERS' && (
         <ViewOrders
           setShowAddNewProductModal={setShowAddNewProductModal}
           styles={styles}

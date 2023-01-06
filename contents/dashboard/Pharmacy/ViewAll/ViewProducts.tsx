@@ -1,34 +1,73 @@
-import Image from "next/image";
-import { Button } from "../../../../components/dashboard";
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '../../../../components/dashboard';
+import Index from '../../../../pages/dashboard';
+import { setSelectedProduct } from '../../../../redux/actions/pharmacy';
 
-const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
+const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductModal }: any) => {
+  const { products, selectedProduct } = useSelector((state: any) => state.pharmacyReducer);
+  const [activeIndex, setActiveIndex]: any = useState(0);
+  const dispatch = useDispatch();
+
+  console.log(products.indexOf(selectedProduct))
+  var formatMoney = new Intl.NumberFormat('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+    //minimumFractionDigits: 0, 
+    maximumFractionDigits: 2, 
+  });
+  
   const productDetails = [
     {
-      label: "Product name",
-      value: "Paracetamol"
+      label: 'Product name',
+      value: selectedProduct?.product_name
     },
     {
-      label: "Product price:",
-      value: "NGN 23,334,33"
+      label: 'Product price:',
+      value: selectedProduct?.product_price
     },
     {
-      label: "Product code:",
-      value: "EQUATE234"
+      label: 'Product code:',
+      value: selectedProduct?.product_id
     },
     {
-      label: "Product strength:",
-      value: "50mg"
+      label: 'Product strength:',
+      value: selectedProduct?.product_strength
     },
     {
-      label: "Pack size:",
-      value: "6 X 6"
+      label: 'Pack size:',
+      value: selectedProduct?.pack_size
     },
     {
-      label: "Quantity:",
-      value: "36"
+      label: 'Quantity:',
+      value: selectedProduct?.product_quantity
     }
   ];
 
+  useEffect(() => {
+    if(selectedProduct){
+     if(products?.indexOf(selectedProduct) === -1){
+      dispatch(setSelectedProduct(products[0]));
+      setActiveIndex(0)
+     }else{
+      dispatch(setSelectedProduct(selectedProduct))
+      setActiveIndex(products?.indexOf(selectedProduct))
+     }
+      
+    }else{
+      dispatch(setSelectedProduct(products[0]));
+    }
+  }, []);
+
+  useEffect(() => {
+    if(activeIndex < 0){
+      setActiveIndex(0)
+    }
+  }, []);
+
+console.log(products)
+console.log(activeIndex)
   return (
     <div className={styles.items_container}>
       <div className={styles.left_items}>
@@ -44,40 +83,29 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
 
         {/* product */}
         <ul className={styles.all_products_}>
-          <li className={styles.product}>
-            <Image
-              src={"/assets/dashboard/pharmacy/product.svg"}
-              alt='product'
-              width={"160px"}
-              height='117px'
-              layout='fixed'
-            />
-            <p className={styles.name}>Paracetamol</p>
-            <p className={styles.item_price}>NGN 10000</p>
-          </li>
-
-          <li className={styles.product}>
-            <Image
-              src={"/assets/dashboard/pharmacy/product.svg"}
-              alt='product'
-              width={"160px"}
-              height='117px'
-              layout='fixed'
-            />
-            <p className={styles.name}>Paracetamol</p>
-            <p className={styles.item_price}>NGN 10000</p>
-          </li>
-          <li className={styles.product}>
-            <Image
-              src={"/assets/dashboard/pharmacy/product.svg"}
-              alt='product'
-              width={"160px"}
-              height='117px'
-              layout='fixed'
-            />
-            <p className={styles.name}>Paracetamol</p>
-            <p className={styles.item_price}>NGN 10000</p>
-          </li>
+          {
+            products?.map((product: any, index: any) => (
+              <li 
+                className={activeIndex === index ? styles.productActive : styles.product}
+                key={index}
+                onClick={() => {
+                  setActiveIndex(index)
+                  // handleOpenMedicalInfo();
+                  dispatch(setSelectedProduct(product));
+                }}
+              >
+                <Image
+                  src={'/assets/dashboard/pharmacy/product.svg'}
+                  alt='product'
+                  width={'160px'}
+                  height='117px'
+                  layout='fixed'
+                />
+                <p className={styles.name}>{product?.product_name}</p>
+                <p className={styles.item_price}>{formatMoney.format(product?.product_price)}</p>
+              </li>
+              ))
+          }
         </ul>
       </div>
 
@@ -86,12 +114,12 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
         <div className={styles.top_items}>
           <h4>Product Details </h4>
 
-          <div className={styles.edit}>
+          <div className={styles.edit}  onClick={() => setShowEditProductModal(true)}>
             <p>Edit</p>
 
             <Image
-              src={"/assets/dashboard/edit.svg"}
-              width={"18px"}
+              src={'/assets/dashboard/edit.svg'}
+              width={'18px'}
               height='18px'
               layout='fixed'
             />
@@ -100,9 +128,9 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
 
         <div className={styles.product_image}>
           <Image
-            src={"/assets/dashboard/pharmacy/product.svg"}
+            src={'/assets/dashboard/pharmacy/product.svg'}
             alt='product'
-            width={"335px"}
+            width={'335px'}
             height='228px'
             layout='fixed'
           />
@@ -126,33 +154,25 @@ const ViewProducts = ({ styles, setShowAddNewProductModal }: any) => {
           <div>
             <p className={styles.label}>About</p>
             <p className={styles.value}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
-              sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{" "}
+              {selectedProduct?.about_product}{' '}
             </p>
           </div>
           <div>
             <p className={styles.label}>Usage direction</p>
             <p className={styles.value}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
-              sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{" "}
+              {selectedProduct?.usage_direction}{' '}
             </p>
           </div>
           <div>
             <p className={styles.label}>Precaution</p>
             <p className={styles.value}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
-              sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{" "}
+              {selectedProduct?.precautions}{' '}
             </p>
           </div>
           <div>
             <p className={styles.label}>Possible side effects</p>
             <p className={styles.value}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula
-              sem turpis dapibus eleifend tempor cras diam tellus. Fusce ante
-              elit interdum pellentesque. Nibh hac gravida placerat{" "}
+              {selectedProduct?.possible_side_effect}{' '}
             </p>
           </div>
         </div>

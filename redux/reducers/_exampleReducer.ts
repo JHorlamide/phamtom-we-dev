@@ -1,4 +1,4 @@
-import * as TYPES from "../types";
+import * as TYPES from '../types';
 
 const initialState = {
   items: [],

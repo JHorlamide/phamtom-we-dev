@@ -90,6 +90,7 @@
         // flex-wrap: wrap;
         gap: 16px;
         width: 100%;
+        cursor: pointer;
 
         .product {
           border-radius: 8px;
@@ -98,6 +99,34 @@
           background: #ffffff;
           border: 2px solid #ebebeb;
           border-radius: 8px;
+
+          .name {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 116%;
+            letter-spacing: -0.045em;
+            color: $color_blue_dark;
+            margin-bottom: 8px;
+            cursor: pointer;
+          }
+
+          .item_price {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 140%;
+            letter-spacing: -0.035em;
+            cursor: pointer;
+            color: $color_blue_dark;
+          }
+        }
+        .productActive {
+          border-radius: 8px;
+          padding: 8px;
+          width: 100%;
+          background: #ffffff;
+          border: 2px solid #ebebeb;
+          border-radius: 8px;
+          background: $color_blue_light;
 
           .name {
             font-weight: 600;

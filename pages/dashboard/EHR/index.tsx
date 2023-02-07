@@ -4,13 +4,14 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styles from '../../../styles/dashboard/EHR.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { patientsService, staffService } from '../../../services/restService';
+import { orderService, patientsService, staffService } from '../../../services/restService';
 import { setPatients, setSelectedPatient } from '../../../redux/actions/patients';
 import { Button, DashboardLayout } from '../../../components/dashboard';
 import { AddNewPatient } from '../../../contents/dashboard/Patients';
 import modalStyles from '../../../styles/dashboard/Patients.module.scss';
 import { setStaffs } from '../../../redux/actions/staffs';
 import { AddNewStaff } from '../../../contents/dashboard/Staffs';
+import { setOrders } from '../../../redux/actions/pharmacy';
 
 const EHR: NextPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const EHR: NextPage = () => {
   const { admin } = useSelector((state: any) => state.adminReducer);
   const { patients } = useSelector((state: any) => state.patientsReducer);
   const { staffs } = useSelector((state: any) => state.staffReducer);
+  const { orders } = useSelector((state: any) => state.pharmacyReducer);
 
   const [totalPatients, setTotalPatients] = useState(0);
   // const [totalOrders, setTotalOrders] = useState(0);
@@ -43,7 +45,7 @@ const EHR: NextPage = () => {
     }
     return initials;
 };
-
+console.log(orders)
   const cards = [
     {
       title: 'Total patients',
@@ -57,7 +59,7 @@ const EHR: NextPage = () => {
     },
     {
       title: 'Total orders',
-      value: '14',
+      value: orders?.length,
       additional: (
         <p className={styles.additional}>
           +2
@@ -111,9 +113,23 @@ const EHR: NextPage = () => {
   //     totalUnread: 2
   //   }
   // ];
+  const getAllPendingOrders = async () => {
+    try {
+     await orderService.getAllPendingOrders(admin.access_token)
+     .then((response)=> response.data)
+     .then((res) => {
+       if(res.status === "Success"){
+        dispatch(setOrders(res.data.reverse()));
+       }
+     })
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     handleGetAllPatients();
+    getAllPendingOrders
   }, []);
 
   useEffect(() => {
@@ -254,21 +270,21 @@ const EHR: NextPage = () => {
                   <div className={styles.patient_name}>
 
                   {  
-                          patient?.profileImage ?
-                          <Image
-                              src={'/assets/dashboard/avatar.svg'}
-                              alt='avatar'
-                              width={'40'}
-                              height={'40'}
-                              layout='fixed'
-                            />
-                            : (
-                              <div className={styles.initials}>
-                                  <h2>{getInitials(`${patient.patient_demographic.first_name} ${patient.patient_demographic.last_name}`)}</h2>
-                              </div>
-                            ) 
+                    patient?.profileImage ?
+                    <Image
+                        src={'/assets/dashboard/avatar.svg'}
+                        alt='avatar'
+                        width={'40'}
+                        height={'40'}
+                        layout='fixed'
+                      />
+                      : (
+                        <div className={styles.initials}>
+                            <h2>{getInitials(`${patient.patient_demographic.first_name} ${patient.patient_demographic.last_name}`)}</h2>
+                        </div>
+                      ) 
 
-                            }
+                  }
                     {/* <Image
                       src={'/assets/dashboard/avatar.svg'}
                       alt='avatar'
@@ -339,15 +355,31 @@ const EHR: NextPage = () => {
               {staffs.map((member: any, index: any) => (
                 <li key={index} className={styles.staff}>
                   <div className={styles.member}>
-                    <Image
+                    {/* <Image
                       src="/assets/dashboard/avatar.svg"
                       alt='avatar'
                       width={'40px'}
                       height={'40px'}
-                    />
+                    /> */}
+                    {  
+                    member?.profileImage ?
+                    <Image
+                        src={'/assets/dashboard/avatar.svg'}
+                        alt='avatar'
+                        width={'40'}
+                        height={'40'}
+                        layout='fixed'
+                      />
+                      : (
+                        <div className={styles.initials}>
+                            <h2>{getInitials(`${member?.first_name} ${member?.last_name}`)}</h2>
+                        </div>
+                      ) 
+
+                  }
 
                     <div>
-                      <p className={styles.name}>{`${member.first_name} ${member.last_name}`}</p>
+                      <p className={styles.name}>{`${member?.first_name} ${member?.last_name}`}</p>
                       {/* <p className={styles.title}>{member.last_name}</p> */}
                     </div>
                   </div>

@@ -46,7 +46,6 @@ const AddNewPatient = ({
     occupation: '',
     image: ''
   });
-  console.log(inputField)
   const onInputChange = (e: any) => {
     setInputField({ ...inputField, [e.target.name]: e.target.value });
   };
@@ -84,10 +83,18 @@ const AddNewPatient = ({
 
   const handleAddPatient = async (e: any) => {
     e.preventDefault();
-
+    // let payload = {
+    //   ...inputField.some()
+    // }
+    let payload = Object.keys(inputField).filter(key => inputField[key as keyof typeof inputField])
+    .reduce((acc: any, key) => {
+      acc[key as keyof typeof acc] = inputField[key as keyof typeof inputField];
+      return acc;
+    }, {});
+    console.log(payload)
     try {
       await patientsService.addPatient(
-        inputField,
+        payload,
         admin.access_token
       )
       .then((response) => response.data)
@@ -137,7 +144,7 @@ const AddNewPatient = ({
   //   height: 720,
   //   facingMode: "user"
   // };
-console.log(imageUpload)
+
   return (
     <div className={styles.modal_container}>
       <Modal

@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Button } from '../../../../components/dashboard';
+import { fileUploadService } from '../../../../services/restService';
+import { useSelector } from 'react-redux';
 
 const Step3 = ({ styles, setCurrentStep, inputField, setInputField, handleAddPharmacy }: any) => {
+  const { admin } = useSelector((state: any) => state.adminReducer);
   const Ref: any = useRef();
   const [uploaded, setUploaded] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -11,6 +14,33 @@ const Step3 = ({ styles, setCurrentStep, inputField, setInputField, handleAddPha
   const onButtonClick = () => {
     Ref.current.click();
   };
+
+  const handleFileUpload = async(e: any) => {
+    let value = new FormData();
+    let fileValue = e.target.files[0]
+    value.append('file', fileValue);
+    try{
+      await fileUploadService.fileUpload(
+        value,
+        admin.access_token
+        )
+        .then((response) => response.data)
+        .then((res)=> {
+          if(res.status === 'Success'){
+            setInputField({
+              ...inputField,
+              valid_document: res?.data?._id
+            })
+            setFileName(e.target.files[0]?.name)
+            setUploaded(fileValue)
+            console.log(uploaded)
+          }
+        })
+    }catch (error) {
+      console.log(error);
+    } 
+    
+  }
 
   return (
     <form >
@@ -28,13 +58,7 @@ const Step3 = ({ styles, setCurrentStep, inputField, setInputField, handleAddPha
             style={{ display: 'none' }} 
             name='valid_document'
             // onChange={onInputChange}
-            onChange={(e: any)=>{
-              setUploaded(e.target.files[0]);
-              setFileName(e.target.files[0].name); 
-              setInputField({ ...inputField, valid_document: e.target.files[0] });
-              console.log((e.target.files))
-            } 
-          }
+            onChange={handleFileUpload} 
             
             // value={inputField?.valid_document}
           />

@@ -15,8 +15,11 @@ restAgent.interceptors.response.use(undefined, (error) => {
   const statusCode = error.response ? error.response.status : null;
   console.log('Inte', statusCode);
   console.log('Inte', error.response);
-  if (error.response.data.message === 'Admin does not exist' ||
-  error.response.data.message === 'Pharmacy not found') {
+
+  if (
+    error.response.data.message === 'Admin does not exist' ||
+    error.response.data.message === 'Pharmacy not found'
+  ) {
     console.log(error.response.data.message);
   } else if (error?.response?.data?.error) {
     toast.error(error.response.data.error);
@@ -73,7 +76,7 @@ export const staffService = {
     return restAgent.post('/staffs', data, config);
   },
 
-  editStaff: (staffId:any, token: any) => {
+  editStaff: (staffId: any, token: any) => {
     const config = getRequestConfig();
     config.headers.Authorization = `Bearer ${token}`;
     return restAgent.delete(`/staffs/${staffId}`, config);
@@ -106,7 +109,7 @@ export const patientsService = {
     return restAgent.post('/patients', data, config);
   },
 
-  editPatient: (data: any, patientId:any, token: any) => {
+  editPatient: (data: any, patientId: any, token: any) => {
     const config = getRequestConfig();
     config.headers.Authorization = `Bearer ${token}`;
     return restAgent.patch(`/patients/${patientId}`, data, config);
@@ -303,8 +306,15 @@ export const orderService = {
   getAllPendingOrders: (token: any) => {
     const config = getRequestConfig();
     config.headers.Authorization = `Bearer ${token}`;
-    return restAgent.get('/orders/admin', config);
-  }
+    return restAgent.get(`/orders/admin`, config);
+  },
+
+  getActiveOrders: (token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.get(`/orders/admin/active-orders`, config);
+  },
+
 };
 
 // shipping

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
   const [orderStatus, setOrderStatus] = useState('Pending');
-  const { orders } = useSelector((state: any) => state.pharmacyReducer);
+  const { selectedOrder, orders } = useSelector((state: any) => state.pharmacyReducer);
   const [trackingNumber, setTrackingNumber] = useState('');
   const [tempNumber, setTempNumber] = useState('');
   const [courier, setCourier] = useState('');
@@ -18,17 +18,6 @@ const ViewOrders = ({ styles, setShowAddNewProductModal }: any) => {
     setChooseCourier(false);
   };
 
-  const productDetails = [
-    {
-      label: 'Name:',
-      value: 'Matthew Ola'
-    },
-    {
-      label: 'Phone:',
-      value: '+234 816 220 7086'
-    }
-  ];
-console.log(orders)
   return (
     <>
       <div className={styles.items_container}>
@@ -37,7 +26,7 @@ console.log(orders)
           <ul className={styles.all_orders_}>
             {
               orders?.map((item: any, index:any)=> (
-                <li className={styles.selected_order}>
+                <li className={styles.selected_order} key={index}>
                   <div className={styles.order_img}>
                     <Image
                       src={'/assets/dashboard/pharmacy/product.svg'}
@@ -75,13 +64,13 @@ console.log(orders)
             <>
               {' '}
               <div className={styles.marked_status}>
-                {orderStatus === 'Pending' && (
+                {selectedOrder?.order_status === "PENDING" && (
                   <p className={styles.pending}>
                     This order has been marked as pending
                   </p>
                 )}
 
-                {orderStatus === 'Packaged' && (
+                {orderStatus === 'ON_IT_WAY' && (
                   <p className={styles.packaged}>
                     This order has been marked as packaged
                   </p>
@@ -97,18 +86,22 @@ console.log(orders)
               <div className={styles.details_container}>
                 <h5>Buyer's info:</h5>
                 <hr />
-                {productDetails.map((detail: any, index: any) => (
-                  <div key={index} className={styles.detail}>
-                    <p className={styles.label}>{detail.label}</p>
-                    <p className={styles.value}>{detail.value}</p>
+
+                  <div className={styles.detail}>
+                    <p className={styles.label}>Name</p>
+                    <p className={styles.value}>{selectedOrder?.buyer_info?.name}</p>
                   </div>
-                ))}
+                  <div className={styles.detail}>
+                    <p className={styles.label}>Phone</p>
+                    <p className={styles.value}>{selectedOrder?.buyer_info?.phone_number}</p>
+                  </div>
+               
                 <hr />
 
                 <div className=''>
                   <h6>Delivery address:</h6>
                   <p className={styles.label}>
-                    No 15, Adejuyigbe Adebo Street, Abudu Edo State.
+                    {selectedOrder?.buyer_info?.address}
                   </p>
                 </div>
                 <hr />
@@ -126,7 +119,7 @@ console.log(orders)
                     </div>
 
                     <hr />
-
+                    {/* status ===  */}
                     <div className={styles.tracking_number}>
                       {trackingNumber && !editTrackingNumber ? (
                         <>

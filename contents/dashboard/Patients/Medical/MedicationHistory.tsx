@@ -15,7 +15,7 @@ const MedicationHistory = ({
   Image
 }: any) => {
   const { admin } = useSelector((state: any) => state.adminReducer);
-  const { selectedPatient, patientMedicationHistory  } = useSelector(
+  const { selectedPatient, patientMedicationHistory } = useSelector(
     (state: any) => state.patientsReducer
   );
 
@@ -307,7 +307,7 @@ const MedicationHistory = ({
                 </div>
 
                 <div className={styles.text_area_container}>
-                  <label htmlFor='medication_strength'>Medical strength</label>
+                  <label htmlFor='medication_strength'>Medication strength</label>
                   <Input
                     styles='input_primary'
                     onChange={handleOnChange}

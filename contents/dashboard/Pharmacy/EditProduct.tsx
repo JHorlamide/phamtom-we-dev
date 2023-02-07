@@ -130,8 +130,7 @@ console.log(inputField)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedProduct])
-
-console.log(inputField)
+  
   return (
     <div className={styles.modal_container}>
       <Modal

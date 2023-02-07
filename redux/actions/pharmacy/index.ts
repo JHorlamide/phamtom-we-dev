@@ -25,6 +25,11 @@ export const setOrders = (data: any) => ({
   data
 });
 
+export const setSelectedOrder = (data: any) => ({
+  type: TYPES.SET_SELECTED_ORDER,
+  data
+});
+
 export const setLogistics = (data: any) => ({
   type: TYPES.SET_LOGISTICS,
   data

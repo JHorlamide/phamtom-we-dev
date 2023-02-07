@@ -1,7 +1,7 @@
 .orders_container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   gap: 16px;
   overflow-x: scroll;
   padding-bottom: 12px;
@@ -18,7 +18,7 @@
   .order {
     border-radius: 8px;
     padding: 8px;
-    width: 100%;
+    // width: 100%;
     background: #ffffff;
     border: 2px solid #ebebeb;
     border-radius: 8px;
@@ -43,6 +43,42 @@
         padding: 4px 8px;
         gap: 10px;
         background: #ecc07c;
+        border-radius: 8px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 140%;
+        letter-spacing: -0.035em;
+        color: #ffffff;
+      }
+
+      .onItsWay {
+        padding: 4px 8px;
+        gap: 10px;
+        background: #559FE3;
+        border-radius: 8px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 140%;
+        letter-spacing: -0.035em;
+        color: #ffffff;
+      }
+
+      .success {
+        padding: 4px 8px;
+        gap: 10px;
+        background: #03C57F;
+        border-radius: 8px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 140%;
+        letter-spacing: -0.035em;
+        color: #ffffff;
+      }
+
+      .cancelled {
+        padding: 4px 8px;
+        gap: 10px;
+        background: #E31B23;
         border-radius: 8px;
         font-weight: 400;
         font-size: 12px;

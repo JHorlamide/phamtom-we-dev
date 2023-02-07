@@ -5,7 +5,7 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 import { useRouter } from 'next/router';
-import { pharmacyService } from '../../../../services/restService';
+import { fileUploadService, pharmacyService } from '../../../../services/restService';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { setPharmacy } from '../../../../redux/actions/pharmacy';

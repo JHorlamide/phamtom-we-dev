@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setSelectedProduct } from '../../../redux/actions/pharmacy';
+import { setSelectedProduct, setPharmacyState } from '../../../redux/actions/pharmacy';
 
 var formatMoney = new Intl.NumberFormat('en-NG', {
   style: 'currency',
@@ -22,13 +22,14 @@ const Products = ({ Products, styles, Image }: any) => {
             key={index} 
             className={styles.product}
             onClick= {()=>{ 
+                dispatch(setPharmacyState('PRODUCTS'))
                 dispatch(setSelectedProduct(item))
                 push('/dashboard/pharmacy/products')
               }
             }
           >
             <Image
-              src={'/assets/dashboard/pharmacy/product.svg'}
+              src={item?.product_image?.imageUrl}
               alt='product'
               width={'160px'}
               height='117px'

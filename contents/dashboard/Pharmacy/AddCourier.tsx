@@ -85,7 +85,7 @@ const AddCourier = ({
     }
   };
 
-console.log(inputField)
+// console.log(inputField)
   return (
     <Modal
       id={styles.addCourier_container}

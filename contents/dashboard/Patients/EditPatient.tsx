@@ -113,9 +113,6 @@ const EditPatient = ({
     }
   };
 
-
-
-  console.log(selectedPatient)
   // const capture = useCallback(() => {
   //   const imageSrc = webcamRef.current.getScreenshot();
   //   setImgSrc(imageSrc);

@@ -10,7 +10,6 @@ const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductMod
   const [activeIndex, setActiveIndex]: any = useState(0);
   const dispatch = useDispatch();
 
-  console.log(products.indexOf(selectedProduct))
   var formatMoney = new Intl.NumberFormat('en-NG', {
     style: 'currency',
     currency: 'NGN',
@@ -66,8 +65,6 @@ const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductMod
     }
   }, []);
 
-console.log(products)
-console.log(activeIndex)
   return (
     <div className={styles.items_container}>
       <div className={styles.left_items}>

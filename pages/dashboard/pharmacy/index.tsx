@@ -29,6 +29,7 @@ const Pharmacy: NextPage = () => {
   const [showAddCourier, setShowAddCourier] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [totalPatients, setTotalPatients] = useState(0);
+  const [activeOrders, setActiveOrders] = useState([]);
 
   const handleCloseAddCourier = () => setShowAddCourier(false);
 
@@ -86,10 +87,10 @@ const Pharmacy: NextPage = () => {
     getPharmacy();
     getTotalPatients();
     getAllPendingOrders()
+    getActiveOrders()
     handleGetAllProducts();
     handleGetAllLogistics();
   }, []);
-  console.log(orders)
 
   const getTotalPatients = async () => {
     try {
@@ -118,6 +119,20 @@ const Pharmacy: NextPage = () => {
     }
   };
 
+  const getActiveOrders = async () => {
+    try {
+     await orderService.getActiveOrders(admin.access_token)
+     .then((response)=> response.data)
+     .then((res) => {
+       if(res.status === "Success"){
+        setActiveOrders(res.data)
+       }
+     })
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const cards = [
     {
       title: 'Total patients',
@@ -129,46 +144,13 @@ const Pharmacy: NextPage = () => {
     },
     {
       title: 'Active orders',
-      value: '14'
+      value: activeOrders?.length
     },
     {
       title: 'Out of stock',
       value: '14'
     }
   ];
-
-  // const Products = [
-  //   {
-  //     name: 'Paracetamol',
-  //     price: '620,000.00',
-  //     image: '/assets/dashboard/pharmacy/product.svg'
-  //   },
-  //   {
-  //     name: 'Paracetamol',
-  //     price: '620,000.00',
-  //     image: '/assets/dashboard/pharmacy/product.svg'
-  //   },
-  //   {
-  //     name: 'Paracetamol',
-  //     price: '620,000.00',
-  //     image: '/assets/dashboard/pharmacy/product.svg'
-  //   },
-  //   {
-  //     name: 'Paracetamol',
-  //     price: '140,000.00',
-  //     image: '/assets/dashboard/pharmacy/product.svg'
-  //   },
-  //   {
-  //     name: 'Paracetamol',
-  //     price: '140,000.00',
-  //     image: '/assets/dashboard/pharmacy/product.svg'
-  //   },
-  //   {
-  //     name: 'Paracetamol',
-  //     price: '140,000.00',
-  //     image: '/assets/dashboard/pharmacy/product.svg'
-  //   }
-  // ];
 
   const MyOrders = [
     {
@@ -229,7 +211,7 @@ const Pharmacy: NextPage = () => {
       role: 'Admin'
     }
   ];
-console.log(products)
+// console.log(products)
   // const chats = [
   //   {
   //     name: 'John Doe',
@@ -253,7 +235,7 @@ console.log(products)
   //     totalUnread: 2
   //   }
   // ];
-console.log(orders)
+// console.log(orders)
   return (
     <DashboardLayout>
 
@@ -370,7 +352,11 @@ console.log(orders)
 
                   {
                     orders?.length > 0 ?
-                      <MyOrder Orders={orders} styles={styles} Image={Image} />
+                      <MyOrder 
+                        Orders={orders} 
+                        styles={styles} 
+                        Image={Image} 
+                      />
                       :
                       <div className={styles.noProduct}>
                         <Image

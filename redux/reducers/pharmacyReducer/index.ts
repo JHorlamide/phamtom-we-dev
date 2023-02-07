@@ -6,6 +6,7 @@ const initialState = {
   products: [],
   selectedProduct: {},
   orders: [],
+  selectedOrder: {},
   logistics: [],
 };
 
@@ -45,6 +46,12 @@ const pharmacyReducer = (state = initialState, action: Payload) => {
       return {
         ...state,
         orders: action.data
+      };
+
+    case TYPES.SET_SELECTED_ORDER:
+      return {
+        ...state,
+        selectedOrder: action.data
       };
 
     case TYPES.SET_LOGISTICS:

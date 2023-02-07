@@ -31,7 +31,7 @@ const Products: NextPage = () => {
       setActiveTab(pharmacyState)
     }
   }, []);
-console.log(pharmacyState)
+
   const handleGetAllProducts = async () => {
     try {
       await productService.getAllProduct(admin.access_token)

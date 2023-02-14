@@ -41,10 +41,16 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
     e.preventDefault();
     setIsAdding(true);
 
+    let payload = Object.keys(inputFields).filter(key => inputFields[key as keyof typeof inputFields])
+      .reduce((acc: any, key) => {
+        acc[key as keyof typeof acc] = inputFields[key as keyof typeof inputFields];
+        return acc;
+      }, {});
+
     try {
       await soapService.addSOAP(
         selectedPatient.patient_demographic.patient_recordId,
-        inputFields,
+        payload,
         admin.access_token
       );
 

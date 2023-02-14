@@ -21,7 +21,7 @@ import { useRouter } from 'next/router';
 
 const Pharmacy: NextPage = () => {
   const { admin } = useSelector((state: any) => state.adminReducer);
-  const { pharmacy, products, orders } = useSelector((state: any) => state.pharmacyReducer);
+  const { pharmacy, products, orders, logistics } = useSelector((state: any) => state.pharmacyReducer);
   // const { patients } = useSelector((state: any) => state.patientsReducer);
   const dispatch = useDispatch();
   const [showAddNewProductModal, setShowAddNewProductModal]: any =
@@ -29,7 +29,8 @@ const Pharmacy: NextPage = () => {
   const [showAddCourier, setShowAddCourier] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [totalPatients, setTotalPatients] = useState(0);
-  const [activeOrders, setActiveOrders] = useState([]);
+  const [activeOrders, setActiveOrders] = useState("");
+  const [productsOutOfStocks, setProductsOutOfStocks] = useState("");
 
   const handleCloseAddCourier = () => setShowAddCourier(false);
 
@@ -124,8 +125,10 @@ const Pharmacy: NextPage = () => {
      await orderService.getActiveOrders(admin.access_token)
      .then((response)=> response.data)
      .then((res) => {
+       console.log(res)
        if(res.status === "Success"){
-        setActiveOrders(res.data)
+        setActiveOrders(res?.data?.activeOrders)
+        setProductsOutOfStocks(res?.data?.productsOutOfStocks)
        }
      })
     } catch (e) {
@@ -144,59 +147,15 @@ const Pharmacy: NextPage = () => {
     },
     {
       title: 'Active orders',
-      value: activeOrders?.length
+      value: activeOrders
     },
     {
       title: 'Out of stock',
-      value: '14'
+      value: productsOutOfStocks
     }
   ];
 
-  const MyOrders = [
-    {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '1',
-      status: 'pending'
-    },
-    {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '454',
-      status: 'pending'
-    },
-    {
-      name: 'Paracetamol',
-      price: '620,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '33',
-      status: 'pending'
-    },
-    {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '21',
-      status: 'pending'
-    },
-    {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '13',
-      status: 'pending'
-    },
-    {
-      name: 'Paracetamol',
-      price: '140,000.00',
-      image: '/assets/dashboard/pharmacy/product.svg',
-      qty: '11',
-      status: 'pending'
-    }
-  ];
-
+  console.log(logistics)
   const couriers = [
     {
       name: 'Jumia Logistics',
@@ -418,7 +377,7 @@ const Pharmacy: NextPage = () => {
                   </div>
 
                   <ShippingServices
-                    couriers={couriers}
+                    logistics={logistics}
                     Image={Image}
                     styles={styles}
                   />

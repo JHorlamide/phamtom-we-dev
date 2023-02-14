@@ -1,10 +1,12 @@
 import React from 'react';
+import PayStack from '../../services/paystack'
+import { formatter } from '../../utils';
 
-const BilledMonthly = ({ Button, Image }: any) => {
+const BilledMonthly = ({ Button, Image, admin }: any) => {
   const monthlyPlan = [
     {
       name: 'Basic plan',
-      price: <p className='price__'>Free</p>,
+      price: "Free",
       onTop: '',
 
       benefits: ['Up to 100 patients'],
@@ -12,23 +14,14 @@ const BilledMonthly = ({ Button, Image }: any) => {
     },
     {
       name: 'Bronze plan',
+      price: 750,
       onTop: '',
-
-      price: (
-        <p className='price__'>
-          $1.5<span> /mo</span>
-        </p>
-      ),
       benefits: ['Up to 200 patients', '2 staff accounts'],
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
       name: 'Silver plan',
-      price: (
-        <p className='price__'>
-          $2.5<span> /mo</span>
-        </p>
-      ),
+      price: 1250,
       onTop: '',
 
       benefits: ['Up to 500 patients', '10 staff accounts'],
@@ -36,11 +29,7 @@ const BilledMonthly = ({ Button, Image }: any) => {
     },
     {
       name: 'Golden plan',
-      price: (
-        <p className='price__'>
-          $5<span> /mo</span>
-        </p>
-      ),
+      price: 2500,
       onTop: '',
 
       benefits: [
@@ -57,12 +46,7 @@ const BilledMonthly = ({ Button, Image }: any) => {
     {
       name: 'Custom',
       onTop: <p className='on_top'>Golden plan features +</p>,
-
-      price: (
-        <p className='price__'>
-          $30<span> /mo</span>
-        </p>
-      ),
+      price: 15000,
       benefits: [
         'Inpatient/Outpatient management ',
         'Scheduling',
@@ -79,10 +63,21 @@ const BilledMonthly = ({ Button, Image }: any) => {
         <li key={index}>
           <div className='title_price'>
             <h4>{plan.name}</h4>
-            <div>{plan.price}</div>
+            <div>
+              {
+                plan?.price === "Free" ? 
+                <p className='price__'>Free </p>
+                :
+                <p className='price__'>{formatter(plan.price)} 
+                  <span> /mo</span>
+                </p>
+              }
+             
+            </div>
             <hr />
 
-            <div className='benefits_container'>
+            <div 
+              className='benefits_container'>
               <div>{plan.onTop}</div>
               {plan.benefits.map((benefit: any, index: any) => (
                 <div key={index} className='benefits_'>
@@ -100,7 +95,19 @@ const BilledMonthly = ({ Button, Image }: any) => {
             </div>
           </div>
 
-          <div className='buy_now'>{plan.button}</div>
+          <PayStack 
+            amount={plan?.price === "Free" ? 0 : plan?.price} 
+            subscriptionType={
+              plan?.name === "Basic plan" ? "BASIC" :
+              plan?.name === "Bronze plan" ? "BRONZE_MONTHLY_PLAN" :
+              plan?.name === "Silver plan" ? "SILVER_MONTHLY_PLAN" :
+              plan?.name === "Golden plan" ? "GOLDEN_MONTHLY_PLAN" :
+              plan?.name === "Custom" ? "CUSTOM_MONTHLY_PLAN" :
+              null
+            } 
+            currentSubscription={admin?.subscription_permission_flag === ("1" || "FREE") ? "BASIC" : admin?.subscription_permission_flag}
+          />
+        
         </li>
       ))}
     </ul>

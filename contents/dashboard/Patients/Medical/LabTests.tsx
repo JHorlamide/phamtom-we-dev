@@ -65,10 +65,16 @@ const LabTests = ({
     e.preventDefault();
     setIsLoading(true);
 
+    let payload = Object.keys(inputFields).filter(key => inputFields[key as keyof typeof inputFields])
+      .reduce((acc: any, key) => {
+        acc[key as keyof typeof acc] = inputFields[key as keyof typeof inputFields];
+        return acc;
+      }, {});
+
     try {
       const data = await labService.addLabTest(
         selectedPatient.patient_demographic.patient_recordId,
-        inputFields,
+        payload,
         admin.access_token
       );
       getAllLabTests()

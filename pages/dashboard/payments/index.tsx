@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Button,
@@ -10,8 +10,12 @@ import styles from '../../..//styles/dashboard/Payments.module.scss';
 import { Modal } from 'react-bootstrap';
 import { Tabs } from '../../../components/LandingPage';
 import { BilledMonthly, BilledQuarterly, BilledYearly } from '../../../contents/pricing';
+import { subscriptionService } from '../../../services/restService';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Payments = () => {
+  const { admin } = useSelector((state: any) => state.adminReducer);
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -28,23 +32,43 @@ const Payments = () => {
 
   const handleShow = () => setShow(true);
 
-  const [viewCardDetails, setViewCardetails] = useState(false);
+  // const [viewCardDetails, setViewCardetails] = useState(false);
   const [enterPin, setEnterPin] = useState(false);
   const [activetab, setActivetab]: any = useState('Billed Monthly');
 
-  const handleOpenPayment = () => {
-    const slider = document.getElementById('PAYMENTS_SLIDE') as HTMLElement;
-    slider.classList.add('slide_right');
+  const handleGetSubscriptionPlan = async () => {
+    try {
+      await subscriptionService.getSubscription(admin.access_token)
+      .then((response) => response.data)
+      .then((res)=> {
+        console.log(res)
+        // if(res.status === "Success"){
+        //   dispatch(setSubscription(res.data.reverse()));
+        // }
+      })
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleClosePayment = () => {
-    const slider = document.getElementById('PAYMENTS_SLIDE') as HTMLElement;
-    slider.classList.remove('slide_right');
-  };
+  useEffect(() => {
+    handleGetSubscriptionPlan()
+  }, []);
 
-  const handleViewCardDetails = () => {
-    setViewCardetails(!viewCardDetails);
-  };
+  // const handleOpenPayment = () => {
+  //   const slider = document.getElementById('PAYMENTS_SLIDE') as HTMLElement;
+  //   slider.classList.add('slide_right');
+  // };
+
+  // const handleClosePayment = () => {
+  //   const slider = document.getElementById('PAYMENTS_SLIDE') as HTMLElement;
+  //   slider.classList.remove('slide_right');
+  // };
+
+  // const handleViewCardDetails = () => {
+  //   setViewCardetails(!viewCardDetails);
+  // };
 
   // const allPlans = [
   //   {
@@ -96,27 +120,27 @@ const Payments = () => {
 
           <div className='pricing_'>
             <main>
-              <section style={{ marginBottom: '180px' }}>
+              <section style={{ marginBottom: '180px', position: "relative" }}>
                 <Tabs
                   tabs={tabs}
                   activeTab={activetab}
                   setActivetab={setActivetab}
                 />
 
-                <div className='plans_conntainer'>
+                <div className='plans_conntainer' style={{padding: "0"}}>
                   {activetab === 'Billed Monthly' && (
                     <>
-                      <BilledMonthly Image={Image} Button={Button} />
+                      <BilledMonthly Image={Image} Button={Button} admin={admin} />
                     </>
                   )}
                   {activetab === 'Billed Quarterly' && (
                     <>
-                      <BilledQuarterly Image={Image} Button={Button} />
+                      <BilledQuarterly Image={Image} Button={Button} admin={admin} />
                     </>
                   )}
                   {activetab === 'Billed Yearly' && (
                     <>
-                      <BilledYearly Image={Image} Button={Button} />
+                      <BilledYearly Image={Image} Button={Button} admin={admin} />
                     </>
                   )}
                 </div>

@@ -75,7 +75,7 @@ const Signup = () => {
       registerAdmin(inputFields)
       .then((response) => response?.data)
       .then(res => {
-        if(res?.status === true){
+        if(res?.status === "Success"){
           toast.success(res?.message)
           saveCredentials(inputFields.email, inputFields.password);
           setTimeout(() => {

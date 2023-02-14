@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, DashboardLayout, Input } from '../../../components/dashboard';
 import styles from '../../../styles/dashboard/Profile.module.scss';
 import { Modal } from 'react-bootstrap';
-import { pharmacyService } from '../../../services/restService';
+import { pharmacyService, updatePassword } from '../../../services/restService';
 import { setPharmacy } from '../../../redux/actions/pharmacy';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 const Profile = () => {
   const { admin } = useSelector((state: any) => state.adminReducer);
   const { pharmacy } = useSelector((state: any) => state.pharmacyReducer);
@@ -16,9 +18,11 @@ const Profile = () => {
   const [error] = useState(false);
   const [password, setPassword] = useState({
     currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
+    password: '',
+    confirmPassword:"",
   });
+
+  const { push } = useRouter();
 
   const [success, setSuccess] = useState(false);
 
@@ -29,15 +33,27 @@ const Profile = () => {
   const handleShowPassword = () => setShowPassword(!showPassword);
   const handleClose = () => setShowModal(false);
 
-  const handleContinue = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setSuccess(true);
+    try {
+       await updatePassword(password, admin.access_token)
+        .then((response) => response?.data)
+        .then(res => {
+          if(res?.status === "Success"){
+            setSuccess(true);
+          }else{
+            toast.error(res?.message)
+          }
+        })
+      } catch (err: any) {
+        console.log(err);
+    }
   };
-
 
   useEffect(() => {
     getPharmacy();
   }, []);
+
   const getPharmacy = async () => {
     try {
       const {data : {data}} = await pharmacyService.getPharmacy(
@@ -52,6 +68,7 @@ const Profile = () => {
 
     }
   };
+
 
   const profile = [
     {
@@ -86,25 +103,6 @@ const Profile = () => {
       value: pharmacy?.pharmacy_physical_address
     }
   ];
-
-  console.log(pharmacy)
-
-  // const getPharmacy = async () => {
-  //   try {
-  //     const data = await pharmacyService.getPharmacy(
-  //       admin._id,
-  //       admin.access_token
-  //     );
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // // CORS issue
-  // useEffect(() => {
-  //   getPharmacy();
-  // }, []);
 
   var getInitials = function (data : string) {
     var names = data?.split(' '),
@@ -198,7 +196,7 @@ const Profile = () => {
 
             <h4>Password change successful</h4>
             <p>Your password has been changed successfully.</p>
-            <Button className='btn_primary w-full' onClick={handleClose}>
+            <Button className='btn_primary w-full' onClick={()=> push('/auth/login')}>
               Login
             </Button>
           </div>
@@ -235,21 +233,21 @@ const Profile = () => {
               </div>
 
               <div>
-                <label htmlFor='new_password'>New Password</label>
+                <label htmlFor='password'>New Password</label>
                 <Input
-                  id='new_password'
+                  id='password'
                   styles='input_primary'
                   placeholder={'Enter your new password'}
                   type={showPassword ? 'text' : 'password'}
                   error={error}
                   onChange={handleChange}
-                  value={password.newPassword}
+                  value={password.password}
                   handleImageChange={handleShowPassword}
                   img='/assets/login/eye.svg'
                   width='22px'
                   height='15px'
                   layout='fixed'
-                  name='newPassword'
+                  name='password'
                 />
               </div>
 
@@ -272,7 +270,15 @@ const Profile = () => {
                 />
               </div>
 
-              <Button onClick={handleContinue} className='btn_primary'>
+              <Button 
+                onClick={handleSubmit} 
+                className='btn_primary'   
+                disabled={
+                    password.currentPassword === "" ||
+                    password.password === "" ||
+                    password.confirmPassword === ""
+                }
+              >
                 Continue
               </Button>
             </form>

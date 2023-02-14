@@ -1,3 +1,4 @@
+
 import { useState, useRef } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ const AddCourier = ({
   showAddCourier,
   styles,
   Image,
-  onHide,
+  // onHide,
   handleGetAllLogistics
 }: any) => {
   const Ref: any = useRef();
@@ -65,10 +66,8 @@ const AddCourier = ({
       )
       .then((response) => response.data)
       .then(res => {
-        console.log(res)
         if(res.status === "Success"){
           toast.success(res.message)
-          // setShowAllProducts(true)
         }
       })
       handleGetAllLogistics();
@@ -81,7 +80,7 @@ const AddCourier = ({
         logistics_image: '',
       });
       setImageUpload("")
-      onHide();
+      handleCloseAddCourier();
     }
   };
 

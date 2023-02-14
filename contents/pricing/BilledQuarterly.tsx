@@ -1,42 +1,32 @@
 import React from 'react';
+import PayStack from '../../services/paystack';
+import { formatter } from '../../utils';
 
-const BilledQuarterly = ({ Button, Image }: any) => {
+const BilledQuarterly = ({ Button, Image, admin }: any) => {
   const monthlyPlan = [
     {
       name: 'Basic plan',
-      price: <p className='price__'>Free</p>,
+      price: "Free",
       benefits: ['Up to 100 patients'],
       button: <p className='current_plan'>Current plan</p>
     },
     {
       name: 'Bronze plan',
-      price: (
-        <p className='price__'>
-          $4<span> /3mo</span>
-        </p>
-      ),
+      price: 2000,
       onTop: '',
       benefits: ['Up to 200 patients', '2 staff accounts'],
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
       name: 'Silver plan',
-      price: (
-        <p className='price__'>
-          $6.5<span> /3mo</span>
-        </p>
-      ),
+      price: 3250,
       onTop: '',
       benefits: ['Up to 500 patients', '10 staff accounts'],
       button: <Button className='btn_primary'>Buy Plan</Button>
     },
     {
       name: 'Golden plan',
-      price: (
-        <p className='price__'>
-          $14<span>/3mo</span>
-        </p>
-      ),
+      price: 7000,
       benefits: [
         'Unlimited patients',
         'Unlimited staff accounts',
@@ -51,11 +41,7 @@ const BilledQuarterly = ({ Button, Image }: any) => {
     },
     {
       name: 'Custom',
-      price: (
-        <p className='price__'>
-          $80<span> /3mo</span>
-        </p>
-      ),
+      price: 40000,
       benefits: [
         'Inpatient/Outpatient management ',
         'Scheduling',
@@ -72,7 +58,14 @@ const BilledQuarterly = ({ Button, Image }: any) => {
         <li key={index}>
           <div className='title_price'>
             <h4>{plan.name}</h4>
-            <div>{plan.price}</div>
+            {
+                plan?.price === "Free" ? 
+                <p className='price__'>Free </p>
+                :
+                <p className='price__'>{formatter(plan.price)} 
+                  <span> /3mo</span>
+                </p>
+              }
 
             <hr />
 
@@ -93,7 +86,18 @@ const BilledQuarterly = ({ Button, Image }: any) => {
             </div>
           </div>
 
-          <div className='buy_now'>{plan.button}</div>
+          <PayStack 
+             amount={plan?.price === "Free" ? 0 : plan?.price} 
+            subscriptionType={
+              plan?.name === "Basic plan" ? "BASIC" :
+              plan?.name === "Bronze plan" ? "BRONZE_QUARTERLY_PLAN" :
+              plan?.name === "Silver plan" ? "SILVER_QUARTERLY_PLAN" :
+              plan?.name === "Golden plan" ? "GOLDEN_QUARTERLY_PLAN" :
+              plan?.name === "Custom" ? "CUSTOM_QUARTERLY_PLAN" :
+              null
+            } 
+            currentSubscription={admin?.subscription_permission_flag === ("1" || "FREE") ? "BASIC" : admin?.subscription_permission_flag}
+          />
         </li>
       ))}
     </ul>

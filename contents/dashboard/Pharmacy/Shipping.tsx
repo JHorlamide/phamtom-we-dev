@@ -1,14 +1,14 @@
 import React from 'react';
 
-const ShippingServices = ({ couriers, styles, Image,  }: any) => {
+const ShippingServices = ({ logistics, styles, Image,  }: any) => {
   return (
     <div>
       <ul className={styles.couriers}>
-        {couriers.map((member: any, index: any) => (
+        {logistics.map((member: any, index: any) => (
           <li key={index} className={styles.courier}>
             <div className={styles.member}>
               <Image
-                src={member.avatar}
+                src={member?.logistics_image?.imageUrl}
                 alt='avatar'
                 width={'64px'}
                 height={'40px'}
@@ -16,7 +16,7 @@ const ShippingServices = ({ couriers, styles, Image,  }: any) => {
               />
 
               <div>
-                <p className={styles.name}>{member.name}</p>
+                <p className={styles.name}>{member?.logistics_name}</p>
               </div>
             </div>
           </li>

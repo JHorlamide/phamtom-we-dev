@@ -39,14 +39,21 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   const handleClose = () => {
     setAddHistory(false);
   };
+
   const handleSave = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
 
+    let payload = Object.keys(inputFields).filter(key => inputFields[key as keyof typeof inputFields])
+      .reduce((acc: any, key) => {
+        acc[key as keyof typeof acc] = inputFields[key as keyof typeof inputFields];
+        return acc;
+      }, {});
+
     try {
       const data = await vitalService.addVitalSign(
         selectedPatient.patient_demographic.patient_recordId,
-        inputFields,
+        payload,
         admin.access_token
       );
 

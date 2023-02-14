@@ -13,7 +13,7 @@ const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
     },
     {
       name: 'ORDERS',
-      totalItems: orders.length
+      totalItems: orders?.length
     }
   ];
 
@@ -47,7 +47,6 @@ const ViewAll = ({ styles, setShowAddNewProductModal }: any) => {
       )}
       {activeTab === 'ORDERS' && (
         <ViewOrders
-          setShowAddNewProductModal={setShowAddNewProductModal}
           styles={styles}
         />
       )}

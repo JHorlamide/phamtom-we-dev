@@ -7,7 +7,7 @@ const Sidebar = ({ setOpenSidebar }: any) => {
   const navLinks = [
     { name: 'Pricing', to: '/pricing' },
     { name: 'About', to: '/about' },
-    { name: 'Login', to: '/login' }
+    { name: 'Login', to: '/auth/login' }
   ];
 
   return (
@@ -26,7 +26,7 @@ const Sidebar = ({ setOpenSidebar }: any) => {
           </Link>
         ))}
       </ul>
-      <Link href='/signup'>
+      <Link href='/auth/signup'>
         <a className='signup'>
           <p>Sign up for free</p>
         </a>

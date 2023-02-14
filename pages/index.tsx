@@ -84,7 +84,7 @@ const Home: NextPage = () => {
           <Section2 Image={Image} Button={Button} />
 
           <Banner
-            linkTo='/signup'
+            linkTo='/auth/signup'
             linkName='Sign up for free'
             content=' Serving over 100+ hospitals, community pharmacies, clinics and
                   health practitioners.'

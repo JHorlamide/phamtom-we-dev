@@ -115,10 +115,157 @@
               border: none !important;
               outline: none !important;
             }
+            .packaged {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #e38855;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
+            .approved {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #559fe3;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
+            .completed {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #03c57f;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
+          }
+        }
+        .selected_orderActive {
+          border-radius: 8px;
+          padding: 8px;
+          width: 100%;
+          background: #ffffff;
+          cursor: pointer;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background-color: $color_blue_light;
+
+          .order_img {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            .name {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+
+              color: $color_blue_dark;
+              margin-bottom: 8px;
+              // cursor: pointer;
+            }
+
+            .qty {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 140%;
+
+              letter-spacing: -0.035em;
+
+              margin-bottom: 8px;
+
+              color: $color_blue_dark;
+
+              opacity: 0.8;
+            }
+
+            .item_price {
+              font-weight: 600;
+              font-size: 14px;
+              line-height: 116%;
+              letter-spacing: -0.045em;
+
+              color: $color_blue_dark;
+            }
+          }
+
+          .order_status {
+            display: flex;
+
+            .pending {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #ecc07c;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
+            .packaged {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #e38855;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
+            .approved {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #559fe3;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
+            .completed {
+              padding: 4px 8px;
+              gap: 10px;
+              background: #03c57f;
+              border-radius: 8px;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 140%;
+              letter-spacing: -0.035em;
+              color: #ffffff;
+              border: none !important;
+              outline: none !important;
+            }
           }
         }
 
-        .selected_order {
+        .selected_orderActive  {
           border: 2px solid #0055d2 !important;
         }
       }

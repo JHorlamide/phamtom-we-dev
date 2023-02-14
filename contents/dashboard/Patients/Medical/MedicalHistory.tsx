@@ -48,8 +48,15 @@ const MedicalHistory = ({
     setIsAdding(true);
 
     try {
+
+      let payload = Object.keys(inputFields).filter(key => inputFields[key as keyof typeof inputFields])
+      .reduce((acc: any, key) => {
+        acc[key as keyof typeof acc] = inputFields[key as keyof typeof inputFields];
+        return acc;
+      }, {});
+
       await medicalHistoryService.addMedicalHistory(
-        inputFields,
+        payload,
         selectedPatient.patient_demographic.patient_recordId,
         admin.access_token
       );

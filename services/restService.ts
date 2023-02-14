@@ -62,6 +62,19 @@ export const attemptLoginAdmin = (data: any) => {
   return restAgent.post('/auth-admin', data, config);
 };
 
+// forgot admin password
+export const forgotPassword = (data: any) => {
+  const config = getRequestConfig();
+  return restAgent.post('/auth/forgot-password', data, config);
+};
+
+// update admin password
+export const updatePassword = (data: any, token:any) => {
+  const config = getRequestConfig();
+  config.headers.Authorization = `Bearer ${token}`;
+  return restAgent.post('/auth/update-password', data, config);
+};
+
 // staff
 export const staffService = {
   getAllStaffs: (token: any) => {
@@ -315,6 +328,23 @@ export const orderService = {
     return restAgent.get(`/orders/admin/active-orders`, config);
   },
 
+  updateOrders: (orderId:any, data:any, token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.put(`/orders/admin/order-status/${orderId}`, data, config);
+  },
+
+  addCourierService: (orderId:any, data:any, token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.put(`/orders/add-courier-service/${orderId}`, data, config);
+  },
+
+  addTrackingNumber: (orderId:any, data:any, token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.put(`/orders/add-tracking-number/${orderId}`, data, config);
+  },
 };
 
 // shipping
@@ -349,4 +379,19 @@ export const getBanks = () => {
 // bank checker
 export const bankAccountChecker = (account: any, code: any) => {
   return axios.get(`https://maylancer.org/api/nuban/api.php?account_number=${account}&bank_code=${code}`);
+};
+
+// shipping
+export const subscriptionService = {
+  addSubscription: (data: any, token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.post('/billing/subscriptions', data, config);
+  },
+
+  getSubscription: (token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.get('/billing/subscriptions', config);
+  }
 };

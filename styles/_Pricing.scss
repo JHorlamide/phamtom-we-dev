@@ -63,7 +63,6 @@
 
       .plans_conntainer {
         margin-top: 82px;
-
         padding: 0 120px;
 
         ul {
@@ -83,7 +82,9 @@
             gap: 40px;
             border: 1px solid #ebebeb;
             border-radius: 16px;
-            padding: 24px;
+            padding: 24px 7px;
+            height: 400px;
+            overflow-y: scroll;
 
             .current_plan {
               font-weight: 500;

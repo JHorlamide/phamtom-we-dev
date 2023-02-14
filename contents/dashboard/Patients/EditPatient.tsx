@@ -80,9 +80,15 @@ const EditPatient = ({
     e.preventDefault();
 
     try {
+
+      let payload = Object.keys(inputField).filter(key => inputField[key as keyof typeof inputField])
+        .reduce((acc: any, key) => {
+          acc[key as keyof typeof acc] = inputField[key as keyof typeof inputField];
+          return acc;
+        }, {});
       await patientsService.editPatient(
-        inputField,
-        selectedPatient.id,
+        payload,
+        selectedPatient?._id,
         admin.access_token
       )
       .then((response) => response.data)
@@ -112,7 +118,7 @@ const EditPatient = ({
       onHide();
     }
   };
-
+console.log(selectedPatient?._id)
   // const capture = useCallback(() => {
   //   const imageSrc = webcamRef.current.getScreenshot();
   //   setImgSrc(imageSrc);

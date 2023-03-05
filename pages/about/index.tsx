@@ -70,9 +70,7 @@ const About: NextPage = () => {
             <section>
               <div className='top_sec'>
                 <h4>
-                  PHAMTOM app is a B2B2C e-commerce marketplace, telechat and
-                  electronic health records platform for Africa&apos;s
-                  Pharmacies and Hospitals.
+                The PHAMTOM app is a B2B2C electronic health records (EHR) and online pharmacy for primary healthcare centers and pharmacies.
                 </h4>
 
                 <div>

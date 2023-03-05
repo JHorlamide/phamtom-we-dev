@@ -16,6 +16,7 @@ const Signup = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -29,6 +30,7 @@ const Signup = () => {
     registration_number: ""
   });
 
+  console.log(checked)
   const handleChange = (e: any) => {
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
 
@@ -217,7 +219,7 @@ const Signup = () => {
             </div>
 
             <div className={styles.agree_terms}>
-              <input type='checkbox' required />
+              <input type='checkbox' onChange={()=>setChecked(!checked)} required />
               <label>
                 By checking the box, you have agreed to our Term of Service and
                 Privacy Policy
@@ -242,7 +244,8 @@ const Signup = () => {
                     !inputFields.password ||
                     !inputFields.registration_number ||
                     Boolean(emailError) ||
-                    Boolean(passwordError)
+                    Boolean(passwordError) ||
+                    !checked
                   }
                   onClick={validate}
                   className='btn_primary w-full'

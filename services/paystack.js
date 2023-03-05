@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
   
 function PayStack({amount, subscriptionType, currentSubscription } ) {
-  console.log(amount)
   const { admin } = useSelector((state) => state.adminReducer);
   const config = {
     reference: (new Date()).getTime().toString(),
@@ -14,10 +13,8 @@ function PayStack({amount, subscriptionType, currentSubscription } ) {
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY
   };
 
-  console.log(admin)
   const onSuccess = (reference) => {
     // let payload = JSON.stringify(reference);
-    console.log(reference)
     let payload = {
       email,
       subscription_type: subscriptionType

@@ -29,7 +29,7 @@ const Pricing: NextPage = () => {
           <meta
             name='description'
             content='Online pharmacy marketplace pricing: a fixed cost of #50, and 0.5% of each transaction.
-  We only charge when a transaction has been successfully completed.'
+              We only charge when a transaction has been successfully completed.'
           />
         </Head>
 
@@ -74,8 +74,8 @@ const Pricing: NextPage = () => {
 
           <Banner
             height={screenSize.width >= 821 ? '300px' : '200px'}
-            linkName='Contact support'
-            linkTo='phamtom-support'
+            // linkName='Contact support'
+            // linkTo='phamtom-support'
             content={
               <>
                 <p>Need some Guidance?</p>

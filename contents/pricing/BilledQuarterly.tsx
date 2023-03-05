@@ -1,8 +1,23 @@
+import { useRouter } from 'next/router';
 import React from 'react';
-import PayStack from '../../services/paystack';
+import { toast } from 'react-toastify';
+// import PayStack from '../../services/paystack';
 import { formatter } from '../../utils';
+import { getQuarterlySubscriptionType } from '../../utils/getSubscriptionType';
 
-const BilledQuarterly = ({ Button, Image, admin }: any) => {
+const BilledQuarterly = ({ Button, Image, admin, subscription, handleAddSubscriptionPlan }: any) => {
+
+  const { pathname, push } = useRouter();
+
+  const doAction = (email: any, amount: any, subscriptionType: any) => {
+    if(pathname === "/pricing"){
+      toast.error("Please login to subscribe.")
+      push("/auth/login")
+    }else{
+      handleAddSubscriptionPlan(email, amount, subscriptionType)
+    }
+  } 
+
   const monthlyPlan = [
     {
       name: 'Basic plan',
@@ -86,7 +101,18 @@ const BilledQuarterly = ({ Button, Image, admin }: any) => {
             </div>
           </div>
 
-          <PayStack 
+          <div>
+            {
+              getQuarterlySubscriptionType(plan?.name) === subscription?.subscriptionType ? "Current plan" :
+              <button className='btn_primary' 
+                onClick={() => doAction(admin?.email, plan?.price, getQuarterlySubscriptionType(plan?.name))}
+              >
+                Buy Now
+              </button>
+            }
+          </div>
+
+          {/* <PayStack 
              amount={plan?.price === "Free" ? 0 : plan?.price} 
             subscriptionType={
               plan?.name === "Basic plan" ? "BASIC" :
@@ -97,7 +123,7 @@ const BilledQuarterly = ({ Button, Image, admin }: any) => {
               null
             } 
             currentSubscription={admin?.subscription_permission_flag === ("1" || "FREE") ? "BASIC" : admin?.subscription_permission_flag}
-          />
+          /> */}
         </li>
       ))}
     </ul>

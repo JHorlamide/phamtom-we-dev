@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Button,
-  Checkbox,
+  // Checkbox,
   Input,
   DashboardLayout
 } from '../../../components/dashboard';
@@ -12,10 +12,14 @@ import { Tabs } from '../../../components/LandingPage';
 import { BilledMonthly, BilledQuarterly, BilledYearly } from '../../../contents/pricing';
 import { subscriptionService } from '../../../services/restService';
 import { useDispatch, useSelector } from 'react-redux';
+import { setSubscription } from '../../../redux/actions/payment';
+
 
 const Payments = () => {
   const { admin } = useSelector((state: any) => state.adminReducer);
+  const { subscription } = useSelector((state: any) => state.paymentReducer);
   const dispatch = useDispatch();
+ 
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -30,7 +34,7 @@ const Payments = () => {
   //   setShow(false);
   // };
 
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
 
   // const [viewCardDetails, setViewCardetails] = useState(false);
   const [enterPin, setEnterPin] = useState(false);
@@ -41,16 +45,37 @@ const Payments = () => {
       await subscriptionService.getSubscription(admin.access_token)
       .then((response) => response.data)
       .then((res)=> {
-        console.log(res)
-        // if(res.status === "Success"){
-        //   dispatch(setSubscription(res.data.reverse()));
-        // }
+        if(res.status === "Success"){
+          dispatch(setSubscription(res.data));
+        }
       })
       
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleAddSubscriptionPlan = async (email: any, amount: any, subscriptionType: any,) => {
+
+    let payload ={
+      email,
+      amount: amount === "Free" ? 0 : amount,
+      subscriptionType
+    }
+    try {
+      await subscriptionService.addSubscription(payload, admin.access_token)
+      .then((response) => response.data)
+      .then((res)=> {
+        if(res.status === "Success"){
+          window.location= res?.data?.checkOutUrl
+        }
+      })
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
     handleGetSubscriptionPlan()
@@ -130,17 +155,34 @@ const Payments = () => {
                 <div className='plans_conntainer' style={{padding: "0"}}>
                   {activetab === 'Billed Monthly' && (
                     <>
-                      <BilledMonthly Image={Image} Button={Button} admin={admin} />
+                      <BilledMonthly 
+                        Image={Image} Button={Button} 
+                        admin={admin} 
+                        subscription={subscription} 
+                        handleAddSubscriptionPlan={handleAddSubscriptionPlan} 
+                      />
                     </>
                   )}
                   {activetab === 'Billed Quarterly' && (
                     <>
-                      <BilledQuarterly Image={Image} Button={Button} admin={admin} />
+                      <BilledQuarterly 
+                        Image={Image} 
+                        Button={Button} 
+                        admin={admin} 
+                        subscription={subscription} 
+                        handleAddSubscriptionPlan={handleAddSubscriptionPlan} 
+                      />
                     </>
                   )}
                   {activetab === 'Billed Yearly' && (
                     <>
-                      <BilledYearly Image={Image} Button={Button} admin={admin} />
+                      <BilledYearly 
+                        Image={Image} 
+                        Button={Button} 
+                        admin={admin} 
+                        subscription={subscription} 
+                        handleAddSubscriptionPlan={handleAddSubscriptionPlan} 
+                      />
                     </>
                   )}
                 </div>

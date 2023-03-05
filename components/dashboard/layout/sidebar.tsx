@@ -40,7 +40,7 @@ const Sidebar = () => {
             <li
               key={index}
               className={
-                pathname === route.to || pathname === route.alt 
+                pathname === route.to || pathname === route.alt
                   ? styles.active_route
                   : styles.inactive_route
               }
@@ -50,7 +50,7 @@ const Sidebar = () => {
                   <>
                     {
                       // eslint-disable-next-line multiline-ternary
-                      pathname === route.to || pathname === route.alt  ? (
+                      pathname === route.to || pathname === route.alt ? (
                         <Image
                           src={route.activeIcon}
                           alt='icon'

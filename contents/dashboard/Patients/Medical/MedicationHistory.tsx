@@ -71,12 +71,11 @@ const MedicationHistory = ({
 
     try {
        await medicationService.addMedicationHistory(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         payload,
         admin.access_token
       )
-      .then((response) => console.log(response) )
-      // getAllMedicationHistory()
+      getAllMedicationHistory()
       setInputFields(
         {
           // full_name: '',
@@ -97,7 +96,6 @@ const MedicationHistory = ({
     }
   };
 
-
   const getAllMedicationHistory = async () => {
     setIsFetching(true);
     setEmptyState(null);
@@ -108,16 +106,16 @@ const MedicationHistory = ({
           data
         }
       } = await medicationService.getAllMedicationHistory(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       );
+      console.log(data)
       if (
         // eslint-disable-next-line camelcase
         data &&
         // eslint-disable-next-line camelcase
         typeof data !== 'string' && data?.length > 0
       ) {
-        console.log(data)
         // eslint-disable-next-line camelcase
         dispatch(setPatientMedicationHistory(data.reverse()));
       } else {
@@ -244,7 +242,7 @@ const MedicationHistory = ({
             ))}
 
           <>
-            {isLoading && (
+            {isFetching && (
               <div className='flex items-center justify-center'>
                 <MoonLoader color='#0055d2' size={30} />
               </div>

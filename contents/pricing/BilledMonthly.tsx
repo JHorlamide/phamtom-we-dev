@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { formatter } from '../../utils';
 import { getMonthlySubscriptionType } from '../../utils/getSubscriptionType';
 
-const BilledMonthly = ({ Button, Image, admin, subscription, handleAddSubscriptionPlan }: any) => {
+const BilledMonthly = ({ Button, Image, admin, subscription, handleAddSubscriptionPlan, handleCancelSubscription }: any) => {
 
   const { pathname, push } = useRouter();
 
@@ -112,7 +112,18 @@ const BilledMonthly = ({ Button, Image, admin, subscription, handleAddSubscripti
 
           <div>
             {
-              getMonthlySubscriptionType(plan?.name) === subscription?.subscriptionType ? "Current plan" :
+              getMonthlySubscriptionType(plan?.name) === subscription?.subscriptionDetails?.subscriptionType ? 
+              (
+                <div>
+                  <p>Current plan</p>
+                  {
+                    ["BASIC", "FREE", "Free"].includes(subscription?.subscriptionDetails?.subscriptionType) ? 
+                    null :
+                    <p onClick={handleCancelSubscription}>cancel subscription</p>
+                  }
+                </div>
+              
+              ):
               <button className='btn_primary' 
                 onClick={() => doAction(admin?.email, plan?.price, getMonthlySubscriptionType(plan?.name))}
               >

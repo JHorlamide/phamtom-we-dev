@@ -52,7 +52,7 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
 
     try {
       const data = await vitalService.addVitalSign(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         payload,
         admin.access_token
       );
@@ -81,7 +81,7 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
           data
         }
       } = await vitalService.getAllVitalSign(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       );
       if (typeof data !== 'string' && data?.length > 0) {

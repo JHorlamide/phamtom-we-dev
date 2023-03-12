@@ -54,8 +54,29 @@ const Payments = () => {
       console.log(error);
     }
   };
-
+console.log(subscription)
   const handleAddSubscriptionPlan = async (email: any, amount: any, subscriptionType: any,) => {
+
+    let payload ={
+      email,
+      amount: amount === "Free" ? 0 : amount,
+      subscriptionType
+    }
+    try {
+      await subscriptionService.addSubscription(payload, admin.access_token)
+      .then((response) => response.data)
+      .then((res)=> {
+        if(res.status === "Success"){
+          window.location= res?.data?.checkOutUrl
+        }
+      })
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCancelSubscription = async (email: any, amount: any, subscriptionType: any,) => {
 
     let payload ={
       email,

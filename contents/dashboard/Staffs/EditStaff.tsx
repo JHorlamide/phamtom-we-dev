@@ -73,7 +73,7 @@ const EditStaff = ({
     try {
       await patientsService.editPatient(
         inputField,
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       )
       // .then((response) => response.data)

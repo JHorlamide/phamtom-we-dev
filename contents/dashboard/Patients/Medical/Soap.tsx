@@ -49,11 +49,10 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
 
     try {
       await soapService.addSOAP(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         payload,
         admin.access_token
       );
-
       setInputFields({
         subjective: '',
         objective: '',
@@ -82,7 +81,7 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
           data
         }
       } = await soapService.getAllSOAP(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       );
 

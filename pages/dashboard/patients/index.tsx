@@ -67,6 +67,7 @@ const Patients: NextPage = () => {
     const slider = document.getElementById('CHATS_SLIDER') as HTMLElement;
     slider.classList.remove('slide_right');
   };
+  console.log(selectedPatient)
 
   useEffect(() => {
     if(selectedPatient){

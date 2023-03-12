@@ -73,7 +73,7 @@ const LabTests = ({
 
     try {
       const data = await labService.addLabTest(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         payload,
         admin.access_token
       );
@@ -100,7 +100,7 @@ const LabTests = ({
           data
         }
       } = await labService.getAllLabTest(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       );
       if (typeof data !== 'string' && data?.length > 0) {

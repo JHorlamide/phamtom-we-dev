@@ -57,7 +57,7 @@ const MedicalHistory = ({
 
       await medicalHistoryService.addMedicalHistory(
         payload,
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       );
 
@@ -88,7 +88,7 @@ const MedicalHistory = ({
           data
         }
       } = await medicalHistoryService.getAllMedicalHistory(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         admin.access_token
       );
 
@@ -115,7 +115,7 @@ const MedicalHistory = ({
   const getSingleMedicalHistory = async () => {
     try {
       const data = await medicalHistoryService.getSingleMedicalHistory(
-        selectedPatient.patient_demographic.patient_recordId,
+        selectedPatient._id,
         patientMedicalHistory[0].medical_history_id,
         admin.access_token
       );

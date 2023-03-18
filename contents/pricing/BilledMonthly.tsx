@@ -124,6 +124,8 @@ const BilledMonthly = ({ Button, Image, admin, subscription, handleAddSubscripti
                 </div>
               
               ):
+              getMonthlySubscriptionType(plan?.name) ===  "FREE"  ?  
+              null :
               <button className='btn_primary' 
                 onClick={() => doAction(admin?.email, plan?.price, getMonthlySubscriptionType(plan?.name))}
               >

@@ -101,7 +101,7 @@ const EditStaff = ({
         ...inputField,
         [name]: value
     })
-}
+  }
 
 
   // console.log(imgSrc)

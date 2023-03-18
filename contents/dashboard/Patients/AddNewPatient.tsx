@@ -7,6 +7,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setSelectedPatient } from '../../../redux/actions/patients';
 // import Webcam from "react-webcam";
 
 type IAddNewPatientProps = {
@@ -30,7 +32,7 @@ const AddNewPatient = ({
   // const [showWebcam, setShowWebcam] = useState(false);
   // const [imageId, setImageId] = useState('');
   const [imageUpload, setImageUpload] : any = useState('');
- 
+  const dispatch = useDispatch();
   const { push } = useRouter();
   const [inputField, setInputField] = useState({
     first_name: '',
@@ -101,6 +103,8 @@ const AddNewPatient = ({
       .then(res => {
         if(res.status === "Success"){
           toast.success(res.message)
+          console.log(res.data)
+          dispatch(setSelectedPatient(res?.data))
           setTimeout(() => {
             push('/dashboard/patients');
             location.reload();

@@ -116,16 +116,23 @@ const BilledYearly = ({ Button, Image, admin, subscription, handleAddSubscriptio
                   {
                     ["BASIC", "FREE", "Free"].includes(subscription?.subscriptionDetails?.subscriptionType) ? 
                     null :
-                    <p style={{fontSize: "12px", marginTop: "5px", color: "#505050", cursor: "pointer"}} onClick={handleCancelSubscription}>cancel subscription</p>
+                    <p 
+                      style={{fontSize: "12px", marginTop: "5px", color: "#505050", cursor: "pointer"}} 
+                      onClick={handleCancelSubscription}>
+                        cancel subscription
+                    </p>
                   }
                 </div>
               
               ):
+              getYearlySubscriptionType(plan?.name) ===  "FREE"  ?  
+                null :
               <button className='btn_primary' 
                 onClick={() => doAction(admin?.email, plan?.price, getYearlySubscriptionType(plan?.name) )}
               >
                 Buy Now
               </button>
+              
             }
           </div>
 

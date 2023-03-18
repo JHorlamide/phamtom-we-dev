@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button, Input } from '../../../../components/dashboard';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPatientLabTests } from '../../../../redux/actions/patients';
-import { labService } from '../../../../services/restService';
+import { fileUploadService, labService } from '../../../../services/restService';
 import { Modal } from 'react-bootstrap';
 import moment from 'moment';
 import { MoonLoader } from 'react-spinners';
@@ -19,6 +19,9 @@ const LabTests = ({
     (state: any) => state.patientsReducer
   );
   const [activeIndex, setActiveIndex]: any = useState(0);
+  const [fileName, setFileName] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(null);
   const dispatch = useDispatch();
 
   const Ref: any = useRef();
@@ -39,6 +42,36 @@ const LabTests = ({
     }
   );
 
+
+  const handleFileUpload = async(e: any) => {
+    setUploading(true)
+    let value = new FormData();
+    let fileValue = e.target.files[0]
+    value.append('file', fileValue);
+    try{
+      await fileUploadService.fileUpload(
+        value,
+        admin.access_token
+        )
+        .then((response) => response.data)
+        .then((res)=> {
+          if(res.status === 'Success'){
+            setUploading(false)
+            setInputFields({
+              ...inputFields,
+              upload_doc: res?.data?._id
+            })
+            setFileName(e.target.files[0]?.name)
+            setUploaded(fileValue)
+            console.log(uploaded)
+          }
+        })
+    }catch (error) {
+      console.log(error);
+      setUploading(false)
+    } 
+    
+  }
   // const [tempInputFields, setTempInputFields]: any = useState([]);
 
   // const newField = [
@@ -287,7 +320,14 @@ const LabTests = ({
                   className={styles.text_area_container}
                 >
                   <div className={styles.upload_doc}>
-                    <input type='file' ref={Ref} style={{ display: 'none' }} />
+                    <input   type='file' 
+                      accept="application/pdf"
+                      ref={Ref} 
+                      style={{ display: 'none' }} 
+                      name='upload_doc'
+                      // onChange={onInputChange}
+                      onChange={handleFileUpload}  
+                    />
 
                     <div onClick={onButtonClick}>
                       <Image
@@ -295,7 +335,7 @@ const LabTests = ({
                         width={'16px'}
                         height={'20px'}
                       />
-                      <p>Upload a document</p>
+                      <p>{uploading ? "uploading..." : fileName ? fileName : "Upload a document"}</p>
                     </div>
                   </div>
                 </div>

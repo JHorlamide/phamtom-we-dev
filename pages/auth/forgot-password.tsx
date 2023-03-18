@@ -36,7 +36,7 @@ const ForgotPassword = () => {
           toast.success(res?.message)
             push("/auth/confirmation");
         }else{
-          toast.error(res?.message)
+          toast.error(res?.data)
         }
       })
     } catch (err: any) {

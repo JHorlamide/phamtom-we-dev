@@ -3,7 +3,7 @@ import { Button, Input } from '../../../../components/dashboard';
 import { useSelector, useDispatch } from 'react-redux';
 import { vitalService } from '../../../../services/restService';
 import { Modal } from 'react-bootstrap';
-import produce from 'immer';
+// import produce from 'immer';
 import { setPatientVitalSigns } from '../../../../redux/actions/patients';
 import { MoonLoader } from 'react-spinners';
 import moment from 'moment';

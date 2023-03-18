@@ -21,6 +21,8 @@ restAgent.interceptors.response.use(undefined, (error) => {
     error.response.data.message === 'Pharmacy not found'
   ) {
     console.log(error.response.data.message);
+  } else if (error.response.data.message === "Internal Server Error") {
+    toast.error("Something went wrong. Please check that you inputted the right details and try again");
   } else if (error?.response?.data?.error) {
     toast.error(error.response.data.error);
   } else if (error?.response?.data?.errors) {
@@ -286,7 +288,7 @@ export const productService = {
   addProduct: (data: any, token: any) => {
     const config = getRequestConfig();
     config.headers.Authorization = `Bearer ${token}`;
-    return restAgent.post('/products', data, config);
+    return restAgent.post('/products/online-pharmacy', data, config);
   },
 
   updateProduct: (productId: any, data: any, token: any) => {

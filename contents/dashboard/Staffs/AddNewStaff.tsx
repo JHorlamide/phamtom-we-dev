@@ -62,7 +62,10 @@ const AddNewStaff = ({
       .then(res => {
         if(res.status === "Success"){
           toast.success(res.message)
-          push("/dashboard/staffs")
+          setTimeout(() => {
+            push("/dashboard/staffs")
+            location.reload();
+          }, 500);
         }
       })
       handleGetAllStaffs();
@@ -244,7 +247,7 @@ const AddNewStaff = ({
               /> */}
               <SelectInput
                 placeholder="Role"
-                options={["DOCTOR", "PHARMACIST", "NURSE", "LAB_ATTENDANT", "Others"]}
+                options={["DOCTOR", "PHARMACIST", "NURSE", "LAB_ATTENDANT", "OTHERS"]}
                 selectChange={(item: any)=>handleSelectChange("role", item)}
               />
             </div>

@@ -72,12 +72,12 @@ const Patients: NextPage = () => {
   useEffect(() => {
     if(selectedPatient){
       dispatch(setSelectedPatient(selectedPatient))
-      setActiveIndex(patients?.indexOf(selectedPatient))
+      setActiveIndex(selectedPatient?._id)
     }else{
       dispatch(setSelectedPatient(patients[0]));
     }
     
-  }, []);
+  }, [selectedPatient]);
 
   const handleSearch = (e: any) => {
     setSearchTerm(e.target.value);
@@ -92,7 +92,7 @@ const Patients: NextPage = () => {
     }
     return initials;
 };
-
+console.log(selectedPatient)
   return (
     <DashboardLayout>
       <div className={styles.patients_container}>
@@ -148,7 +148,7 @@ const Patients: NextPage = () => {
                           dispatch(setSelectedPatient(patient));
                         }}
                       >
-                        <div className={activeIndex === index ? styles.activePatient_list : styles.patient_list}>
+                        <div className={activeIndex === patient?._id ? styles.activePatient_list : styles.patient_list}>
                           <div className={styles.patient_info}>
                           {  
                           selectedPatient?.profileImage ?

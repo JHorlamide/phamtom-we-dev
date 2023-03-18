@@ -85,15 +85,15 @@ const Products: NextPage = () => {
 
         {activeTab === 'PRODUCTS' && (
             <ViewProducts
-            setShowAddNewProductModal={setShowAddNewProductModal}
-            setShowEditProductModal={setShowEditProductModal}
-            styles={styles}
+              setShowAddNewProductModal={setShowAddNewProductModal}
+              setShowEditProductModal={setShowEditProductModal}
+              styles={styles}
             />
         )}
         {activeTab === 'ORDERS' && (
             <ViewOrders
-            setShowAddNewProductModal={setShowAddNewProductModal}
-            styles={styles}
+              setShowAddNewProductModal={setShowAddNewProductModal}
+              styles={styles}
             />
         )}
 

@@ -253,9 +253,9 @@ const AddNewProducts = ({
             </div>
 
             <Button
-               disabled={[inputField?.product_name || inputField?.product_price || inputField?.product_strength 
-              || inputField?.product_quantity || inputField?.pack_size || inputField?.about_product || inputField?.usage_direction
-              || inputField?.precautions || inputField?.possible_side_effect].some((x) => x === '')}
+               disabled={[inputField?.product_name, inputField?.product_price, inputField?.product_strength,
+                inputField?.product_quantity, inputField?.pack_size, inputField?.about_product, inputField?.usage_direction,
+               inputField?.precautions, inputField?.possible_side_effect].some((x) => x === '')}
               className={'btn_primary'}
               style={{ marginTop: '16px' }}
               onClick={handleAddProduct}

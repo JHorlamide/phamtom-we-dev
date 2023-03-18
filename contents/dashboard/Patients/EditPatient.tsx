@@ -102,19 +102,6 @@ const EditPatient = ({
     } catch (error) {
       console.log(error);
     } finally {
-      setInputField({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone_number: '',
-        home_address: '',
-        age: '',
-        // genotype: '',
-        weight_unit: '',
-        height_unit: '',
-        blood_group: '',
-        occupation: ''
-      });
       onHide();
     }
   };

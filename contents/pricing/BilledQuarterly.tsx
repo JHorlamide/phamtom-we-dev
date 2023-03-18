@@ -115,6 +115,8 @@ const BilledQuarterly = ({ Button, Image, admin, subscription, handleAddSubscrip
                 </div>
               
               ):
+              getQuarterlySubscriptionType(plan?.name) ===  "FREE"  ?  
+              null :
               <button className='btn_primary' 
                 onClick={() => doAction(admin?.email, plan?.price, getQuarterlySubscriptionType(plan?.name))}
               >

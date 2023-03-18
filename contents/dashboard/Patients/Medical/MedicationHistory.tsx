@@ -7,6 +7,7 @@ import { Modal } from 'react-bootstrap';
 import { MoonLoader } from 'react-spinners';
 // import produce from 'immer';
 import moment from 'moment';
+import SelectInput from '../../../../components/dashboard/SelectInput';
 
 const MedicationHistory = ({
   medicalHistory,
@@ -58,6 +59,13 @@ const MedicationHistory = ({
       [e.target.name]: e.target.value
     });
   };
+
+  const handleSelectChange = (name: any, value: any) => {
+    setInputFields({
+        ...inputFields,
+        [name]: value
+    })
+  }
 
   const handleSave = async (e: any) => {
     e.preventDefault();
@@ -128,6 +136,8 @@ const MedicationHistory = ({
       setIsFetching(false);
     }
   };
+
+ 
 
   useEffect(() => {
     getAllMedicationHistory();
@@ -335,62 +345,51 @@ const MedicationHistory = ({
                     />
                   </div>
 
-                  <div className={styles.text_area_container}>
+                  <div className={styles.text_area_container} style={{width:"100%", marginLeft:"10px"}}>
                     <label htmlFor='route_of_administration'>
                       Route of administration
                     </label>
-                    <Input
+                    {/* <Input
                       styles='input_primary'
                       onChange={handleOnChange}
                       value={inputFields.route_of_administration}
                       name='route_of_administration'
                       id='route_of_administration'
                       placeholder='Lorem ipsum dolor sit amet, consectetur adi'
-                    />
+                    /> */}
+                      <SelectInput
+                        placeholder="Select"
+                        options={["ORALLY", "IV", "IM", "SC", "OTIC", "BUCCAL", "RECTAL", "NASAL", "INHALATION", "TRANSDERMAL", "SUBLINGUAL", "INTRATHECAL", "INTRADERMAL", "OTHER"]}
+                        selectChange={(item: any)=>handleSelectChange("route_of_administration", item)}
+                      />
                   </div>
 
                 </div>
 
                 
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <div className={styles.text_area_container}>
+                  <div className={styles.text_area_container} style={{width:"100%", marginRight: "10px"}}>
                     <label htmlFor='duration_of_use'>Duration of use</label>
-                    <div className={styles.duration_of_use} >
-                      <Input
-                        // type='number'
-                        styles='input_primary'
-                       
-                        onChange={handleOnChange}
-                        value={inputFields.duration_of_use}
-                        name='duration_of_use'
-                        id='duration_of_use'
-                        placeholder='3'
-                      />
 
-                      <select className={styles.select} name='' id=''>
-                        {['day', 'week', 'month', 'year'].map(
-                          (item: any, index: any) => (
-                            <option key={index} value={item}>
-                              {item}
-                            </option>
-                          )
-                        )}
-                      </select>
+                      <SelectInput
+                        placeholder="Select"
+                        options={["Day(s)", "Week(s)", "Month(s)", "Year(s)"]}
+                        selectChange={(item: any)=>handleSelectChange("duration_of_use", item)}
+                      />
+                    </div>
+
+                    <div className={styles.text_area_container} style={{width:"100%",}}>
+                      <label htmlFor='refill_information'>Refill information</label>
+                      <Input
+                        styles='input_primary'
+                        onChange={handleOnChange}
+                        value={inputFields.refill_information}
+                        name='refill_information'
+                        id='refill_information'
+                        placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                      />
                     </div>
                   </div>
-
-                  <div className={styles.text_area_container}>
-                    <label htmlFor='refill_information'>Refill information</label>
-                    <Input
-                      styles='input_primary'
-                      onChange={handleOnChange}
-                      value={inputFields.refill_information}
-                      name='refill_information'
-                      id='refill_information'
-                      placeholder='Lorem ipsum dolor sit amet, consectetur adi'
-                    />
-                  </div>
-              </div>
             {/* // ))} */}
 
             <Button

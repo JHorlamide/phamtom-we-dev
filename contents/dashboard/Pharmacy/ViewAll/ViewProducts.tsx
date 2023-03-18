@@ -92,7 +92,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductMod
                 }}
               >
                 <Image
-                  src={'/assets/dashboard/pharmacy/product.svg'}
+                  src={product?.product_image ? product?.product_image?.imageUrl : '/assets/dashboard/pharmacy/product.svg'}
                   alt='product'
                   width={'160px'}
                   height='117px'
@@ -125,7 +125,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductMod
 
         <div className={styles.product_image}>
           <Image
-            src={'/assets/dashboard/pharmacy/product.svg'}
+            src={selectedProduct?.product_image?.imageUrl ? selectedProduct?.product_image?.imageUrl : '/assets/dashboard/pharmacy/product.svg'}
             alt='product'
             width={'335px'}
             height='228px'

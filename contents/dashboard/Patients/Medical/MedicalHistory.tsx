@@ -99,7 +99,6 @@ const MedicalHistory = ({
         typeof data !== 'string' && data?.length > 0 
       ) {
         // eslint-disable-next-line camelcase
-        console.log(data)
         dispatch(setPatientMedicalHistory(data.reverse()));
       } else {
         dispatch(setPatientMedicalHistory([]));

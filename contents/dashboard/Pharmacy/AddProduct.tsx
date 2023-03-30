@@ -26,12 +26,14 @@ const AddNewProducts = ({
   const inputFile: any = useRef(null);
   // const [imageUrl, setImageUrl] = useState('');
   const [imageUpload, setImageUpload] : any = useState('');
+  const [isChecked, setIsChecked] : any = useState(false);
   const [inputField, setInputField] = useState({
     product_name: '',
     product_price: '',
     product_image: '',
     product_strength: '',
     pack_size: '',
+    prescription: false,
     product_quantity: '',
     about_product: '',
     usage_direction: '',
@@ -76,9 +78,14 @@ const AddNewProducts = ({
   const handleAddProduct = async (e: any) => {
     e.preventDefault();
 
+    const payload = {
+      ...inputField,
+      prescription: isChecked
+    }
+
     try {
       await productService.addProduct(
-        inputField,
+        payload,
         admin.access_token
       )
       .then((response) => response.data)
@@ -99,6 +106,7 @@ const AddNewProducts = ({
         product_image: '',
         product_strength: '',
         pack_size: '',
+        prescription: false,
         product_quantity: '',
         about_product: '',
         usage_direction: '',
@@ -210,7 +218,7 @@ const AddNewProducts = ({
             </div>
 
             <div className={styles.checkbox_container}>
-              <input type={'checkbox'} name='Prescription' id='Prescription' />
+              <input type={'checkbox'} name='Prescription' id='Prescription' checked={isChecked} onChange={()=> setIsChecked(!isChecked)} />
               <label htmlFor='Prescription'>Prescription required</label>
             </div>
 

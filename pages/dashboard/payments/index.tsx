@@ -54,6 +54,21 @@ const Payments = () => {
       console.log(error);
     }
   };
+
+  const handleCancelSubscriptionPlan = async () => {
+    try {
+      await subscriptionService.cancelSubscription(admin.access_token)
+      .then((response) => response.data)
+      .then((res)=> {
+        if(res.status === "Success"){
+          window.location=res?.data?.link
+        }
+      })
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 console.log(subscription)
   const handleAddSubscriptionPlan = async (email: any, amount: any, subscriptionType: any,) => {
 
@@ -76,26 +91,26 @@ console.log(subscription)
     }
   };
 
-  const handleCancelSubscription = async (email: any, amount: any, subscriptionType: any,) => {
+  // const handleCancelSubscription = async (email: any, amount: any, subscriptionType: any,) => {
 
-    let payload ={
-      email,
-      amount: amount === "Free" ? 0 : amount,
-      subscriptionType
-    }
-    try {
-      await subscriptionService.addSubscription(payload, admin.access_token)
-      .then((response) => response.data)
-      .then((res)=> {
-        if(res.status === "Success"){
-          window.location= res?.data?.checkOutUrl
-        }
-      })
+  //   let payload ={
+  //     email,
+  //     amount: amount === "Free" ? 0 : amount,
+  //     subscriptionType
+  //   }
+  //   try {
+  //     await subscriptionService.addSubscription(payload, admin.access_token)
+  //     .then((response) => response.data)
+  //     .then((res)=> {
+  //       if(res.status === "Success"){
+  //         window.location= res?.data?.checkOutUrl
+  //       }
+  //     })
       
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
 
   useEffect(() => {
@@ -181,6 +196,7 @@ console.log(subscription)
                         admin={admin} 
                         subscription={subscription} 
                         handleAddSubscriptionPlan={handleAddSubscriptionPlan} 
+                        handleCancelSubscriptionPlan={handleCancelSubscriptionPlan}
                       />
                     </>
                   )}
@@ -192,6 +208,7 @@ console.log(subscription)
                         admin={admin} 
                         subscription={subscription} 
                         handleAddSubscriptionPlan={handleAddSubscriptionPlan} 
+                        handleCancelSubscriptionPlan={handleCancelSubscriptionPlan}
                       />
                     </>
                   )}
@@ -203,6 +220,7 @@ console.log(subscription)
                         admin={admin} 
                         subscription={subscription} 
                         handleAddSubscriptionPlan={handleAddSubscriptionPlan} 
+                        handleCancelSubscriptionPlan={handleCancelSubscriptionPlan}
                       />
                     </>
                   )}

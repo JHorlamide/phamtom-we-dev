@@ -98,18 +98,18 @@ console.log(inputField)
     } catch (error) {
       console.log(error);
     } finally {
-      setInputField({
-        product_name: '',
-        product_price: '',
-        product_image: '',
-        product_strength: '',
-        pack_size: '',
-        product_quantity: '',
-        about_product: '',
-        usage_direction: '',
-        precautions: '',
-        possible_side_effect: '',
-      });
+      // setInputField({
+      //   product_name: '',
+      //   product_price: '',
+      //   product_image: '',
+      //   product_strength: '',
+      //   pack_size: '',
+      //   product_quantity: '',
+      //   about_product: '',
+      //   usage_direction: '',
+      //   precautions: '',
+      //   possible_side_effect: '',
+      // });
       setImageUpload("")
       onHide();
     }

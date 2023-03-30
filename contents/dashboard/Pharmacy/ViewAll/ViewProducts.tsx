@@ -145,7 +145,13 @@ const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductMod
 
           <div>
             <p className={styles.label}>Requirements</p>
-            <p className={styles.req_}>This product requires a prescription</p>
+            <p className={styles.req_}>
+              {
+                selectedProduct?.prescription === true ? 
+                "This product requires a prescription": 
+                "This product doesnt require a prescription" 
+              }
+            </p>
           </div>
 
           <div>

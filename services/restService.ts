@@ -395,5 +395,11 @@ export const subscriptionService = {
     const config = getRequestConfig();
     config.headers.Authorization = `Bearer ${token}`;
     return restAgent.get('/billing/subscriptions/details', config);
+  },
+
+  cancelSubscription: (token: any) => {
+    const config = getRequestConfig();
+    config.headers.Authorization = `Bearer ${token}`;
+    return restAgent.get('/billing/subscriptions/manage', config);
   }
 };

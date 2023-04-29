@@ -133,19 +133,6 @@ const BilledMonthly = ({ Button, Image, admin, subscription, handleAddSubscripti
               </button>
             }
           </div>
-
-          {/* <PayStack 
-            amount={plan?.price === "Free" ? 0 : plan?.price} 
-            subscriptionType={
-              plan?.name === "Basic plan" ? "BASIC" :
-              plan?.name === "Bronze plan" ? "BRONZE_MONTHLY_PLAN" :
-              plan?.name === "Silver plan" ? "SILVER_MONTHLY_PLAN" :
-              plan?.name === "Golden plan" ? "GOLDEN_MONTHLY_PLAN" :
-              plan?.name === "Custom" ? "CUSTOM_MONTHLY_PLAN" :
-              null
-            } 
-            currentSubscription={admin?.subscription_permission_flag === ("1" || "FREE") ? "BASIC" : admin?.subscription_permission_flag}
-          /> */}
         
         </li>
       ))}

@@ -24,12 +24,14 @@ const MedicationHistory = ({
   const [activeIndex, setActiveIndex]: any = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [addHistory, setAddHistory] = useState(false);
+  const [durationInput, setDurationInput] = useState("");
   const [inputFields, setInputFields] = useState({
       medication_name: '',
       dosing_information: '',
       medication_strength: '',
       frequency: '',
       route_of_administration: '',
+      duration_of_use_input: '',
       duration_of_use: '',
       refill_information: ''
     });
@@ -49,6 +51,20 @@ const MedicationHistory = ({
   // ];
 
   const handleClose = () => {
+    setInputFields(
+          {
+            // full_name: '',
+            refill_information: '',
+            medication_name: '',
+            dosing_information: '',
+            medication_strength: '',
+            frequency: '',
+            route_of_administration: '',
+            duration_of_use: '',
+            duration_of_use_input: ""
+          }
+        );
+        setDurationInput("")
     setAddHistory(false);
   };
 
@@ -71,11 +87,18 @@ const MedicationHistory = ({
     e.preventDefault();
     setIsLoading(true);
 
-    let payload = Object.keys(inputFields).filter(key => inputFields[key as keyof typeof inputFields])
+    let payload = {
+      ...inputFields,
+      duration_of_use: durationInput + " "+ inputFields?.duration_of_use
+    }
+
+     payload = Object.keys(payload).filter(key => payload[key as keyof typeof payload])
       .reduce((acc: any, key) => {
-        acc[key as keyof typeof acc] = inputFields[key as keyof typeof inputFields];
+        acc[key as keyof typeof acc] = payload[key as keyof typeof payload];
         return acc;
       }, {});
+
+      console.log(payload)
 
     try {
        await medicationService.addMedicationHistory(
@@ -93,7 +116,8 @@ const MedicationHistory = ({
           medication_strength: '',
           frequency: '',
           route_of_administration: '',
-          duration_of_use: ''
+          duration_of_use: '',
+          duration_of_use_input: ""
         }
       );
     } catch (error) {
@@ -103,7 +127,7 @@ const MedicationHistory = ({
       setIsLoading(false);
     }
   };
-
+console.log(inputFields)
   const getAllMedicationHistory = async () => {
     setIsFetching(true);
     setEmptyState(null);
@@ -316,7 +340,7 @@ const MedicationHistory = ({
                     value={inputFields.dosing_information}
                     name='dosing_information'
                     id='dosing_information'
-                    placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+                    placeholder='One in the morning, and One in the evening'
                   />
                 </div>
 
@@ -366,10 +390,20 @@ const MedicationHistory = ({
 
                 </div>
 
-                
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <div className={styles.text_area_container} style={{width:"100%", marginRight: "10px"}}>
-                    <label htmlFor='duration_of_use'>Duration of use</label>
+                  <div className={styles.text_area_container} style={{width:"100%", marginRight: "10px", flex: 2}}>
+                    <label htmlFor='duration_of_use_input'>Duration of use</label>
+                    <Input
+                        styles='input_primary'
+                        onChange={(e)=>setDurationInput(e.target.value)}
+                        value={durationInput}
+                        name='durationInput'
+                        id='durationInput'
+                        placeholder='3'
+                      />
+                    </div>
+                  <div className={styles.text_area_container} style={{width:"100%", marginRight: "10px", flex: 1}}>
+                    <label htmlFor='duration_of_use'>{""} </label> <br />
 
                       <SelectInput
                         placeholder="Select"
@@ -377,8 +411,8 @@ const MedicationHistory = ({
                         selectChange={(item: any)=>handleSelectChange("duration_of_use", item)}
                       />
                     </div>
-
-                    <div className={styles.text_area_container} style={{width:"100%",}}>
+                  </div>
+                  <div className={styles.text_area_container} style={{width:"100%",}}>
                       <label htmlFor='refill_information'>Refill information</label>
                       <Input
                         styles='input_primary'
@@ -389,7 +423,6 @@ const MedicationHistory = ({
                         placeholder='Lorem ipsum dolor sit amet, consectetur adi'
                       />
                     </div>
-                  </div>
             {/* // ))} */}
 
             <Button

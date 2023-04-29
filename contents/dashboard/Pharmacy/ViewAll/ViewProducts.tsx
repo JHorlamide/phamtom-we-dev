@@ -149,7 +149,7 @@ const ViewProducts = ({ styles, setShowAddNewProductModal, setShowEditProductMod
               {
                 selectedProduct?.prescription === true ? 
                 "This product requires a prescription": 
-                "This product doesnt require a prescription" 
+                "This product does not require a prescription" 
               }
             </p>
           </div>

@@ -5,7 +5,7 @@ import { formatter } from '../../utils';
 import { getYearlySubscriptionType } from '../../utils/getSubscriptionType';
 import { useRouter } from 'next/router';
 
-const BilledYearly = ({ Button, Image, admin, subscription, handleAddSubscriptionPlan, handleCancelSubscription }: any) => {
+const BilledYearly = ({ Button, Image, admin, subscription, handleAddSubscriptionPlan, handleCancelSubscriptionPlan }: any) => {
   const { pathname, push } = useRouter();
 
   const doAction = (email: any, amount: any, subscriptionType: any) => {
@@ -116,11 +116,7 @@ const BilledYearly = ({ Button, Image, admin, subscription, handleAddSubscriptio
                   {
                     ["BASIC", "FREE", "Free"].includes(subscription?.subscriptionDetails?.subscriptionType) ? 
                     null :
-                    <p 
-                      style={{fontSize: "12px", marginTop: "5px", color: "#505050", cursor: "pointer"}} 
-                      onClick={handleCancelSubscription}>
-                        cancel subscription
-                    </p>
+                    <button className='secondary' style={{padding:"7px", marginTop: "5px"}} onClick={handleCancelSubscriptionPlan}>cancel subscription</button>
                   }
                 </div>
               

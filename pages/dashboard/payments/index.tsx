@@ -63,8 +63,7 @@ const Payments = () => {
         if(res.status === "Success"){
           window.location=res?.data?.link
         }
-      })
-      
+      }) 
     } catch (error) {
       console.log(error);
     }
@@ -174,8 +173,13 @@ console.log(subscription)
           <div>
             <div className={styles.plan}>
               <p>Your current plan</p>
-              <h6>Basic</h6>
-              <p>Free</p>
+              <h6 style={{textTransform: "capitalize"}}>{
+                subscription?.subscriptionDetails?.plan?.interval ?
+                subscription?.subscriptionDetails?.plan?.interval :
+                "Basic"
+                }
+              </h6>
+              <p>{subscription?.subscriptionDetails?.plan?.name}</p>
             </div>
           </div>
 

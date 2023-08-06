@@ -1,6 +1,8 @@
 import React from 'react';
+import ArrowIcon from "../../../public/assets/dashboard/attach.svg";
 
-const ShippingServices = ({ logistics, styles, Image,  }: any) => {
+const ShippingServices = ({ logistics, styles, Image, }: any) => {
+
   return (
     <div>
       <ul className={styles.couriers}>
@@ -8,7 +10,7 @@ const ShippingServices = ({ logistics, styles, Image,  }: any) => {
           <li key={index} className={styles.courier}>
             <div className={styles.member}>
               <Image
-                src={member?.logistics_image?.imageUrl}
+                src={member.logistics_image?.imageUrl === undefined ? ArrowIcon : member?.logistics_image?.imageUrl}
                 alt='avatar'
                 width={'64px'}
                 height={'40px'}

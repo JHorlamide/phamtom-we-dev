@@ -43,7 +43,8 @@ const EditPatient = ({
     email: '',
     phone_number: "",
     home_address: '',
-    age: '',
+    date_of_birth: '',
+    // age: '',
     // genotype: '',
     weight_unit: '',
     height_unit: '',
@@ -58,7 +59,8 @@ const EditPatient = ({
       email: selectedPatient?.patient_demographic?.email ? selectedPatient?.patient_demographic?.email : '',
       phone_number: selectedPatient?.phone_number ? selectedPatient?.phone_number : '',
       home_address: selectedPatient?.patient_demographic?.home_address ? selectedPatient?.patient_demographic?.home_address : '',
-      age: selectedPatient?.patient_demographic?.age ? selectedPatient?.patient_demographic?.age : '',
+      date_of_birth: selectedPatient?.patient_demographic?.date_of_birth ? selectedPatient?.patient_demographic?.date_of_birth : '',
+      // age: selectedPatient?.patient_demographic?.age ? selectedPatient?.patient_demographic?.age : '',
       weight_unit: selectedPatient?.patient_demographic?.weight_unit ? selectedPatient?.patient_demographic?.weight_unit : '',
       height_unit: selectedPatient?.patient_demographic?.height_unit ? selectedPatient?.patient_demographic?.height_unit : '',
       blood_group: selectedPatient?.patient_demographic?.blood_group ? selectedPatient?.patient_demographic?.blood_group : '',
@@ -66,7 +68,7 @@ const EditPatient = ({
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPatient])
-  
+
 
   const onInputChange = (e: any) => {
     setInputField({ ...inputField, [e.target.name]: e.target.value });
@@ -80,8 +82,8 @@ const EditPatient = ({
     e.preventDefault();
 
     try {
-
-      let payload = Object.keys(inputField).filter(key => inputField[key as keyof typeof inputField])
+      let payload = Object.keys(inputField)
+        .filter(key => inputField[key as keyof typeof inputField])
         .reduce((acc: any, key) => {
           acc[key as keyof typeof acc] = inputField[key as keyof typeof inputField];
           return acc;
@@ -91,13 +93,13 @@ const EditPatient = ({
         selectedPatient?._id,
         admin.access_token
       )
-      .then((response) => response.data)
-      .then(res => {
-       if(res.status === "Success"){
-         toast.success(res.message)
-         dispatch(setSelectedPatient(res.data))
-       }
-      })
+        .then((response) => response.data)
+        .then(res => {
+          if (res.status === "Success") {
+            toast.success(res.message)
+            dispatch(setSelectedPatient(res.data))
+          }
+        })
       handleGetAllPatients();
     } catch (error) {
       console.log(error);
@@ -105,7 +107,7 @@ const EditPatient = ({
       onHide();
     }
   };
-console.log(selectedPatient?._id)
+  console.log(selectedPatient?._id)
   // const capture = useCallback(() => {
   //   const imageSrc = webcamRef.current.getScreenshot();
   //   setImgSrc(imageSrc);
@@ -118,7 +120,7 @@ console.log(selectedPatient?._id)
   //   height: 720,
   //   facingMode: "user"
   // };
-  
+
   return (
     <div className={styles.modal_container}>
       <Modal
@@ -174,7 +176,7 @@ console.log(selectedPatient?._id)
                 name='first_name'
                 onChange={onInputChange}
                 disabled
-                defaultValue={ selectedPatient?.patient_demographic?.first_name ? selectedPatient?.patient_demographic?.first_name : inputField.first_name }
+                defaultValue={selectedPatient?.patient_demographic?.first_name ? selectedPatient?.patient_demographic?.first_name : inputField.first_name}
               />
             </div>
 
@@ -183,7 +185,7 @@ console.log(selectedPatient?._id)
               <Input
                 type={'text'}
                 styles='input_primary'
-                placeholder='Olukoju'
+                placeholder='James'
                 id='Lastname'
                 name='last_name'
                 onChange={onInputChange}
@@ -217,7 +219,7 @@ console.log(selectedPatient?._id)
                   setInputField({ ...inputField, phone_number: phone });
                 }}
                 disabled
-                value={selectedPatient?.phone_number ? selectedPatient?.phone_number :  inputField.phone_number}
+                value={selectedPatient?.phone_number ? selectedPatient?.phone_number : inputField.phone_number}
               />
             </div>
 
@@ -255,9 +257,10 @@ console.log(selectedPatient?._id)
                   styles='input_primary'
                   placeholder='54'
                   id='dob'
-                  name='age'
+                  name='date_of_birth'
                   onChange={onInputChange}
-                  defaultValue={selectedPatient?.patient_demographic?.age ? selectedPatient?.patient_demographic?.age : inputField.age}
+                  defaultValue={selectedPatient?.patient_demographic?.date_of_birth ? selectedPatient?.patient_demographic?.date_of_birth : inputField.date_of_birth}
+                  // defaultValue={selectedPatient?.patient_demographic?.age ? selectedPatient?.patient_demographic?.age : inputField.age}
                 />
               </div>
               <div>
@@ -296,7 +299,7 @@ console.log(selectedPatient?._id)
                   id='Weight'
                   name='weight_unit'
                   onChange={onInputChange}
-                  defaultValue={selectedPatient?.patient_demographic?.weight_unit ? selectedPatient?.patient_demographic?.weight_unit : inputField.weight_unit }
+                  defaultValue={selectedPatient?.patient_demographic?.weight_unit ? selectedPatient?.patient_demographic?.weight_unit : inputField.weight_unit}
                 />
               </div>
             </div>
@@ -312,7 +315,7 @@ console.log(selectedPatient?._id)
           </form>
         </div>
       </Modal>
-      
+
 
       {/* {
         showWebcam &&
@@ -329,7 +332,7 @@ console.log(selectedPatient?._id)
 
       </>
       } */}
-      
+
     </div>
   );
 };

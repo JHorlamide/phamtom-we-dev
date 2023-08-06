@@ -185,7 +185,7 @@ const AddNewStaff = ({
               <Input
                 type={'text'}
                 styles='input_primary'
-                placeholder='Olukoju'
+                placeholder='James'
                 id='Lastname'
                 name='last_name'
                 onChange={onInputChange}

@@ -99,7 +99,8 @@ const MedicalHistory = ({
         typeof data !== 'string' && data?.length > 0 
       ) {
         // eslint-disable-next-line camelcase
-        dispatch(setPatientMedicalHistory(data.reverse()));
+        dispatch(setPatientMedicalHistory(data));
+        // dispatch(setPatientMedicalHistory(data.reverse()));
       } else {
         dispatch(setPatientMedicalHistory([]));
         setEmptyState('No medical history saved yet');

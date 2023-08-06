@@ -26,15 +26,15 @@ const MedicationHistory = ({
   const [addHistory, setAddHistory] = useState(false);
   const [durationInput, setDurationInput] = useState("");
   const [inputFields, setInputFields] = useState({
-      medication_name: '',
-      dosing_information: '',
-      medication_strength: '',
-      frequency: '',
-      route_of_administration: '',
-      duration_of_use_input: '',
-      duration_of_use: '',
-      refill_information: ''
-    });
+    medication_name: '',
+    dosing_information: '',
+    medication_strength: '',
+    frequency: '',
+    route_of_administration: '',
+    duration_of_use_input: '',
+    duration_of_use: '',
+    refill_information: ''
+  });
   // const [tempInputFields, setTempInputFields]: any = useState([]);
   const [emptyState, setEmptyState]: any = useState(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -52,19 +52,19 @@ const MedicationHistory = ({
 
   const handleClose = () => {
     setInputFields(
-          {
-            // full_name: '',
-            refill_information: '',
-            medication_name: '',
-            dosing_information: '',
-            medication_strength: '',
-            frequency: '',
-            route_of_administration: '',
-            duration_of_use: '',
-            duration_of_use_input: ""
-          }
-        );
-        setDurationInput("")
+      {
+        // full_name: '',
+        refill_information: '',
+        medication_name: '',
+        dosing_information: '',
+        medication_strength: '',
+        frequency: '',
+        route_of_administration: '',
+        duration_of_use: '',
+        duration_of_use_input: ""
+      }
+    );
+    setDurationInput("")
     setAddHistory(false);
   };
 
@@ -78,8 +78,8 @@ const MedicationHistory = ({
 
   const handleSelectChange = (name: any, value: any) => {
     setInputFields({
-        ...inputFields,
-        [name]: value
+      ...inputFields,
+      [name]: value
     })
   }
 
@@ -89,19 +89,19 @@ const MedicationHistory = ({
 
     let payload = {
       ...inputFields,
-      duration_of_use: durationInput + " "+ inputFields?.duration_of_use
+      duration_of_use: durationInput + " " + inputFields?.duration_of_use
     }
 
-     payload = Object.keys(payload).filter(key => payload[key as keyof typeof payload])
+    payload = Object.keys(payload).filter(key => payload[key as keyof typeof payload])
       .reduce((acc: any, key) => {
         acc[key as keyof typeof acc] = payload[key as keyof typeof payload];
         return acc;
       }, {});
 
-      console.log(payload)
+    console.log(payload)
 
     try {
-       await medicationService.addMedicationHistory(
+      await medicationService.addMedicationHistory(
         selectedPatient._id,
         payload,
         admin.access_token
@@ -127,7 +127,7 @@ const MedicationHistory = ({
       setIsLoading(false);
     }
   };
-console.log(inputFields)
+  console.log(inputFields)
   const getAllMedicationHistory = async () => {
     setIsFetching(true);
     setEmptyState(null);
@@ -141,7 +141,6 @@ console.log(inputFields)
         selectedPatient._id,
         admin.access_token
       );
-      console.log(data)
       if (
         // eslint-disable-next-line camelcase
         data &&
@@ -149,19 +148,20 @@ console.log(inputFields)
         typeof data !== 'string' && data?.length > 0
       ) {
         // eslint-disable-next-line camelcase
-        dispatch(setPatientMedicationHistory(data.reverse()));
+        dispatch(setPatientMedicationHistory(data));
+        // dispatch(setPatientMedicationHistory(data.reverse()));
       } else {
         dispatch(setPatientMedicationHistory([]));
         setEmptyState('No saved medication history yet');
       };
     } catch (error) {
       console.log(error);
-    }finally {
+    } finally {
       setIsFetching(false);
     }
   };
 
- 
+
 
   useEffect(() => {
     getAllMedicationHistory();
@@ -184,9 +184,9 @@ console.log(inputFields)
         <div className={styles.medical_history_}>
           {patientMedicationHistory?.length > 0 &&
             patientMedicationHistory.map((item: any, index: any) => (
-              <div 
-                key={index} 
-                className={ activeIndex === index ? styles.history_activeContainer : styles.history_container}
+              <div
+                key={index}
+                className={activeIndex === index ? styles.history_activeContainer : styles.history_container}
               >
                 <div
                   className={styles.history_header}
@@ -242,8 +242,8 @@ console.log(inputFields)
                       </p>
 
                       <hr style={{ marginTop: '16px' }} />
-                      </div>
-                      
+                    </div>
+
                     <div className={styles.detail}>
                       <p className={styles.detail_title}>FREQUENCY</p>
                       <p className={styles.detail_statement}>
@@ -320,60 +320,60 @@ console.log(inputFields)
                 </div>
               ))} */}
             {/* {inputFields.map((inputField: any, index: any) => ( */}
-              {/* <div key={index} className={styles.form_row}> */}
-                <div className={styles.text_area_container}>
-                  <label htmlFor='medication_name'>Medication name</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.medication_name}
-                    name='medication_name'
-                    id='medication_name'
-                    placeholder='Enter medication name'
-                  />
-                </div>
+            {/* <div key={index} className={styles.form_row}> */}
+            <div className={styles.text_area_container}>
+              <label htmlFor='medication_name'>Medication name</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.medication_name}
+                name='medication_name'
+                id='medication_name'
+                placeholder='Enter medication name'
+              />
+            </div>
 
-                <div className={styles.text_area_container}>
-                  <label htmlFor='dosing_information'>Dosage information</label>
-                  <textarea
-                    onChange={handleOnChange}
-                    value={inputFields.dosing_information}
-                    name='dosing_information'
-                    id='dosing_information'
-                    placeholder='One in the morning, and One in the evening'
-                  />
-                </div>
+            <div className={styles.text_area_container}>
+              <label htmlFor='dosing_information'>Dosage information</label>
+              <textarea
+                onChange={handleOnChange}
+                value={inputFields.dosing_information}
+                name='dosing_information'
+                id='dosing_information'
+                placeholder='One in the morning, and One in the evening'
+              />
+            </div>
 
-                <div className={styles.text_area_container}>
-                  <label htmlFor='medication_strength'>Medication strength</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.medication_strength}
-                    name='medication_strength'
-                    id='medication_strength'
-                    placeholder='Lorem ipsum dolor sit amet, consectetur adi'
-                  />
-                </div>
+            <div className={styles.text_area_container}>
+              <label htmlFor='medication_strength'>Medication strength</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.medication_strength}
+                name='medication_strength'
+                id='medication_strength'
+                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+              />
+            </div>
 
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <div className={styles.text_area_container}>
-                    <label htmlFor='frequency'>Frequency</label>
-                    <Input
-                      styles='input_primary'
-                      onChange={handleOnChange}
-                      value={inputFields.frequency}
-                      name='frequency'
-                      id='frequency'
-                      placeholder='Textfield text'
-                    />
-                  </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div className={styles.text_area_container}>
+                <label htmlFor='frequency'>Frequency</label>
+                <Input
+                  styles='input_primary'
+                  onChange={handleOnChange}
+                  value={inputFields.frequency}
+                  name='frequency'
+                  id='frequency'
+                  placeholder='Textfield text'
+                />
+              </div>
 
-                  <div className={styles.text_area_container} style={{width:"100%", marginLeft:"10px"}}>
-                    <label htmlFor='route_of_administration'>
-                      Route of administration
-                    </label>
-                    {/* <Input
+              <div className={styles.text_area_container} style={{ width: "100%", marginLeft: "10px" }}>
+                <label htmlFor='route_of_administration'>
+                  Route of administration
+                </label>
+                {/* <Input
                       styles='input_primary'
                       onChange={handleOnChange}
                       value={inputFields.route_of_administration}
@@ -381,55 +381,55 @@ console.log(inputFields)
                       id='route_of_administration'
                       placeholder='Lorem ipsum dolor sit amet, consectetur adi'
                     /> */}
-                      <SelectInput
-                        placeholder="Select"
-                        options={["ORALLY", "IV", "IM", "SC", "OTIC", "BUCCAL", "RECTAL", "NASAL", "INHALATION", "TRANSDERMAL", "SUBLINGUAL", "INTRATHECAL", "INTRADERMAL", "OTHER"]}
-                        selectChange={(item: any)=>handleSelectChange("route_of_administration", item)}
-                      />
-                  </div>
+                <SelectInput
+                  placeholder="Select"
+                  options={["ORALLY", "IV", "IM", "SC", "OTIC", "BUCCAL", "RECTAL", "NASAL", "INHALATION", "TRANSDERMAL", "SUBLINGUAL", "INTRATHECAL", "INTRADERMAL", "OTHER"]}
+                  selectChange={(item: any) => handleSelectChange("route_of_administration", item)}
+                />
+              </div>
 
-                </div>
+            </div>
 
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <div className={styles.text_area_container} style={{width:"100%", marginRight: "10px", flex: 2}}>
-                    <label htmlFor='duration_of_use_input'>Duration of use</label>
-                    <Input
-                        styles='input_primary'
-                        onChange={(e)=>setDurationInput(e.target.value)}
-                        value={durationInput}
-                        name='durationInput'
-                        id='durationInput'
-                        placeholder='3'
-                      />
-                    </div>
-                  <div className={styles.text_area_container} style={{width:"100%", marginRight: "10px", flex: 1}}>
-                    <label htmlFor='duration_of_use'>{""} </label> <br />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div className={styles.text_area_container} style={{ width: "100%", marginRight: "10px", flex: 2 }}>
+                <label htmlFor='duration_of_use_input'>Duration of use</label>
+                <Input
+                  styles='input_primary'
+                  onChange={(e) => setDurationInput(e.target.value)}
+                  value={durationInput}
+                  name='durationInput'
+                  id='durationInput'
+                  placeholder='3'
+                />
+              </div>
+              <div className={styles.text_area_container} style={{ width: "100%", marginRight: "10px", flex: 1 }}>
+                <label htmlFor='duration_of_use'>{""} </label> <br />
 
-                      <SelectInput
-                        placeholder="Select"
-                        options={["Day(s)", "Week(s)", "Month(s)", "Year(s)"]}
-                        selectChange={(item: any)=>handleSelectChange("duration_of_use", item)}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.text_area_container} style={{width:"100%",}}>
-                      <label htmlFor='refill_information'>Refill information</label>
-                      <Input
-                        styles='input_primary'
-                        onChange={handleOnChange}
-                        value={inputFields.refill_information}
-                        name='refill_information'
-                        id='refill_information'
-                        placeholder='Lorem ipsum dolor sit amet, consectetur adi'
-                      />
-                    </div>
+                <SelectInput
+                  placeholder="Select"
+                  options={["Day(s)", "Week(s)", "Month(s)", "Year(s)"]}
+                  selectChange={(item: any) => handleSelectChange("duration_of_use", item)}
+                />
+              </div>
+            </div>
+            <div className={styles.text_area_container} style={{ width: "100%", }}>
+              <label htmlFor='refill_information'>Refill information</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.refill_information}
+                name='refill_information'
+                id='refill_information'
+                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+              />
+            </div>
             {/* // ))} */}
 
             <Button
               onClick={handleSave}
               disabled={
                 [inputFields?.medication_name, inputFields?.medication_strength].some((x) => x === '') ||
-                  isLoading 
+                isLoading
                 //   &&
                 // tempInputFields.length < 1
               }

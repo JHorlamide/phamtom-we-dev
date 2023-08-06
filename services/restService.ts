@@ -13,8 +13,8 @@ const restAgent = axios.create({
 
 restAgent.interceptors.response.use(undefined, (error) => {
   const statusCode = error.response ? error.response.status : null;
-  console.log('Inte', statusCode);
-  console.log('Inte', error.response);
+  // console.log('Inte', statusCode);
+  // console.log('Inte', error.response);
 
   if (
     error.response.data.message === 'Admin does not exist' ||
@@ -68,6 +68,12 @@ export const attemptLoginAdmin = (data: any) => {
 export const forgotPassword = (data: any) => {
   const config = getRequestConfig();
   return restAgent.post('/auth/forgot-password', data, config);
+};
+
+// forgot admin password
+export const resetPassword = (data: any) => {
+  const config = getRequestConfig();
+  return restAgent.post('/auth/reset-password', data, config);
 };
 
 // update admin password
@@ -256,6 +262,7 @@ export const soapService = {
     config.headers.Authorization = `Bearer ${token}`;
     return restAgent.post(`/patients/${patientId}/assessments`, data, config);
   },
+  
   getAllSOAP: (patientId: any, token: any) => {
     const config = getRequestConfig();
     config.headers.Authorization = `Bearer ${token}`;

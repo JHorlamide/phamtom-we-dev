@@ -3,33 +3,26 @@ import Link from 'next/link';
 const Section1 = ({ Image, Button }: any) => {
   const electronicRecords = [
     'Document Patients health records',
-    'Accessible from any location',
+    'Efficient for pharmacies',
     'Cloud-based storage',
     'Secured and HIPAA compliant',
-    'Simple to use',
-    'Track patients\' medication',
-    'Free for up to 100 patients\'records',
-    'Evidence-based decision making tool',
-    'Reduce medical error'
+    'Evidence-based decision-making tool',
+    'Improve patient outcomes',
   ];
 
   const marketplace = [
-    'Locate pharmacies stocked with your preferred medications.',
-    'High quality medication for residents in rural and underserved urban areas.',
-    'Transparency and Fast delivery',
+    'Integrate with your physical store',
+    'Provide optimum care to your patients online and offline',
+    'High-quality medication',
+    'Timesaving',
+    'Doorstep delivery',
     'Medication mix',
-    'Vetted Pharmacies and pharmacists.',
-    'Affordable price',
-    'Product visibility'
   ];
 
   const telechat = [
-    'Virtual consultation with your healthcare provider',
-    '24/7 support',
-    'EHR, Chat and Medication integration',
     'Access to specialists',
-    'Free',
-    'Medical access to rural and underserved urban residents.'
+    'Medical access to residents in rural and underserved areas',
+    'Address your needs from any convenient location',
   ];
 
   return (
@@ -50,14 +43,14 @@ const Section1 = ({ Image, Button }: any) => {
               layout={'responsive'}
             />
           </div>
+
           <div className='prod_desc'>
             <div>
               <h5>Electronic Health records</h5>
               <p>
-                Efficient and cost effective way for health practitioners,
-                hospitals, pharmacies and clinics to document their patients
-                health records according to HIPAA regulations and global
-                healthcare standard.
+                An efficient and cost-effective way for health practitioners, hospitals,
+                pharmacies, and clinics to document their patients’ health records according
+                to HIPAA regulations and global healthcare standards.
               </p>
             </div>
 
@@ -94,14 +87,14 @@ const Section1 = ({ Image, Button }: any) => {
             </div>
           </div>
         </div>
+
         <div className='prod column_reverse'>
           <div className='prod_desc'>
             <div>
-              <h5>Online Pharmacy Market Place</h5>
+              <h5>Online Pharmacy</h5>
               <p>
-                Are you eligible to operate an online pharmacy? Setup your
-                online pharmacy store in less than five mins. Help patients
-                access safe and effective medications
+                Set up your online pharmacy store in less than five minutes.
+                Improves patients’ access to quality and effective medications
               </p>
             </div>
 
@@ -146,6 +139,7 @@ const Section1 = ({ Image, Button }: any) => {
             />
           </div>
         </div>
+
         <div className='prod'>
           <div>
             <Image
@@ -155,12 +149,12 @@ const Section1 = ({ Image, Button }: any) => {
               layout={'responsive'}
             />
           </div>
+          
           <div className='prod_desc'>
             <div>
               <h5>Telechat</h5>
               <p>
-                Virtual consultation with your healthcare practitioner and
-                patient in a single click.
+                Virtual Consultation with licensed and qualified health professionals
               </p>
             </div>
 
@@ -181,17 +175,17 @@ const Section1 = ({ Image, Button }: any) => {
               <div>
                 {/* <Link href='/auth/login'>
                   <a> */}
-                    {' '}
-                    <Button className='secondary  flex items-center gap-2'>
-                      {' '}
-                      <p className='mt-0'>Coming soon</p>
-                      {/* <Image
+                {' '}
+                <Button className='secondary  flex items-center gap-2'>
+                  {' '}
+                  <p className='mt-0'>Coming soon</p>
+                  {/* <Image
                         src='/assets/home/arrowRight.svg'
                         height={8}
                         width={16}
                       /> */}
-                    </Button>
-                  {/* </a>
+                </Button>
+                {/* </a>
                 </Link> */}
               </div>
             </div>

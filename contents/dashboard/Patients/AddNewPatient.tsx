@@ -40,7 +40,8 @@ const AddNewPatient = ({
     email: '',
     phone_number: '',
     home_address: '',
-    age: '',
+    // age: '',
+    date_of_birth: '',
     // genotype: '',
     weight_unit: '',
     height_unit: '',
@@ -122,7 +123,8 @@ const AddNewPatient = ({
         email: '',
         phone_number: '',
         home_address: '',
-        age: '',
+        date_of_birth: '',
+        // age: '',
         // genotype: '',
         weight_unit: '',
         height_unit: '',
@@ -216,7 +218,7 @@ const AddNewPatient = ({
               <Input
                 type={'text'}
                 styles='input_primary'
-                placeholder='Olukoju'
+                placeholder='James'
                 id='Lastname'
                 name='last_name'
                 onChange={onInputChange}
@@ -280,15 +282,15 @@ const AddNewPatient = ({
 
             <div className={styles.group}>
               <div>
-                <label htmlFor='dob'>Age</label>
+                <label htmlFor='dob'>Date of birth</label>
                 <Input
-                  type={'number'}
+                  type={'date'}
                   styles='input_primary'
                   placeholder='54'
                   id='dob'
-                  name='age'
+                  name='date_of_birth'
                   onChange={onInputChange}
-                  value={inputField.age}
+                  value={inputField.date_of_birth}
                 />
               </div>
               <div>

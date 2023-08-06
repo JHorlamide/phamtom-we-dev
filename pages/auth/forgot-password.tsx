@@ -10,7 +10,6 @@ import Image from "next/image";
 
 const ForgotPassword = () => {
   const { push } = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputFields, setInputFields] = useState({
@@ -30,17 +29,16 @@ const ForgotPassword = () => {
 
     try {
       await forgotPassword(inputFields)
-      .then((response) => response?.data)
-      .then(res => {
-        if(res?.status === "Success"){
-          toast.success(res?.message)
+        .then((response) => response?.data)
+        .then(res => {
+          if (res?.status === "Success") {
+            toast.success(res?.message)
             push("/auth/confirmation");
-        }else{
-          toast.error(res?.data)
-        }
-      })
+          } else {
+            toast.error(res?.data)
+          }
+        })
     } catch (err: any) {
-      console.log(err);
       setError(true);
       const errors = err?.response?.data?.errors;
 
@@ -59,27 +57,23 @@ const ForgotPassword = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}></div>
-
       <div className={styles.right}>
-      <Link href={'/'}>
-        <a>
-          <div className={styles.return}>
-          
-                <Image
-                  src='/assets/dashboard/arrow_left.svg'
-                  alt='logo'
-                  width={'15px'}
-                  height={'19px'}
-                />
+        <Link href={'/'}>
+          <a>
+            <div className={styles.return}>
+              <Image
+                src='/assets/dashboard/arrow_left.svg'
+                alt='logo'
+                width={'15px'}
+                height={'19px'}
+              />
               <p>Return to Homepage</p>
-            
-          
-          </div>
-        </a>
-      </Link>
+            </div>
+          </a>
+        </Link>
+        
         <form className={styles.form}>
           <h1>Forgot Password</h1>
-
           <div className={styles.input_container}>
             <div>
               <label className={styles.label} htmlFor='email'>
@@ -103,35 +97,35 @@ const ForgotPassword = () => {
           <>
             {isLoading
               ? (
-              <div className={styles.isLoading}>
-                <MoonLoader color='#0055d2' size={30} />
-              </div>
-                )
+                <div className={styles.isLoading}>
+                  <MoonLoader color='#0055d2' size={30} />
+                </div>
+              )
               : (
-              <>
-                {" "}
-                <div>
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={
-                      inputFields.email === "" ||
-                      isLoading ||
-                      error
-                    }
-                    className='btn_primary w-full'
-                  >
-                    Continue
-                  </Button>
-                </div>
-                <div className={styles.sign_up}>
-                  <p>
-                    <Link href={"/auth/login"}>
-                      <a className={styles.sign_up_link}>Login</a>
-                    </Link>
-                  </p>
-                </div>
-              </>
-                )}
+                <>
+                  {" "}
+                  <div>
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={
+                        inputFields.email === "" ||
+                        isLoading ||
+                        error
+                      }
+                      className='btn_primary w-full'
+                    >
+                      Continue
+                    </Button>
+                  </div>
+                  <div className={styles.sign_up}>
+                    <p>
+                      <Link href={"/auth/login"}>
+                        <a className={styles.sign_up_link}>Login</a>
+                      </Link>
+                    </p>
+                  </div>
+                </>
+              )}
           </>
         </form>
       </div>

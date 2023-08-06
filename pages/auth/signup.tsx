@@ -13,11 +13,9 @@ import Image from "next/image";
 
 const Signup = () => {
   const { push } = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [checked, setChecked] = useState(false);
-
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 

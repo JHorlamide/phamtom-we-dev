@@ -14,6 +14,7 @@ var formatMoney = new Intl.NumberFormat('en-NG', {
 const Products = ({ Products, styles, Image }: any) => {
   const { push } = useRouter()
   const dispatch = useDispatch();
+
   return (
     <div>
       <ul className={styles.products_container}>

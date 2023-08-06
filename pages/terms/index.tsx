@@ -440,7 +440,7 @@ const Terms: NextPage = () => {
             <Banner
               height={screenSize.width >= 821 ? '300px' : '200px'}
               linkName='Get started'
-              linkTo='get-started'
+              linkTo='/auth/signup'
               content='Signup to join our rapidly growing community of digital healthcare providers today.'
             />
           </div>

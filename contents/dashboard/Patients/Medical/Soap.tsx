@@ -89,7 +89,8 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
       if (data && typeof data !== 'string' && data?.length > 0) {
         // eslint-disable-next-line camelcase
         console.log(data)
-        dispatch(setPatientSoap(data.reverse()));
+        dispatch(setPatientSoap(data));
+        // dispatch(setPatientSoap(data.reverse()));
       } else {
         dispatch(setPatientSoap([]));
         setEmptyState('No saved SOAP record yet');
@@ -118,9 +119,9 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         <div className={styles.medical_history_}>
           {soap.length > 0 &&
             soap.map((item: any, index: any) => (
-              <div 
-                key={index} 
-                className={ activeIndex === index ? styles.history_activeContainer : styles.history_container}
+              <div
+                key={index}
+                className={activeIndex === index ? styles.history_activeContainer : styles.history_container}
               >
                 <div
                   className={styles.history_header}
@@ -269,7 +270,7 @@ const Soap = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
             <Button
               onClick={handleSave}
               disabled={
-                [inputFields?.assessment || inputFields?.objective || 
+                [inputFields?.assessment || inputFields?.objective ||
                   inputFields?.plan || inputFields?.subjective].some((x) => x === '') || isAdding
               }
               className={'btn_primary'}

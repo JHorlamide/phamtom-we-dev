@@ -7,8 +7,6 @@ const MyOrders = ({ Orders, styles, Image }: any) => {
   const { push } = useRouter()
   const dispatch = useDispatch();
 
-  console.log(Orders)
-
   return (
     <div>
       <ul className={styles.orders_container}>

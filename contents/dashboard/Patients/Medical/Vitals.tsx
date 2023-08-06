@@ -10,7 +10,7 @@ import moment from 'moment';
 
 const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
   const { admin } = useSelector((state: any) => state.adminReducer);
-  const { selectedPatient, vitalSigns} = useSelector(
+  const { selectedPatient, vitalSigns } = useSelector(
     (state: any) => state.patientsReducer
   );
 
@@ -59,12 +59,12 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
 
       getAllVitalSigns()
       setInputFields({
-          date: '',
-          blood_pressure: '',
-          pulse_rate: '',
-          respiration_rate: '',
-          body_temperature: '',
-        }
+        date: '',
+        blood_pressure: '',
+        pulse_rate: '',
+        respiration_rate: '',
+        body_temperature: '',
+      }
       );
     } catch (error) {
       console.log(error);
@@ -85,7 +85,8 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         admin.access_token
       );
       if (typeof data !== 'string' && data?.length > 0) {
-        dispatch(setPatientVitalSigns(data.reverse()));
+        dispatch(setPatientVitalSigns(data));
+        // dispatch(setPatientVitalSigns(data.reverse()));
         setEmptyState(null);
       } else {
         dispatch(setPatientVitalSigns([]));
@@ -117,9 +118,9 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
         <div className={styles.medical_history_}>
           {vitalSigns?.length > 0 &&
             vitalSigns.map((item: any, index: any) => (
-              <div 
-                key={index} 
-                className={ activeIndex === index ? styles.history_activeContainer : styles.history_container}
+              <div
+                key={index}
+                className={activeIndex === index ? styles.history_activeContainer : styles.history_container}
               >
                 <div
                   className={styles.history_header}
@@ -175,8 +176,8 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
                       </p>
 
                       <hr style={{ marginTop: '16px' }} />
-                      </div>
-                      
+                    </div>
+
                     <div className={styles.detail}>
                       <p className={styles.detail_title}>RESPIRATION RATE</p>
                       <p className={styles.detail_statement}>
@@ -237,69 +238,69 @@ const Vitals = ({ medicalHistory, setSelectedRecord, styles, Image }: any) => {
 
         <div className={styles.form_container}>
           <form>
-            
-                <div className={styles.text_area_container}>
-                  <label htmlFor='date'>Date</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.date}
-                    name='date'
-                    id='date'
-                    placeholder='Enter date'
-                    type={'date'}
-                  />
-                </div>
 
-                <div className={styles.text_area_container}>
-                  <label htmlFor='Blood pressure'>Blood pressure</label>
-                  <textarea
-                    onChange={handleOnChange}
-                    value={inputFields.blood_pressure}
-                    name='blood_pressure'
-                    id='Blood pressure'
-                    placeholder='Blood pressure'
-                  />
-                </div>
+            <div className={styles.text_area_container}>
+              <label htmlFor='date'>Date</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.date}
+                name='date'
+                id='date'
+                placeholder='Enter date'
+                type={'date'}
+              />
+            </div>
 
-                <div className={styles.text_area_container}>
-                  <label htmlFor='pulse_rate'>Pulse rate</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.pulse_rate}
-                    name='pulse_rate'
-                    id='pulse_rate'
-                    placeholder='Enter pulse rate'
-                  />
-                </div>
+            <div className={styles.text_area_container}>
+              <label htmlFor='Blood pressure'>Blood pressure</label>
+              <textarea
+                onChange={handleOnChange}
+                value={inputFields.blood_pressure}
+                name='blood_pressure'
+                id='Blood pressure'
+                placeholder='Blood pressure'
+              />
+            </div>
 
-                <div className={styles.text_area_container}>
-                  <label htmlFor='respiration_rate'>Respiration rate</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.respiration_rate}
-                    name='respiration_rate'
-                    id='respiration_rate'
-                    placeholder='Respiration rate'
-                  />
-                </div>
+            <div className={styles.text_area_container}>
+              <label htmlFor='pulse_rate'>Pulse rate</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.pulse_rate}
+                name='pulse_rate'
+                id='pulse_rate'
+                placeholder='Enter pulse rate'
+              />
+            </div>
 
-                <div className={styles.text_area_container}>
-                  <label htmlFor='body_temperature'>Body temperature</label>
+            <div className={styles.text_area_container}>
+              <label htmlFor='respiration_rate'>Respiration rate</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.respiration_rate}
+                name='respiration_rate'
+                id='respiration_rate'
+                placeholder='Respiration rate'
+              />
+            </div>
 
-                  <Input
-                    type='text'
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.body_temperature}
-                    name='body_temperature'
-                    id='body_temperature'
-                    placeholder='Body temperature'
-                  />
-                </div>
-            
+            <div className={styles.text_area_container}>
+              <label htmlFor='body_temperature'>Body temperature</label>
+
+              <Input
+                type='text'
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.body_temperature}
+                name='body_temperature'
+                id='body_temperature'
+                placeholder='Body temperature'
+              />
+            </div>
+
 
             <Button
               onClick={handleSave}

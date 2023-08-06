@@ -11,38 +11,20 @@ const About: NextPage = () => {
       title: 'Electronic Health Records',
       description:
         // eslint-disable-next-line quotes
-        "PHAMTOM's electronic health records powers the documentation and access to patients' health records from any location for optimum healthcare delivery.",
+        "Our EHR simplifies the entire process of patient record documentation in a retail pharmacy, providing a comprehensive and user-friendly platform for patient consultation, health record documentation, retrieval, and more. It helps qualified pharmacists and other healthcare professionals to make informed decisions, collaborate seamlessly, and deliver personalized care.",
       image: '/assets/about/webnmobile.svg',
       width: '487px',
       height: '288px'
     },
     {
-      title: 'Online Pharmacy Marketplace',
+      title: 'Online Pharmacy',
       description:
         // eslint-disable-next-line quotes
-        'PHAMTOM online pharmacy marketplace helps patients to locate their preferred medications that might not be available in local drug stores around them, at competitive price and high quality from any location.',
+        'Our Online Pharmacy SaaS product offers a convenient and secure platform for patients to order quality and effective medications directly from their pharmacy of choice.',
       image: '/assets/about/webnmobile.svg',
       width: '487px',
       height: '288px'
     },
-    {
-      title: 'Easy to Use for Patients',
-      description:
-        // eslint-disable-next-line quotes
-        'Patients love PHAMTOM as a one-stop-app for their health needs.',
-      image: '/assets/about/webnmobile.svg',
-      width: '487px',
-      height: '288px'
-    },
-    {
-      title: 'Easy Integration',
-      description:
-        // eslint-disable-next-line quotes
-        "It helps pharmacies to easily integrate their offline operations with their online operation without the need to write a single line of code or hire a web developer to setup and manage an online store. Hence, they're able to save cost from hiring web developers, domain and hosting services, logistics, and many more.",
-      image: '/assets/about/webnmobile.svg',
-      width: '487px',
-      height: '288px'
-    }
   ];
 
   return (
@@ -70,13 +52,15 @@ const About: NextPage = () => {
             <section>
               <div className='top_sec'>
                 <h4>
-                The PHAMTOM app is a B2B2C electronic health records (EHR) and online pharmacy for primary healthcare centers and pharmacies.
+                  PHAMTOM is a B2B electronic health records (EHR) and online pharmacy
+                  SaaS application for retail pharmacies and other health systems in
+                  Africa.
                 </h4>
 
                 <div>
                   <p>
-                    Our mission is to improve health outcomes by developing
-                    products that will accelerate transition to digital health.
+                    Our mission is to improve patients’ health outcomes by accelerating
+                    the transition to digital health in Africa’s health systems.
                   </p>
                 </div>
               </div>
@@ -87,7 +71,7 @@ const About: NextPage = () => {
               <div className='challanges_flex'>
                 <div></div>
 
-                <div className='challenges'>
+                {/* <div className='challenges'>
                   <h5>Challenges</h5>
                   <div>
                     <p>
@@ -123,7 +107,7 @@ const About: NextPage = () => {
                       price.{' '}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </section>
 
@@ -133,8 +117,7 @@ const About: NextPage = () => {
                 <div className='our_solutions'>
                   <h5>Our Solutions</h5>
                   <p>
-                    PHAMTOM offers desktop and mobile based apps to solve these
-                    challenges.
+                    PHAMTOM offers desktop and mobile-based apps to solve these challenges.
                   </p>
                 </div>
 
@@ -148,6 +131,7 @@ const About: NextPage = () => {
                           width={solution.width}
                         />
                       </div>
+
                       <div className='card_content'>
                         <h6>{solution.title}</h6>
                         <p>{solution.description}</p>
@@ -163,7 +147,7 @@ const About: NextPage = () => {
             <Banner
               height={screenSize.width >= 821 ? '300px' : '200px'}
               linkName='Get started'
-              linkTo='get-started'
+              linkTo='/auth/signup'
               content='Signup to join our rapidly growing community of digital healthcare providers today.'
             />
           </div>

@@ -35,6 +35,7 @@ const Patients: NextPage = () => {
   const handleHideAddNewPatient = () => {
     setShowAddNewPatientModal(false);
   };
+
   const handleChangeTab = (tab: any) => {
     setCurrentTab(tab);
   };
@@ -45,19 +46,20 @@ const Patients: NextPage = () => {
 
   const handleGetAllPatients = async () => {
     try {
-     await patientsService.getAllPatients(admin.access_token)
-     .then((response) => response.data)
-        .then((res)=> {
-          if(res.status === 'Success'){
-            dispatch(setPatients(res?.data?.reverse()));
+      await patientsService.getAllPatients(admin.access_token)
+        .then((response) => response.data)
+        .then((res) => {
+          if (res.status === 'Success') {
+            dispatch(setPatients(res?.data));
+            // dispatch(setPatients(res?.data?.reverse()));
           }
         })
-      
+
     } catch (error) {
       console.log(error);
     }
   };
-// console.log(selectedPatient)
+  // console.log(selectedPatient)
   const handleOpenMedicalInfo = () => {
     const slider = document.getElementById('CHATS_SLIDER') as HTMLElement;
     slider.classList.add('slide_right');
@@ -67,32 +69,31 @@ const Patients: NextPage = () => {
     const slider = document.getElementById('CHATS_SLIDER') as HTMLElement;
     slider.classList.remove('slide_right');
   };
-  console.log(selectedPatient)
 
   useEffect(() => {
-    if(selectedPatient){
+    if (selectedPatient) {
       dispatch(setSelectedPatient(selectedPatient))
       setActiveIndex(selectedPatient?._id)
-    }else{
+    } else {
       dispatch(setSelectedPatient(patients[0]));
     }
-    
+
   }, [selectedPatient]);
 
   const handleSearch = (e: any) => {
     setSearchTerm(e.target.value);
   };
 
-  var getInitials = function (data : string) {
+  var getInitials = function (data: string) {
     var names = data?.split(' '),
-        initials = names?.[0]?.substring(0, 1).toUpperCase();
-    
+      initials = names?.[0]?.substring(0, 1).toUpperCase();
+
     if (names?.length > 1) {
-        initials += names?.[names?.length - 1]?.substring(0, 1).toUpperCase();
+      initials += names?.[names?.length - 1]?.substring(0, 1).toUpperCase();
     }
     return initials;
-};
-console.log(selectedPatient)
+  };
+
   return (
     <DashboardLayout>
       <div className={styles.patients_container}>
@@ -150,21 +151,20 @@ console.log(selectedPatient)
                       >
                         <div className={activeIndex === patient?._id ? styles.activePatient_list : styles.patient_list}>
                           <div className={styles.patient_info}>
-                          {  
-                          selectedPatient?.profileImage ?
-                          <Image
-                              src={'/assets/dashboard/avatar.svg'}
-                              alt='avatar'
-                              width={'40'}
-                              height={'40'}
-                              layout='fixed'
-                            />
-                            : (
-                              <div className={styles.patient_info_initials}>
-                                  <h2>{getInitials(`${patient.patient_demographic.first_name} ${patient.patient_demographic.last_name}`)}</h2>
-                              </div>
-                            ) 
-
+                            {
+                              selectedPatient?.profileImage ?
+                                <Image
+                                  src={'/assets/dashboard/avatar.svg'}
+                                  alt='avatar'
+                                  width={'40'}
+                                  height={'40'}
+                                  layout='fixed'
+                                />
+                                : (
+                                  <div className={styles.patient_info_initials}>
+                                    <h2>{getInitials(`${patient.patient_demographic.first_name} ${patient.patient_demographic.last_name}`)}</h2>
+                                  </div>
+                                )
                             }
 
                             <div>
@@ -178,7 +178,6 @@ console.log(selectedPatient)
                             </div>
                           </div>
                         </div>
-
                         <hr />
                       </li>
                     ))}
@@ -190,63 +189,62 @@ console.log(selectedPatient)
         <div className={styles.patient_details_container}>
           <div
             id={'CHATS_SLIDER'}
-            className={`${styles.patient_details} ${
-              screenSize.width > 700 &&
+            className={`${styles.patient_details} ${screenSize.width > 700 &&
               selectedPatient !== undefined && Object?.keys(selectedPatient)?.length > 1 &&
               'slide_right'
-            }`}
+              }`}
           >
-              <div className={styles.patient_details_header}>
-                <div className={styles.patient_details_header_top}>
-                  <div className={styles.patient_details_header_top_avatar}>
-                    {screenSize.width < 700 && (
-                      <Image
-                        src='/assets/dashboard/arrow_left.svg'
-                        alt='avatar'
-                        width={'18px'}
-                        height={'12px'}
-                        onClick={handleCloseChat}
-                      />
-                    )}
-
-                    {/* user avatar */}
-                    {
-                      selectedPatient?.profileImage ?
-                      <Image
-                      src={'/assets/dashboard/avatar.svg'}
+            <div className={styles.patient_details_header}>
+              <div className={styles.patient_details_header_top}>
+                <div className={styles.patient_details_header_top_avatar}>
+                  {screenSize.width < 700 && (
+                    <Image
+                      src='/assets/dashboard/arrow_left.svg'
                       alt='avatar'
-                      width={'64px'}
-                      height={'64px'}
+                      width={'18px'}
+                      height={'12px'}
+                      onClick={handleCloseChat}
                     />
-                    : (
-                      <div className={styles.patient_details_header_top_avatar_initials}>
-                          <h2>{getInitials(`${selectedPatient?.patient_demographic?.first_name} ${selectedPatient?.patient_demographic?.last_name}`)}</h2>
-                      </div>
-                    ) 
-                    }  
-                  </div>
+                  )}
 
-                  <div className={styles.patient_details_header_top_details}>
-                      <h3>{`${selectedPatient?.patient_demographic?.first_name} ${selectedPatient?.patient_demographic?.last_name}`} </h3>
-                      <p>{`${selectedPatient?.admin_id}`}</p>
-                  </div>
+                  {/* user avatar */}
+                  {
+                    selectedPatient?.profileImage ?
+                      <Image
+                        src={'/assets/dashboard/avatar.svg'}
+                        alt='avatar'
+                        width={'64px'}
+                        height={'64px'}
+                      />
+                      : (
+                        <div className={styles.patient_details_header_top_avatar_initials}>
+                          <h2>{getInitials(`${selectedPatient?.patient_demographic?.first_name} ${selectedPatient?.patient_demographic?.last_name}`)}</h2>
+                        </div>
+                      )
+                  }
                 </div>
 
-                <div className={styles.tabs}>
-                  {['PERSONAL', 'MEDICAL'].map((tab: any, index: any) => (
-                    <div
-                      key={index}
-                      className={
-                        currentTab === tab ? styles.active_tab : styles.tab
-                      }
-                      onClick={() => handleChangeTab(tab)}
-                    >
-                      {tab}
-                    </div>
-                  ))}
+                <div className={styles.patient_details_header_top_details}>
+                  <h3>{`${selectedPatient?.patient_demographic?.first_name} ${selectedPatient?.patient_demographic?.last_name}`} </h3>
+                  <p>{`${selectedPatient?.admin_id}`}</p>
                 </div>
               </div>
-            
+
+              <div className={styles.tabs}>
+                {['PERSONAL', 'MEDICAL'].map((tab: any, index: any) => (
+                  <div
+                    key={index}
+                    className={
+                      currentTab === tab ? styles.active_tab : styles.tab
+                    }
+                    onClick={() => handleChangeTab(tab)}
+                  >
+                    {tab}
+                  </div>
+                ))}
+              </div>
+            </div>
+
 
             {/* patients details */}
             {currentTab === 'PERSONAL' && <PersonalData styles={styles} />}

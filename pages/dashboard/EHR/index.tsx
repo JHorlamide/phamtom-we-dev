@@ -36,16 +36,16 @@ const EHR: NextPage = () => {
     setShowAddNewStaffModal(false);
   };
 
-  var getInitials = function (data : string) {
+  var getInitials = function (data: string) {
     var names = data?.split(' '),
-        initials = names?.[0]?.substring(0, 1).toUpperCase();
-    
+      initials = names?.[0]?.substring(0, 1).toUpperCase();
+
     if (names?.length > 1) {
-        initials += names?.[names?.length - 1]?.substring(0, 1).toUpperCase();
+      initials += names?.[names?.length - 1]?.substring(0, 1).toUpperCase();
     }
     return initials;
-};
-console.log(orders)
+  };
+  console.log(orders)
   const cards = [
     {
       title: 'Total patients',
@@ -115,13 +115,13 @@ console.log(orders)
   // ];
   const getAllPendingOrders = async () => {
     try {
-     await orderService.getAllPendingOrders(admin.access_token)
-     .then((response)=> response.data)
-     .then((res) => {
-       if(res.status === "Success"){
-        dispatch(setOrders(res.data.reverse()));
-       }
-     })
+      await orderService.getAllPendingOrders(admin.access_token)
+        .then((response) => response.data)
+        .then((res) => {
+          if (res.status === "Success") {
+            dispatch(setOrders(res.data.reverse()));
+          }
+        })
     } catch (e) {
       console.log(e);
     }
@@ -140,12 +140,13 @@ console.log(orders)
   const handleGetAllPatients = async () => {
     try {
       await patientsService.getAllPatients(admin.access_token)
-      .then((response) => response.data)
-      .then(res => {
-        if(res.status === 'Success'){
-          dispatch(setPatients(res.data.reverse()));
-        }
-      }) 
+        .then((response) => response.data)
+        .then(res => {
+          if (res.status === 'Success') {
+            dispatch(setPatients(res.data));
+            // dispatch(setPatients(res.data.reverse()));
+          }
+        })
     } catch (error) {
       console.log(error);
     }
@@ -159,15 +160,15 @@ console.log(orders)
   const handleGetAllStaffs = async () => {
     try {
       await staffService.getAllStaffs(admin.access_token)
-      .then(response => response.data)
-      .then((res) => {
-        console.log(res)
-        if(res.status === "Success"){
-          dispatch(setStaffs(res.data.reverse()));
-        }
-      })
-     
-      
+        .then(response => response.data)
+        .then((res) => {
+          console.log(res)
+          if (res.status === "Success") {
+            dispatch(setStaffs(res.data.reverse()));
+          }
+        })
+
+
     } catch (error) {
       console.log(error);
     }
@@ -242,11 +243,10 @@ console.log(orders)
             <div className={styles.recent_p}>
               <h5>Recent patients</h5>
 
-              <div onClick={() => 
-                  {
-                    dispatch(setSelectedPatient(patients[0]))
-                    push('/dashboard/patients');
-                  }}>
+              <div onClick={() => {
+                dispatch(setSelectedPatient(patients[0]))
+                push('/dashboard/patients');
+              }}>
                 <p>View all</p>
                 <Image
                   src='/assets/dashboard/ehr/arrow.svg'
@@ -269,22 +269,22 @@ console.log(orders)
                 >
                   <div className={styles.patient_name}>
 
-                  {  
-                    patient?.profileImage ?
-                    <Image
-                        src={'/assets/dashboard/avatar.svg'}
-                        alt='avatar'
-                        width={'40'}
-                        height={'40'}
-                        layout='fixed'
-                      />
-                      : (
-                        <div className={styles.initials}>
+                    {
+                      patient?.profileImage ?
+                        <Image
+                          src={'/assets/dashboard/avatar.svg'}
+                          alt='avatar'
+                          width={'40'}
+                          height={'40'}
+                          layout='fixed'
+                        />
+                        : (
+                          <div className={styles.initials}>
                             <h2>{getInitials(`${patient.patient_demographic.first_name} ${patient.patient_demographic.last_name}`)}</h2>
-                        </div>
-                      ) 
+                          </div>
+                        )
 
-                  }
+                    }
                     {/* <Image
                       src={'/assets/dashboard/avatar.svg'}
                       alt='avatar'
@@ -361,22 +361,22 @@ console.log(orders)
                       width={'40px'}
                       height={'40px'}
                     /> */}
-                    {  
-                    member?.profileImage ?
-                    <Image
-                        src={'/assets/dashboard/avatar.svg'}
-                        alt='avatar'
-                        width={'40'}
-                        height={'40'}
-                        layout='fixed'
-                      />
-                      : (
-                        <div className={styles.initials}>
+                    {
+                      member?.profileImage ?
+                        <Image
+                          src={'/assets/dashboard/avatar.svg'}
+                          alt='avatar'
+                          width={'40'}
+                          height={'40'}
+                          layout='fixed'
+                        />
+                        : (
+                          <div className={styles.initials}>
                             <h2>{getInitials(`${member?.first_name} ${member?.last_name}`)}</h2>
-                        </div>
-                      ) 
+                          </div>
+                        )
 
-                  }
+                    }
 
                     <div>
                       <p className={styles.name}>{`${member?.first_name} ${member?.last_name}`}</p>
@@ -388,8 +388,8 @@ console.log(orders)
               ))}
             </ul>
 
-            <Button 
-              className='secondary_2 w-full' 
+            <Button
+              className='secondary_2 w-full'
               style={{ marginTop: '8px' }}
               onClick={() => setShowAddNewStaffModal(true)}
             >
@@ -470,7 +470,7 @@ console.log(orders)
         showAddNewStaffModal={showAddNewStaffModal}
         onHide={handleHideAddNewStaff}
         admin={admin}
-        // handleGetAllStaffs={handleGetAllStaffs}
+      // handleGetAllStaffs={handleGetAllStaffs}
       />
     </DashboardLayout>
   );

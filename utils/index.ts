@@ -3,5 +3,6 @@ export const formatter = (amount: any) => {
     style: 'currency',
     currency: 'NGN',
   });
+
   return formatMoney?.format(amount)
 }

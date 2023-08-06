@@ -43,19 +43,19 @@ const LabTests = ({
   );
 
 
-  const handleFileUpload = async(e: any) => {
+  const handleFileUpload = async (e: any) => {
     setUploading(true)
     let value = new FormData();
     let fileValue = e.target.files[0]
     value.append('file', fileValue);
-    try{
+    try {
       await fileUploadService.fileUpload(
         value,
         admin.access_token
-        )
+      )
         .then((response) => response.data)
-        .then((res)=> {
-          if(res.status === 'Success'){
+        .then((res) => {
+          if (res.status === 'Success') {
             setUploading(false)
             setInputFields({
               ...inputFields,
@@ -66,11 +66,11 @@ const LabTests = ({
             console.log(uploaded)
           }
         })
-    }catch (error) {
+    } catch (error) {
       console.log(error);
       setUploading(false)
-    } 
-    
+    }
+
   }
   // const [tempInputFields, setTempInputFields]: any = useState([]);
 
@@ -112,11 +112,11 @@ const LabTests = ({
       );
       getAllLabTests()
       setInputFields({
-          test_name: '',
-          test_date: '',
-          test_result: '',
-          upload_doc: ''
-        }
+        test_name: '',
+        test_date: '',
+        test_result: '',
+        upload_doc: ''
+      }
       );
     } catch (error) {
       console.log(error);
@@ -137,7 +137,8 @@ const LabTests = ({
         admin.access_token
       );
       if (typeof data !== 'string' && data?.length > 0) {
-        dispatch(setPatientLabTests(data.reverse()));
+        dispatch(setPatientLabTests(data));
+        // dispatch(setPatientLabTests(data.reverse()));
         setEmptyState(null);
       } else {
         dispatch(setPatientLabTests([]));
@@ -169,9 +170,9 @@ const LabTests = ({
         <div className={styles.medical_history_}>
           {labTests?.length > 0 &&
             labTests?.map((item: any, index: any) => (
-              <div 
-                key={index} 
-                className={ activeIndex === index ? styles.history_activeContainer : styles.history_container}
+              <div
+                key={index}
+                className={activeIndex === index ? styles.history_activeContainer : styles.history_container}
               >
                 <div
                   className={styles.history_header}
@@ -279,67 +280,67 @@ const LabTests = ({
               ))} */}
             {/* {inputFields.map((inputField: any, index: any) => (
               <div key={index} className={styles.form_row}> */}
-                <div className={styles.text_area_container}>
-                  <label htmlFor='test_name'>Test name</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.test_name}
-                    name='test_name'
-                    id='test_name'
-                    placeholder='Enter medication name'
+            <div className={styles.text_area_container}>
+              <label htmlFor='test_name'>Test name</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.test_name}
+                name='test_name'
+                id='test_name'
+                placeholder='Enter medication name'
+              />
+            </div>
+
+            <div className={styles.text_area_container}>
+              <label htmlFor='test_date'>Date of test</label>
+              <Input
+                styles='input_primary'
+                onChange={handleOnChange}
+                value={inputFields.test_date}
+                name='test_date'
+                id='test_date'
+                type='date'
+                placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+              />
+            </div>
+
+            <div className={styles.text_area_container}>
+              <label htmlFor='test_result'>Results</label>
+              <textarea
+                onChange={handleOnChange}
+                value={inputFields.test_result}
+                name='test_result'
+                id='test_result'
+              // placeholder='Lorem ipsum dolor sit amet, consectetur adi'
+              />
+            </div>
+
+            <div
+              style={{ marginTop: '8px' }}
+              className={styles.text_area_container}
+            >
+              <div className={styles.upload_doc}>
+                <input type='file'
+                  accept="application/pdf"
+                  ref={Ref}
+                  style={{ display: 'none' }}
+                  name='upload_doc'
+                  // onChange={onInputChange}
+                  onChange={handleFileUpload}
+                />
+
+                <div onClick={onButtonClick}>
+                  <Image
+                    src={'/assets/dashboard/doc.svg'}
+                    width={'16px'}
+                    height={'20px'}
                   />
+                  <p>{uploading ? "uploading..." : fileName ? fileName : "Upload a document"}</p>
                 </div>
-
-                <div className={styles.text_area_container}>
-                  <label htmlFor='test_date'>Date of test</label>
-                  <Input
-                    styles='input_primary'
-                    onChange={handleOnChange}
-                    value={inputFields.test_date}
-                    name='test_date'
-                    id='test_date'
-                    type='date'
-                    placeholder='Lorem ipsum dolor sit amet, consectetur adi'
-                  />
-                </div>
-
-                <div className={styles.text_area_container}>
-                  <label htmlFor='test_result'>Results</label>
-                  <textarea
-                    onChange={handleOnChange}
-                    value={inputFields.test_result}
-                    name='test_result'
-                    id='test_result'
-                    // placeholder='Lorem ipsum dolor sit amet, consectetur adi'
-                  />
-                </div>
-
-                <div
-                  style={{ marginTop: '8px' }}
-                  className={styles.text_area_container}
-                >
-                  <div className={styles.upload_doc}>
-                    <input   type='file' 
-                      accept="application/pdf"
-                      ref={Ref} 
-                      style={{ display: 'none' }} 
-                      name='upload_doc'
-                      // onChange={onInputChange}
-                      onChange={handleFileUpload}  
-                    />
-
-                    <div onClick={onButtonClick}>
-                      <Image
-                        src={'/assets/dashboard/doc.svg'}
-                        width={'16px'}
-                        height={'20px'}
-                      />
-                      <p>{uploading ? "uploading..." : fileName ? fileName : "Upload a document"}</p>
-                    </div>
-                  </div>
-                </div>
-              {/* </div>
+              </div>
+            </div>
+            {/* </div>
             ))} */}
 
             {/* <div className={styles.add_another}>
@@ -371,8 +372,8 @@ const LabTests = ({
             <Button
               onClick={handleSave}
               disabled={
-                [inputFields?.test_date && inputFields?.test_name && inputFields?.test_result ].some((x) => x === '' ||
-                  isLoading) 
+                [inputFields?.test_date && inputFields?.test_name && inputFields?.test_result].some((x) => x === '' ||
+                  isLoading)
               }
               className={'btn_primary'}
               style={{ marginTop: '16px' }}

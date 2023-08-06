@@ -20,8 +20,7 @@ const Home: NextPage = () => {
           <title>PHAMTOM - Home Page</title>
           <meta
             name='description'
-            content='Serving over 100+ hospitals, community pharmacies, clinics and
-                  health practitioners.'
+            content='Serving over 100+ community pharmacies, and other healthcare institutions.'
           />
         </Head>
 
@@ -86,8 +85,7 @@ const Home: NextPage = () => {
           <Banner
             linkTo='/auth/signup'
             linkName='Sign up for free'
-            content=' Serving over 100+ hospitals, community pharmacies, clinics and
-                  health practitioners.'
+            content='Serving over 100+ community pharmacies, and other healthcare institutions.'
           />
         </main>
       </div>

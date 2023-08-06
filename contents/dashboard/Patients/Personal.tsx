@@ -36,7 +36,8 @@ const Personal = ({ styles }: any) => {
     },
     {
       label: 'Age',
-      value: selectedPatient?.patient_demographic?.age
+      value: selectedPatient?.patient_demographic?.date_of_birth
+      // value: selectedPatient?.patient_demographic?.age
     },
     {
       label: 'Weight',
@@ -59,12 +60,13 @@ const Personal = ({ styles }: any) => {
   const handleGetAllPatients = async () => {
     try {
       await patientsService.getAllPatients(admin.access_token)
-      .then((response) => response.data)
-      .then(res => {
-        if(res.status === 'Success'){
-          dispatch(setPatients(res.data.reverse()));
-        }
-      }) 
+        .then((response) => response.data)
+        .then(res => {
+          if (res.status === 'Success') {
+            dispatch(setPatients(res.data));
+            // dispatch(setPatients(res.data.reverse()));
+          }
+        })
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +77,7 @@ const Personal = ({ styles }: any) => {
       <div className={styles.details_body}>
         {/* patients personal info */}
         <div className={styles.personal_details_container}>
-          { selectedPatient !== undefined && Object?.keys(selectedPatient)?.length > 0 &&
+          {selectedPatient !== undefined && Object?.keys(selectedPatient)?.length > 0 &&
             personal?.map((item: any, index: any) => (
               <div key={index} style={{ display: 'contents' }}>
                 <div className={styles.personal_details}>
@@ -95,21 +97,21 @@ const Personal = ({ styles }: any) => {
         </div>
       </div>
 
-        <Button 
-          className={styles.add_record}
-          onClick={()=>setShowEditPatientModal(true)}
-        >
-          
-          <p>Edit record</p>
-        </Button> 
-        <EditPatient
-          admin={admin}
-          handleGetAllPatients={handleGetAllPatients}
-          styles={modalStyles}
-          showEditPatientModal={showEditPatientModal}
-          onHide={()=> setShowEditPatientModal(false)}
-          selectedPatient={selectedPatient}
-        />
+      <Button
+        className={styles.add_record}
+        onClick={() => setShowEditPatientModal(true)}
+      >
+
+        <p>Edit record</p>
+      </Button>
+      <EditPatient
+        admin={admin}
+        handleGetAllPatients={handleGetAllPatients}
+        styles={modalStyles}
+        showEditPatientModal={showEditPatientModal}
+        onHide={() => setShowEditPatientModal(false)}
+        selectedPatient={selectedPatient}
+      />
     </div>
   );
 };

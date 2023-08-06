@@ -1,4 +1,4 @@
-const withOffline = require("next-offline");
+const withOffline = require('next-offline');
 
 module.exports = withOffline({
   reactStrictMode: false,
@@ -7,18 +7,18 @@ module.exports = withOffline({
   },
   images: {
     domains: [
-      "res.cloudinary.com"
+      'res.cloudinary.com'
     ]
   },
-  target: "serverless",
+  target: 'serverless',
   workboxOpts: {
-    swDest: "static/service-worker.js",
+    swDest: 'static/service-worker.js',
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
-        handler: "NetworkFirst",
+        handler: 'NetworkFirst',
         options: {
-          cacheName: "offlineCache",
+          cacheName: 'offlineCache',
           expiration: {
             maxEntries: 200
           }
@@ -31,11 +31,27 @@ module.exports = withOffline({
 // module.exports = {
 //   reactStrictMode: false,
 //   eslint: {
-//     ignoreDuringBuilds: true,
+//     ignoreDuringBuilds: true
 //   },
 //   images: {
 //     domains: [
 //       'res.cloudinary.com'
-//     ],
+//     ]
 //   },
-// }
+//   target: 'serverless',
+//   workboxOpts: {
+//     swDest: 'static/service-worker.js',
+//     runtimeCaching: [
+//       {
+//         urlPattern: /^https?.*/,
+//         handler: 'NetworkFirst',
+//         options: {
+//           cacheName: 'offlineCache',
+//           expiration: {
+//             maxEntries: 200
+//           }
+//         }
+//       }
+//     ]
+//   }
+// };
